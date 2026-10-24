@@ -84,3 +84,40 @@ If these conditions fail, pivot to a carefully documented systematic/scoping rev
 4. Search specifically for calibration intercept/slope, Brier score, ECE, and decision-curve analysis in voice-only PD screening papers published through 2026.
 5. Create a final evidence table with exact endpoint, participant count, validation unit, external test, uncertainty, calibration, demographic analysis, and code/data access.
 6. Only then decide the protocol and prespecified analysis plan.
+
+
+## 7. Additional high-priority papers found on the next search pass
+
+### Hossain, Banu & Chowdhury (2026): cross-corpus consensus feature selection
+
+**“Cross-corpus consensus feature selection for language-invariant Parkinson’s disease detection: a dual-stream acoustic and spectrogram-attention framework.”** *Scientific Reports*, published online 22 October 2026. [Publisher article](https://www.nature.com/articles/s41598-026-76171-y), DOI 10.1038/s41598-026-76171-y.
+
+This very recent peer-reviewed article is a particularly close overlap. It proposes stable handcrafted features and spectrogram-attention features selected across corpora, with separate derivation and held-out validation corpora. Its abstract describes English, Italian, and Bengali derivation corpora and Spanish/English external corpora. It also reports post-hoc temperature scaling using a held-out derivation calibration set, optimized by Brier score, and evaluates on PC-GITA, ParkCeleb, and NeuroVoz. We must inspect its full methods and dataset split details before finalizing our question.
+
+**Implication:** neither “language-invariant features” nor “cross-corpus consensus” nor “probability calibration under cross-language testing” can be presented as novel without a substantially more specific distinction.
+
+### Ahammad (2026): generalization, explainability, and federated learning
+
+**“Generalization over accuracy: A cross-dataset, explainable, and federated learning framework for Parkinson’s disease detection.”** *Digital Health*, first published 8 July 2026. [Publisher article](https://journals.sagepub.com/doi/10.1177/20552076261467837), DOI 10.1177/20552076261467837.
+
+This study harmonizes common features across three datasets and combines subject-aware evaluation, cross-dataset testing, SHAP/LIME, and federated-learning simulations. It reports performance degradation under cross-dataset evaluation and includes Brier score among its metrics. Its code is described as available on request rather than openly archived, which limits independent reproducibility. Nonetheless, the core “generalization-first cross-dataset benchmark” framing overlaps strongly with our original idea.
+
+### Remote AI screening: calibration and external testing
+
+A 2025 preprint, **“Remote AI Screening for Parkinson’s Disease: A Multimodal, Cross-Setting Validation Study,”** reports testing a multimodal web-based system across independent evaluation cohorts, with AUROC and Brier-score/calibration analyses. [Preprint](https://pmc.ncbi.nlm.nih.gov/articles/PMC12270200/). It is not a voice-only benchmark, but it means external validation and calibration are not untouched concepts in remote PD screening.
+
+### Consequence for our candidate research question
+
+The candidate question about calibration under dataset shift is **not yet cleared as novel**. The newest evidence already includes cross-corpus calibration using temperature scaling/Brier score and generalization frameworks reporting Brier score. A viable contribution may need to be framed as a **transparent, independent reproduction and comparative audit** of published methods, with a sharply defined new analysis only if the literature matrix reveals one. We should not continue presenting calibration under shift as a novel contribution by itself.
+
+## 8. Revised decision
+
+At this point, do not lock a novel empirical hypothesis. First complete a comparison matrix for the closest four studies:
+1. Lim et al. (2025), cross-language speech model.
+2. ParkMAE (2026), multilingual representation learning.
+3. Hossain et al. (2026), cross-corpus consensus feature selection and post-hoc calibration.
+4. Ahammad (2026) and Ganatra (2026), cross-dataset generalization and target-domain adaptation.
+
+For each, extract exact corpora, overlap between training/validation/test participants, task matching, feature/audio availability, preprocessing, external-test design, probability calibration, uncertainty intervals, subgroup analysis, code availability, and whether the claimed result can be reproduced with legally accessible data.
+
+The most credible paper may turn out to be a preregistered reproduction/benchmark rather than a new model. That is acceptable if it answers a specific clinical reliability question and reports honest negative or null findings.
