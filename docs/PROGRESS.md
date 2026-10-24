@@ -50,3 +50,11 @@ Do not assume these resources are mutually compatible. Do not claim cross-langua
 - Major feasibility risk: EWA-DB and NeuroVoz require requests/licenses; PC-GITA, ParkCeleb and Bridge2AI data involve additional access constraints. MDVR-KCL and ItalianPVS are lower-friction candidates but small.
 - Methodology checkpoint: independent unit is the participant, not file/window/feature row. The protocol must document every split stage and use participant-clustered uncertainty. Language effects cannot be isolated where language is fully confounded with site, task, device or recruitment.
 - Research question remains provisional. No model has been trained and no new experimental performance results exist.
+
+
+## 2026-10-25 — Search protocol and primary-study matrix
+
+- Added docs/SEARCH_AND_SCREENING_FRAMEWORK.md with proposed databases, search strings, inclusion/exclusion criteria, screening stages, extraction fields, and risk-of-bias/synthesis plan. These are planned methods; the full search and screening have not yet been executed.
+- Added docs/PRIMARY_STUDY_COMPARISON_MATRIX.md with a first-pass comparison of the closest direct-overlap studies and supporting reviews.
+- Current decision: no final novelty claim. Cross-language model evaluation, cross-corpus feature stability, participant-level splitting, demographic-only baselines, target-data adaptation, and Brier-score evaluation have prior art. Any future empirical contribution must specify its additional analysis and be justified against the completed matrix.
+- Dataset feasibility remains the key gate. Need verify licenses, participant identifiers, labels, languages/tasks, and available features in the exact release before approving datasets.
