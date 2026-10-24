@@ -58,3 +58,12 @@ Do not assume these resources are mutually compatible. Do not claim cross-langua
 - Added docs/PRIMARY_STUDY_COMPARISON_MATRIX.md with a first-pass comparison of the closest direct-overlap studies and supporting reviews.
 - Current decision: no final novelty claim. Cross-language model evaluation, cross-corpus feature stability, participant-level splitting, demographic-only baselines, target-data adaptation, and Brier-score evaluation have prior art. Any future empirical contribution must specify its additional analysis and be justified against the completed matrix.
 - Dataset feasibility remains the key gate. Need verify licenses, participant identifiers, labels, languages/tasks, and available features in the exact release before approving datasets.
+
+
+## 2026-10-25 — Route A candidate defined
+
+- Added docs/ROUTE_A_LABEL_FREE_RELIABILITY_PROPOSAL.md.
+- Candidate question: can unlabeled-target shift indicators predict external failure of a source-trained PD voice model, and can a source-validation-selected abstention policy reduce error among predictions retained for automated output?
+- This is a hypothesis-generation document only. A targeted search found related general medical label-free evaluation/selective classification methods and PD-specific uncertainty work; novelty is not established.
+- Hold model training until the broader prior-art search, exact dataset-access checks, and participant-level data integrity pilot are complete.
+- The plan explicitly allows a null result and requires reporting coverage and subgroup deferral so abstention cannot hide unequal performance.
