@@ -217,3 +217,10 @@ Predefine thresholds on source data only. Keep all recordings from each particip
 **Hold:** final protocol lock, model training and any “first-of-its-kind” claim.
 
 If the dataset gate fails, pivot to a transparent two-corpus pilot or a review/reproducibility project. Do not claim the intended multi-corpus study is complete unless its data and design requirements are met.
+
+
+## Version 0.2 addendum — broader domain-adaptation prior art
+
+The latest targeted pass also found Siniukov et al. (2025) on HuBERT-based multilingual adaptation, Ibarra et al. (2023) on corpus/language-independent screening and shortcut reduction, and Francesconi et al. (2026) on fairness-aware partial-label voice-domain adaptation. These make broad claims about cross-language robustness, domain adaptation, fairness-aware representations or shortcut mitigation even less defensible as standalone novelty.
+
+The updated decision is unchanged: test existing label-free monitors as an empirical comparative benchmark only if data feasibility is confirmed. The method comparison must include or justify excluding relevant existing approaches; the paper must remain honest if the result is a replication or domain-specific evaluation rather than a methodological invention.

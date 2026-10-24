@@ -95,3 +95,16 @@ No priority/“first study” claim is justified. No models have been trained an
 **HOLD:** final protocol lock, model training, and any first-of-kind claim.
 
 If the data gate passes, write a precise prespecified protocol with one primary endpoint, source-only monitor/threshold selection, participant-level uncertainty and subgroup deferral. If it fails, change the project scope transparently rather than pretending the intended multi-corpus study was completed.
+
+
+## Additional relevant work discovered in the next search pass
+
+The following sources further narrow the prior-art boundary and should be screened in full:
+
+- Siniukov et al. (2025), **“Towards a Generalizable Speech Marker for Parkinson’s Disease Diagnosis”**, [arXiv:2501.03581](https://arxiv.org/abs/2501.03581). Uses HuBERT/self-supervised adaptation with four PD voice datasets across English, Italian and Spanish. This is another direct precedent for multilingual generalization and adaptation. It does not by itself answer whether label-free monitoring scores predict observed deployment errors.
+- Ibarra et al. (2023), **“Towards a Corpus (and Language)-Independent Screening of Parkinson’s Disease from Voice and Speech through Domain Adaptation”**, [PMC full text](https://pmc.ncbi.nlm.nih.gov/articles/PMC10669342/). Directly studies domain adaptation across four heterogeneous PD speech corpora, reducing dataset-related shortcuts. Cross-corpus invariance/domain adaptation is therefore established prior art.
+- Francesconi et al. (2026-02-20), **“Fairness-Aware Partial-label Domain Adaptation for Voice Classification of Parkinson’s and ALS”**, [arXiv:2602.18535](https://arxiv.org/abs/2602.18535). Studies cross-cohort/domain generalization, partial-label mismatch and gender-invariant learning across four sustained-vowel datasets. Domain adaptation with a fairness objective is already being studied in voice classification; our work should not claim this idea generally as novel.
+- DAT-PD (2026), **“Longitudinal voice biomarker trajectory modelling for Parkinson’s disease severity: domain-adaptive transfer learning on mPower real-world smartphone data”**, [PubMed](https://pubmed.ncbi.nlm.nih.gov/42483429/) / [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC13385221/). This is mainly longitudinal severity regression, not binary PD/control screening, so it is adjacent rather than a direct collision. It further illustrates that domain-adaptive voice modelling is an active 2026 area.
+- Sedigh Malekroodi et al. (2025), **“Voice-Based Detection of Parkinson’s Disease Using Machine and Deep Learning Approaches: A Systematic Review”**, [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC12649940/). Its search ended 2025-09-07 and included 69 studies; the review reported internal validation was far more common than external/cross-dataset validation. Use as a starting reference list, but it does not include most late-2025/2026 work and is not a substitute for our updated review.
+
+These studies strengthen the decision that the only plausible Route A contribution is an appropriately limited empirical **monitoring-method comparison**. They do not justify a first-of-kind claim.

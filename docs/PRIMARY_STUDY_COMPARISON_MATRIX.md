@@ -46,3 +46,18 @@ This matrix currently covers selected high-overlap studies and supporting review
 | Flühmann et al., [label-free clinical metric estimation](https://arxiv.org/abs/2507.22776) | Label-free estimates of confusion-matrix/clinical performance quantities under distribution shift. | Candidate batch-level comparator if faithfully implementable. |
 
 **Extraction status:** this remains a selected primary-study/method matrix, not a complete search result set. Full database searching, deduplication, screening, and supplement/code review remain incomplete. No novelty priority claim is warranted.
+
+
+## Additional prior-art records from the targeted update
+
+| Study | Contribution and overlap | Implication |
+|---|---|---|
+| Siniukov et al. (2025), [arXiv:2501.03581](https://arxiv.org/abs/2501.03581) | HuBERT/self-supervised learning and domain adaptation across four PD voice datasets in English, Italian and Spanish. | Multilingual generalization/adaptation is directly covered; this is a relevant foundational comparison. |
+| Ibarra et al. (2023), [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC10669342/) | Corpus- and language-independent PD screening via domain adaptation over four speech corpora; explicitly studies reduction of corpus shortcuts. | General domain adaptation and dataset-shortcut mitigation are not new. |
+| Francesconi et al. (2026), [arXiv:2602.18535](https://arxiv.org/abs/2602.18535) | Fairness-aware partial-label domain adaptation for healthy/PD/ALS voice classification across four heterogeneous sustained-vowel corpora. | Cross-domain speech learning with a fairness objective is active current work; do not claim domain adaptation plus fairness as broadly novel. |
+| DAT-PD (2026), [PubMed](https://pubmed.ncbi.nlm.nih.gov/42483429/) / [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC13385221/) | Domain-adaptive longitudinal PD severity trajectory regression on mPower smartphone speech. | Adjacent evidence that speech domain adaptation is active; endpoint differs from binary screening and deployment monitoring. |
+| Sedigh Malekroodi et al. (2025), [systematic review](https://pmc.ncbi.nlm.nih.gov/articles/PMC12649940/) | Review of 69 voice-based PD detection studies, searched through 2025-09-07, describing validation patterns and reporting limitations. | Use as a starting point for citation chaining, then update it with late-2025/2026 work. |
+
+### Dataset version control note
+
+NeuroVoz latest Zenodo v3 (record [10.5281/zenodo.13647600](https://zenodo.org/records/13647600)) reports 112 participants, 54 PD / 58 controls and 2,977 recordings; older v1.0.0 (record [10.5281/zenodo.10777657](https://zenodo.org/records/10777657)) reports 108 participants, 53 PD / 55 controls and 2,903 recordings. Files on both records are marked **Restricted**. Use one exact permitted version, not mixed counts.

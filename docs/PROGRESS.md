@@ -53,3 +53,11 @@ Do not assume these resources are mutually compatible. Do not claim cross-langua
 - Added docs/DATASET_FEASIBILITY_GATE.md. At least three independent, legally accessible cohorts are required for the intended benchmark; four are preferred. The data gate is not passed: MDVR-KCL and ItalianPVS are candidates but have not yet undergone local integrity checks; UNLaM has a count/version discrepancy; PC-GITA, NeuroVoz and EWA-DB require access verification; Bridge2AI v3/v4 overlap.
 - Updated Route A to version 0.2 and the primary-study matrix with new close-overlap papers and methods.
 - No local dataset download, model training, or experimental validation was performed in this update. No performance results are claimed.
+
+
+## 2026-10-25 — Second search pass and source-version verification
+
+- Added Siniukov et al. (2025) on HuBERT-based multilingual domain adaptation, Ibarra et al. (2023) on corpus/language-independent screening, Francesconi et al. (2026) on fairness-aware partial-label domain adaptation, DAT-PD (2026) on severity trajectories, and the 2025 systematic review of 69 studies to the prior-art record.
+- Created docs/TARGETED_SEARCH_LOG_2026-10-25.md to distinguish searches actually run from the planned full systematic search. The current evidence retrieval was web-based and targeted; it is not represented as a completed database systematic review.
+- Verified that NeuroVoz counts depend on release: current v3 reports 112 participants (54 PD / 58 controls; 2,977 recordings), while v1.0.0 reports 108 (53 PD / 55 controls; 2,903 recordings). Both records mark files as restricted. Count/version and access must be logged in the dataset manifest.
+- No models trained. No audio downloaded. No target labels or performance metrics created.

@@ -23,6 +23,10 @@ The intended cross-corpus monitoring benchmark requires **at least three indepen
 | ParkCeleb | Celebrity video-derived cohort with age/sex/ethnicity matching claims. | [Zenodo record](https://zenodo.org/records/13954768) primarily has metadata/links, with access/licensing and privacy issues. | Not a primary raw-audio candidate. |
 | UCI 301/489 and engineered-feature collections | Small participant populations with repeated feature rows; no raw audio in many releases. | Public subsets are useful for code/split checks, but cannot measure raw-audio quality shift. | Secondary methodological checks only. |
 
+### NeuroVoz version-specific counts
+
+The current latest Zenodo version (v3, record [10.5281/zenodo.13647600](https://zenodo.org/records/13647600)) reports **112 participants (54 PD, 58 healthy controls) and 2,977 audio files**, with files restricted unless access is granted. The older v1.0.0 record ([10.5281/zenodo.10777657](https://zenodo.org/records/10777657)) reports **108 participants (53 PD, 55 controls) and 2,903 files**. These are version-specific counts; use the chosen release’s manifest, not a pooled or casually mixed count.
+
 ## Independence and integrity cautions
 
 1. The n=50 Italian test cohort in Guo et al. (2026) may be the standard ItalianPVS subset (28 PD + 22 elderly controls); treat as possible overlap until identifiers and provenance are checked.

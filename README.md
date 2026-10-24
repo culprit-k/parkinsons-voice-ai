@@ -57,3 +57,6 @@ The targeted prior-art update found direct overlap with cross-corpus transfer, u
 - [Progress ledger](docs/PROGRESS.md)
 
 **Current blocker:** at least three independent, legally accessible cohorts are not yet verified. No models have been trained and no new experimental results are claimed.
+
+
+See also the [targeted search log](docs/TARGETED_SEARCH_LOG_2026-10-25.md), which records the queries and source types actually checked to date.
