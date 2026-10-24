@@ -43,3 +43,13 @@ Do not assume these resources are mutually compatible. Do not claim cross-langua
 - 2026-10-25: Initialized from project conversation. No experiments or manuscript results claimed.
 - 2026-10-25: Added preliminary Route A hypothesis and data-access cautions.
 - 2026-10-25: Added a targeted prior-art audit. Found substantial conceptual overlap with SUDO and general selective/OOD methods; the proposed PD-voice benchmark remains a conditional hypothesis, not a cleared novelty claim. No experiments performed.
+
+
+## 2026-10-25 — Expanded prior-art and dataset-independence audit
+
+- Added docs/UPDATED_PRIOR_ART_REVIEW_2026-10-25.md with direct PD overlap (September 2026 LODO paper; May 2026 target-data adaptation and sex-specific FNR; October 22 cross-corpus consensus-feature work; June 2026 uncertainty-aware Spanish-to-Italian study) and general label-free monitoring methods (SUDO, D3M, selective classification, label-free confusion-matrix estimation).
+- Identified a public September 2026 repository claiming an acoustic-shortcut/silence-only audit and IPVS/MDVR-KCL cross-corpus model. Its reported results have not been independently reproduced here, but it is material public prior art and reduces the value of repeating that project.
+- Revised the candidate to a comparative benchmark of existing **participant-level error-ranking/selective-prediction** and **batch/domain-level degradation-monitoring** methods. These are separate tasks and must not be mixed into one endpoint.
+- Added docs/DATASET_FEASIBILITY_GATE.md. At least three independent, legally accessible cohorts are required for the intended benchmark; four are preferred. The data gate is not passed: MDVR-KCL and ItalianPVS are candidates but have not yet undergone local integrity checks; UNLaM has a count/version discrepancy; PC-GITA, NeuroVoz and EWA-DB require access verification; Bridge2AI v3/v4 overlap.
+- Updated Route A to version 0.2 and the primary-study matrix with new close-overlap papers and methods.
+- No local dataset download, model training, or experimental validation was performed in this update. No performance results are claimed.

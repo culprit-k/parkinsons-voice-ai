@@ -44,3 +44,16 @@ See [docs/PROGRESS.md](docs/PROGRESS.md), [docs/LITERATURE_REVIEW_PLAN.md](docs/
 
 ## First milestone
 Complete a structured literature audit and dataset feasibility audit before choosing the final research question or training models.
+
+
+## Research decision update — 2026-10-25
+
+The targeted prior-art update found direct overlap with cross-corpus transfer, uncertainty-aware voice assessment, target-data adaptation and general label-free clinical-AI monitoring (including SUDO and D3M). The current candidate is a **comparative benchmark of existing label-free monitoring methods for Parkinson's voice AI**, not a claim of a new general-purpose OOD/abstention method.
+
+- [Updated prior-art review](docs/UPDATED_PRIOR_ART_REVIEW_2026-10-25.md)
+- [Dataset feasibility and independence gate](docs/DATASET_FEASIBILITY_GATE.md)
+- [Revised Route A proposal](docs/ROUTE_A_LABEL_FREE_RELIABILITY_PROPOSAL.md)
+- [Primary-study comparison matrix](docs/PRIMARY_STUDY_COMPARISON_MATRIX.md)
+- [Progress ledger](docs/PROGRESS.md)
+
+**Current blocker:** at least three independent, legally accessible cohorts are not yet verified. No models have been trained and no new experimental results are claimed.

@@ -28,3 +28,21 @@
 ## Extraction status
 
 This matrix currently covers selected high-overlap studies and supporting reviews. It does not yet cover every eligible primary paper; the full systematic search and screening framework is in docs/SEARCH_AND_SCREENING_FRAMEWORK.md.
+
+
+## Updated close-overlap and monitoring methods (2026-10-25)
+
+| Study/method | What it covers | Implication for our project |
+|---|---|---|
+| Şaraldi & Bozdağ Karakeçi (2026-09-30), [DOI 10.46578/humder.1923413](https://doi.org/10.46578/humder.1923413) | LODO comparison across PC-GITA, MDVR-KCL and mPower; CNN+ViT, Wav2Vec2 and classical methods. | Cross-corpus testing is already a direct precedent. Verify split construction and subject-level denominators in the systematic review. |
+| Ganatra (2026-05-15), [article](https://nhsjs.com/2026/limited-target-data-calibration-improves-cross-dataset-transfer-for-parkinsons-disease-detection-from-speech/) | Zero-shot transfer, limited target-data adaptation and sex-specific false-negative rates across several PD speech corpora. | Target adaptation and sex-FNR analysis alone are not novel. Our monitoring decision rules must not use target labels. |
+| Hossain et al. (2026-10-22), [DOI 10.1038/s41598-026-76171-y](https://www.nature.com/articles/s41598-026-76171-y) | Cross-corpus feature selection, external validation and probability-calibration analysis. | Cross-corpus feature stability/calibration is crowded. Focus on monitoring prediction of external error, if supported. |
+| Guo et al. (2026-06-23), [DOI 10.1007/s40846-026-01040-y](https://doi.org/10.1007/s40846-026-01040-y) | Uncertainty-aware voice assessment and Spanish-to-Italian external evaluation. | Generic voice uncertainty and this language pair are already studied; audit whether its Italian n=50 overlaps ItalianPVS. |
+| Public [Parkinson-Voice-Detection repository](https://github.com/BennedictQuanTon/Parkinson-Voice-Detection), September 2026 | Self-reported silence-only acoustic shortcut audit and IPVS/MDVR-KCL cross-corpus modeling. | Not peer reviewed and not independently reproduced here, but relevant public prior art; avoid duplicating the core audit. |
+| SUDO, Kiyasseh et al. (2024), [Nature Communications](https://www.nature.com/articles/s41467-024-46000-9) | Reliability estimation on unlabeled deployment data using labelled reference data and pseudo-label analysis. | General label-free clinical reliability monitoring already exists. Consider a faithful baseline. |
+| D3M, Nguyen et al. (NeurIPS 2025), [official proceedings](https://proceedings.neurips.cc/paper_files/paper/2025/hash/0bb251eba663f0345c0929f5bbbfb6dc-Abstract-Conference.html) | Disagreement-based monitoring for post-deployment performance deterioration without target labels. | Candidate **batch/domain-level** baseline; do not treat it as a per-participant score without justified validation. |
+| Liang et al., [Selective Classification Under Distribution Shifts](https://pmc.ncbi.nlm.nih.gov/articles/PMC12470254/) | Selective prediction and risk–coverage under shifts. | Abstention is a baseline and evaluation concept, not novelty. |
+| Guan & Zhou (2026), [DomainSAT preprint](https://arxiv.org/abs/2601.00716) | Input-shift and output-confidence signals for degradation in pathology vision-language models. | The combination of feature shift and predictive confidence already has adjacent general-method prior art. |
+| Flühmann et al., [label-free clinical metric estimation](https://arxiv.org/abs/2507.22776) | Label-free estimates of confusion-matrix/clinical performance quantities under distribution shift. | Candidate batch-level comparator if faithfully implementable. |
+
+**Extraction status:** this remains a selected primary-study/method matrix, not a complete search result set. Full database searching, deduplication, screening, and supplement/code review remain incomplete. No novelty priority claim is warranted.

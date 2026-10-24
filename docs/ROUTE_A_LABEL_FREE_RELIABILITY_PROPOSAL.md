@@ -1,8 +1,8 @@
 # Route A proposal: Label-free reliability monitoring for Parkinson voice AI under domain shift
 
-**Version:** 0.1 (hypothesis-generation stage)  
+**Version:** 0.2 (revised after expanded prior-art audit)  
 **Date:** 2026-10-25  
-**Status:** Candidate direction only. Novelty is NOT established. No experiments have been run.
+**Status:** Revised candidate only. Novelty is NOT established and the dataset gate is not passed. No experiments have been run.
 
 ## Working title
 
@@ -171,3 +171,49 @@ Before claiming novelty:
 This is the strongest candidate identified so far for an independent empirical contribution, but it is not yet proven novel and may fail the data-feasibility gate. First secure legal access to enough independent datasets, then lock the analysis plan, version it in GitHub, and run a small data-integrity pilot before any confirmatory experiment.
 
 No project results have been generated.
+
+
+---
+
+## Version 0.2 — decision update after the 2026-10-25 prior-art audit
+
+### What changed
+
+The direct and adjacent prior art is broader than the first proposal captured. PD-specific papers now cover leave-one-dataset-out testing, zero-shot transfer, limited target-data adaptation, sex-stratified false-negative rates, cross-corpus feature stability, probability calibration and uncertainty-aware Spanish-to-Italian voice assessment. A public GitHub project also describes acoustic shortcut controls and IPVS/MDVR-KCL cross-corpus modeling. General methods include SUDO, D3M disagreement-driven degradation monitoring, selective classification under distribution shifts and label-free estimation of clinically relevant performance metrics.
+
+Therefore, the project must not be framed as inventing label-free reliability monitoring, OOD detection, or abstention. The candidate is a **disease-specific comparative benchmark of existing monitors**, if a complete prior-art search and data gate justify it.
+
+### Revised primary question
+
+> On independent Parkinson speech corpora held out from model development, do prespecified label-free monitoring methods identify participant-level errors or batch-level performance degradation better than confidence-only baselines, and what risk–coverage and subgroup-deferral trade-offs result?
+
+Possible future title: **“Do Label-Free Reliability Monitors Predict External Errors in Parkinson’s Voice Screening? A Comparative Multi-Corpus Benchmark.”** This title is provisional and is not a novelty claim.
+
+### Separate primary-analysis levels
+
+1. **Participant-level error detection/selective prediction:** rank individual participant predictions by a prespecified risk score (e.g. confidence/margin, source-reference feature distance, or a valid per-case uncertainty score). After the score/rule is frozen, use target diagnostic labels only to evaluate whether errors were ranked as riskier and assess risk–coverage.
+2. **Batch/domain-level performance monitoring:** run a published method such as SUDO, D3M, or a label-free confusion-matrix estimator on an unlabeled target batch/corpus; after the monitor is frozen, reveal target labels for retrospective comparison with actual performance degradation.
+
+These tasks are not interchangeable. The protocol must select one primary endpoint and classify each baseline by its intended operating level. Do not count overlapping random batches from one small dataset as independent target domains.
+
+### Method shortlist, not yet locked
+
+- Confidence-only baseline: maximum predicted probability, class margin or entropy.
+- Input-level shift baseline: a prespecified distance between source and target acoustic distributions; representation distance only with a fixed, documented encoder.
+- Batch-level disagreement monitor: D3M or a faithful disagreement-rate baseline.
+- One label-free performance estimator: SUDO or the Flühmann-style confusion-matrix estimator, selected after checking code, assumptions and sample-size feasibility.
+
+The shortlist should remain small. Implement methods faithfully and do not tune them against target labels. An unlabeled-target method can still require labeled source/reference data; describe this precisely.
+
+### Data gate and analysis safeguards
+
+No confirmatory training until at least three independent, legally accessible cohorts with participant-level PD/control labels and compatible inputs are verified; four is preferable. The n=50 Italian cohort used by a recent uncertainty-aware paper may overlap with the standard ItalianPVS subset. UNLaM has a 119-vs-126 count discrepancy. Bridge2AI v3 and v4 are not independent cohorts. See [dataset feasibility gate](DATASET_FEASIBILITY_GATE.md).
+
+Predefine thresholds on source data only. Keep all recordings from each participant together. Use participant-level outcomes and uncertainty. Report all source-to-target directions, sensitivity at the chosen threshold, specificity, balanced accuracy, AUROC as secondary, risk–coverage, subgroup coverage/deferral and negative controls. Describe combined dataset/domain shift where language is confounded with site, device, task or recruitment.
+
+### Decision
+
+**Proceed:** full literature verification, implementation-method review and lawful data-access verification.  
+**Hold:** final protocol lock, model training and any “first-of-its-kind” claim.
+
+If the dataset gate fails, pivot to a transparent two-corpus pilot or a review/reproducibility project. Do not claim the intended multi-corpus study is complete unless its data and design requirements are met.
