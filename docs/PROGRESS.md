@@ -186,3 +186,14 @@ Do not assume these resources are mutually compatible. Do not claim cross-langua
 - UCI Dataset 301 does not provide raw WAV data in its UCI release; its separate test table is PD-only, so it does not satisfy the missing raw-audio PD/control cohort requirement.
 - Updated novelty judgement: cross-language PD voice models and uncertainty-aware assessment are already published (ParkMAE 2025/2026; Lim et al. 2025; Spanish-to-Italian uncertainty-aware work in June 2026). Our only candidate is a narrow comparison of domain-distance plus calibrated confidence versus confidence alone for participant-level error monitoring. No global novelty or "first" claim.
 - State unchanged: protocol NOT LOCKED; confirmatory modelling NOT STARTED; no models trained and no predictive metrics. See [research establishment update](RESEARCH_ESTABLISHMENT_UPDATE_2026-10-25.md).
+
+
+## EWA-DB access and audit action — 25 October 2026
+
+- Verified the official Zenodo record is restricted and requires an access request followed by signed EULA; no request has yet been submitted and no files are held by the project.
+- Identified the data descriptor's corresponding author, Milan Rusko (`milan.rusko@savba.sk`), and prepared a project-specific access email asking about student eligibility, supervisor/ethics requirements, diagnosis mix, task-specific available audio, repeat recordings, and permitted reporting.
+- Found a cohort-count discrepancy that must be resolved with the custodian: official EWA description: 1,649 total; 1,122 meeting stated criteria; 1,003 people with publishable WAVs. ParkMAE reports an EWA-DB PD/control subset of 956 speakers (95 PD / 861 controls), 6,692 recordings and 88 h 10 min. Do not treat the 956 subset as automatically downloadable or equate it to all 1,003 audio-consenting participants.
+- Added `scripts/audit_ewa_db_local.py`, which performs local aggregate-only audio inventory/QC after access. A synthetic-file smoke test passed; it has NOT been run on real EWA-DB.
+- Added `docs/EWA_DB_ACCESS_AND_AUDIT_CHECKLIST_2026-10-25.md` with the ready-to-send message, access instructions, audit plan and promotion rules.
+- Next external dependency: researcher submits the restricted Zenodo access request with their own identity, reads and signs the EULA only after review, and sends the custodian clarifying questions. Assistant has not submitted a request or signed/accepted terms.
+- Protocol remains NOT LOCKED; no model training or results.
