@@ -308,12 +308,14 @@ def cohort_path_summary(root: Path) -> dict[str, Any]:
         entry = accum.setdefault(group, {
             "wav_count": 0,
             "directory_prefixes_by_depth": defaultdict(set),
+            "directory_names_by_depth": defaultdict(set),
         })
         entry["wav_count"] += 1
         for depth in range(1, len(directory_parts) + 1):
             entry["directory_prefixes_by_depth"][depth].add(
                 "/".join(directory_parts[:depth])
             )
+            entry["directory_names_by_depth"][depth].add(directory_parts[depth - 1])
 
     output: dict[str, Any] = {}
     for group, item in accum.items():
@@ -322,6 +324,10 @@ def cohort_path_summary(root: Path) -> dict[str, Any]:
             "unique_directory_counts_by_depth": {
                 str(depth): len(prefixes)
                 for depth, prefixes in sorted(item["directory_prefixes_by_depth"].items())
+            },
+            "unique_directory_name_counts_by_depth": {
+                str(depth): len(names)
+                for depth, names in sorted(item["directory_names_by_depth"].items())
             },
             "participant_count": "not inferred from folder depth; requires source-specific mapping",
         }
