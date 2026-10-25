@@ -106,3 +106,24 @@ Priority access request: **EWA-DB (Slovak, ELRA-S0489)** because sustained-vowel
 
 ### Novelty verdict after this search
 **Still not cleared.** The closest reviewed literature already establishes cross-language/cross-corpus PD voice modelling, corpus-comparability evaluation, uncertainty/confidence-based monitoring, external validation and calibration. The selected question may remain a defensible comparative study, but a systematic database search, deduplication, citation-chain checking, and direct examination of any closely matching endpoint are still needed before protocol lock. We must not promise patentability or claim a novel general mathematical model.
+
+
+## Additional targeted novelty search — distance-based audio OOD and failure detection
+
+### Queries executed
+- Parkinson voice prediction errors confidence domain distance audio classification
+- confidence plus acoustic distance Parkinson voice error detection
+- speech classification out-of-distribution confidence feature distance error detection clinical audio
+- selective prediction Parkinson speech voice calibration participant-level external validation
+
+### Sources found and interpretation
+| Source | Verified finding | Implication |
+|---|---|---|
+| Bukhsh & Saeed, *On Out-of-Distribution Detection for Audio with Deep Nearest Neighbors*, ICASSP 2023. [IEEE page](https://resourcecenter.ieee.org/conferences/icassp-2023/spsicassp23vid0558) · [author page](https://zaharah.github.io/ood_audio/) | Uses feature-space deep k-nearest-neighbor distances to flag out-of-distribution audio across multiple audio/speech classification tasks. | **Feature-space distance for audio OOD detection is prior art.** Do not describe acoustic distance itself as novel. The remaining question, if retained, is whether a prespecified distance score adds value beyond confidence-only error ranking specifically on external PD-voice screening cohorts. |
+| Yilmaz & Toraman, *D2U: Distance-to-Uniform Learning for Out-of-Scope Detection*, NAACL 2022. [ACL Anthology](https://aclanthology.org/2022.naacl-main.152/) | A zero-shot out-of-scope score for utterances uses the shape of the classifier output distribution and is evaluated across six datasets. | Out-of-scope and confidence-derived scores for utterances are established prior art. |
+| Kulkarni et al., *Uncertainty Quantification and Calibration for Audio-driven Disease Diagnosis*, 2024 workshop research. [Sony Research page](https://www.sony.com/en/SonyInfo/technology/publications/uncertainty-quantification-and-calibration-for-audio-driven-disease-diagnosis/) | Uses a Dirichlet-based uncertainty estimate and independent kernel distance learning in latent space for audio-driven disease detection; the source page describes respiratory-disease datasets. | Confidence and feature-space distance have been combined for audio-driven disease assessment outside PD. This is direct conceptual overlap. |
+| Steinmetz et al., *Failure detection in medical image classification under realistic distribution shifts: A large-scale benchmark* (medRxiv, 2026). [Preprint](https://www.medrxiv.org/content/10.64898/2026.05.04.26350496v1.full) | Benchmarks confidence functions and aggregation strategies for detecting classification errors under realistic shifts across eight medical-imaging tasks. | Confidence-based failure detection as a comparative benchmark is established in another clinical modality; our potential claim must remain a PD-voice-specific empirical test, not a general algorithm. |
+| Ponchard & Serrano, BUCC 2026. [ACL Anthology](https://aclanthology.org/2026.bucc-1.2/) | Directly studies comparability and generalization of four Parkinsonian speech corpora under intra-corpus, cross-corpus and out-of-domain conditions. | Cross-corpus comparability and evaluation are direct prior art. |
+
+### Revised novelty decision
+The closest method-family overlap is stronger than initially represented: (1) cross-corpus PD speech comparability, (2) confidence/uncertainty error ranking in clinical classification, and (3) feature-distance OOD detection for audio are each already published. No exact paper was identified in this targeted query pass that tests the precise **participant-level error-ranking** comparison of confidence alone versus confidence plus a predeclared feature-distance signal on independent PD-voice cohorts. That absence is not proof that no exact match exists. The only defensible continuation is a narrow comparative external-validation study if the full database/citation-chain search supports it; otherwise pivot to a transparent replication/reproducibility paper. No new general-purpose OOD method is justified.
