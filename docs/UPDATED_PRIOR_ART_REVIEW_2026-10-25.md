@@ -144,3 +144,13 @@ The current primary question is a potentially useful **PD-voice application benc
 A public repository created 2026-09-12 and updated 2026-09-26 reports acoustic-shortcut/silence controls and cross-corpus PD voice modeling on IPVS and MDVR-KCL, with eGeMAPSv02, CMVN, leave-one-corpus-out nested validation, calibration and subgroup checks: https://github.com/BennedictQuanTon/Parkinson-Voice-Detection. Its reported empirical results have not been independently reproduced here, but the project is a major prior-art overlap and the same corpus pair/audit should not be our headline contribution.
 
 PARK (2026) also evaluates uncertainty and external cohorts in multimodal remote screening: https://pmc.ncbi.nlm.nih.gov/articles/PMC13586151/. This means uncertainty/error relationships are established; only a carefully justified incremental acoustic-distance comparison remains a candidate gap, not a cleared novelty claim.
+
+
+## Citation-chain update — 25 October 2026
+
+Two additional sources further restrict the novelty space:
+
+- Ponchard & Serrano (2026), *A Comparative Study of Parkinsonian Speech Corpora for Deep Learning-Based Detection of Dysarthria*, BUCC 2026. The paper explicitly evaluates four corpora under within-corpus, cross-corpus and out-of-domain settings, including whether multi-corpus training is compatible across differences in recording conditions and speech tasks. [ACL Anthology](https://aclanthology.org/2026.bucc-1.2/). Consequence: corpus comparability and cross-corpus robustness are already direct research targets.
+- Hossain et al. (published 22 October 2026), *Cross-corpus consensus feature selection for language-invariant Parkinson's disease detection*. [Scientific Reports](https://www.nature.com/articles/s41598-026-76171-y). Consequence: another current study focuses on cross-corpus feature consistency, language-invariant modeling and external evaluation. We must not claim novelty for those broad objectives.
+
+These papers do not, from the abstracts reviewed, establish that the exact confidence-only versus confidence-plus-source-distance participant-error ranking comparison has already been done. That is a limited absence-of-match observation, not evidence that no match exists. The candidate remains **plausible but not cleared** until a database-grade search and citation-chain inspection are completed.
