@@ -285,43 +285,47 @@ def audit_one(name: str, url: str, expected_sha: str | None, output: Path) -> di
 
 
 def cohort_path_summary(root: Path) -> dict[str, Any]:
-    """Aggregate label-folder and participant-folder counts without exposing names."""
-    groups: dict[str, dict[str, Any]] = {}
+    """Summarize WAV counts and directory-depth structure without exposing folder names."""
+    accum: dict[str, dict[str, Any]] = {}
     for path in sorted(root.rglob("*.wav")):
         rel = path.relative_to(root)
         group = path_group_hint(rel)
         if group == "unknown":
             continue
         parts = rel.parts
-        group_idx = next(
+        category_idx = next(
             (i for i, part in enumerate(parts)
-             if path_group_hint(Path(part)) == group),
+             if path_group_hint(Path(part)) == group
+             and any(token in part.lower() for token in (
+                 "young healthy", "young control", "elderly healthy",
+                 "elderly control", "people with parkinson", "parkinson's disease"
+             ))),
             None,
         )
-        participant_dir = None
-        if group_idx is not None and group_idx + 1 < len(parts) - 1:
-            participant_dir = parts[group_idx + 1]
-        entry = groups.setdefault(group, {
+        if category_idx is None:
+            continue
+        directory_parts = parts[category_idx + 1:-1]
+        entry = accum.setdefault(group, {
             "wav_count": 0,
-            "participant_folder_keys_private": set(),
-            "recordings_per_folder_private": Counter(),
+            "directory_prefixes_by_depth": defaultdict(set),
         })
         entry["wav_count"] += 1
-        if participant_dir is not None:
-            entry["participant_folder_keys_private"].add(participant_dir)
-            entry["recordings_per_folder_private"][participant_dir] += 1
+        for depth in range(1, len(directory_parts) + 1):
+            entry["directory_prefixes_by_depth"][depth].add(
+                "/".join(directory_parts[:depth])
+            )
 
     output: dict[str, Any] = {}
-    for group, item in groups.items():
-        counts = list(item["recordings_per_folder_private"].values())
+    for group, item in accum.items():
         output[group] = {
             "wav_count": item["wav_count"],
-            "participant_folder_count": len(item["participant_folder_keys_private"]),
-            "participant_folders_with_multiple_wavs": sum(count > 1 for count in counts),
-            "max_wavs_in_one_participant_folder": max(counts) if counts else None,
+            "unique_directory_counts_by_depth": {
+                str(depth): len(prefixes)
+                for depth, prefixes in sorted(item["directory_prefixes_by_depth"].items())
+            },
+            "participant_count": "not inferred from folder depth; requires source-specific mapping",
         }
     return output
-
 
 def audit_spreadsheets(root: Path) -> list[dict[str, Any]]:
     """Summarize workbook structure and safe aggregate ID/label linkage metrics."""
