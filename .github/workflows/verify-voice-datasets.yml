@@ -24,6 +24,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install metadata inspection libraries
+        run: python -m pip install --disable-pip-version-check openpyxl soundfile
+
       - name: Download, hash and inventory public archives
         id: audit
         continue-on-error: true
@@ -67,11 +70,36 @@ jobs:
                       "audio_file_count": item.get("audio_file_count"),
                       "wav_file_count": item.get("wav_file_count"),
                       "wav_headers_readable": item.get("wav_headers_readable"),
+                      "wav_header_error_counts": item.get("wav_header_error_counts"),
                       "sample_rate_count_hz": item.get("sample_rate_count_hz"),
                       "channel_count": item.get("channel_count"),
                       "wav_duration_min_seconds": item.get("wav_duration_min_seconds"),
                       "wav_duration_max_seconds": item.get("wav_duration_max_seconds"),
                       "duplicate_audio_hash_group_count": len(duplicates),
+                      "spreadsheet_audit": [
+                          {
+                              "status": book.get("status"),
+                              "sheets": [
+                                  {
+                                      "data_rows": sheet.get("data_rows"),
+                                      "unique_ids": sheet.get("unique_ids"),
+                                      "rows_missing_id": sheet.get("rows_missing_id"),
+                                      "label_value_counts": sheet.get("label_value_counts"),
+                                      "ids_matching_audio_filename": sheet.get("ids_matching_audio_filename"),
+                                      "ids_not_matching_audio_filename": sheet.get("ids_not_matching_audio_filename"),
+                                  }
+                                  for sheet in book.get("sheets", [])
+                              ],
+                          }
+                          for book in item.get("spreadsheet_audit", [])
+                      ],
+                      "figshare_source_file_checks": [
+                          {
+                              "bytes_local": file.get("bytes_local"),
+                              "md5_match": file.get("md5_match"),
+                          }
+                          for file in item.get("figshare_source_file_checks", [])
+                      ],
                       "nested_zip_extractions": [
                           {k: v for k, v in result.items() if k != "archive_relative_path"}
                           for result in item.get("nested_zip_extractions", [])
