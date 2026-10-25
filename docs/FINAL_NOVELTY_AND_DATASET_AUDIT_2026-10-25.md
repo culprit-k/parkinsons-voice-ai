@@ -140,3 +140,13 @@ Even when the script runs, additional human/data-curation checks remain mandator
 6. Freeze the statistical analysis plan before looking at the held-out cohort labels or selecting error-detection metrics.
 
 **Final status:** targeted novelty review completed; broad novelty claims rejected; narrow comparison retained only as a conditional study direction; local raw-data integrity verification blocked by runtime DNS failure; no data downloads, local hashes, participant manifest audits, models or empirical results are claimed.
+
+
+## Additional targeted search results — confidence gating and speech-domain shift
+
+Two further sources found during the final targeted search strengthen the conservative novelty boundary:
+
+- **Confidence-Gated Hybrid CNN Ensemble for PD speech analysis**, Electronics 15(3):587, published 29 January 2026. It uses per-sample confidence indicators (maximum posterior, decision margin, entropy) to gate or weight an ensemble for PD classification on public UCI voice datasets. This is not the same endpoint as ranking incorrect participant-level predictions on held-out cohorts with an acoustic-distance feature, but it means confidence-gated PD voice modelling itself is already reported. [Paper](https://www.mdpi.com/2079-9292/15/3/587)
+- **Detection of actionable domain shifts in speech enhancement systems by tracking prediction uncertainty**, published 28 February 2026. This speech-processing study explicitly monitors prediction uncertainty to identify shifts associated with degraded performance. It concerns speech enhancement and shift-at-the-batch/system level, not PD diagnosis or participant-level classification-error ranking, but it is clear adjacent prior art for using uncertainty as a speech-domain-shift signal. [Paper](https://link.springer.com/article/10.1186/s13636-026-00448-3)
+
+These sources do not prove that the exact candidate comparison has already been done, but further reduce support for presenting confidence gating or speech-domain monitoring as a novel method. The plausible contribution remains a narrow comparative test: does a frozen acoustic-distance signal add value beyond confidence for identifying errors in independent PD-voice cohorts?
