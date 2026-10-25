@@ -77,6 +77,7 @@ jobs:
                       "wav_duration_max_seconds": item.get("wav_duration_max_seconds"),
                       "duplicate_audio_hash_group_count": len(duplicates),
                       "duplicate_audio_group_sizes": [len(group.get("paths_private", [])) for group in duplicates],
+                      "cohort_path_summary": item.get("cohort_path_summary"),
                       "spreadsheet_audit": [
                           {
                               "status": book.get("status"),
@@ -84,6 +85,7 @@ jobs:
                                   {
                                       "sheet_name": sheet.get("sheet_name_private"),
                                       "column_headers": sheet.get("column_headers_private"),
+                                      "direct_name_fields_present": sheet.get("direct_name_fields_present"),
                                       "data_rows": sheet.get("data_rows"),
                                       "unique_ids": sheet.get("unique_ids"),
                                       "rows_missing_id": sheet.get("rows_missing_id"),
