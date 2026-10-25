@@ -121,3 +121,14 @@ Do not assume these resources are mutually compatible. Do not claim cross-langua
 - UAMS: individual source files downloaded via Figshare API; per-file MD5 checks passed. Inventory contains 81 readable mono 8-kHz WAVs plus one workbook. The Parselmouth sheet has 81 unique IDs, 41 HC / 40 PwPD labels, and 81/81 ID-to-audio filename matches. No exact duplicate audio hashes were found.
 - Overall data gate remains NOT PASSED: IPVS duplicate and participant mapping are unresolved; UAMS diagnostic provenance and independent-participant status need confirmation; third independent compatible cohort not established.
 - No model training or empirical prediction evaluation has occurred; protocol remains NOT LOCKED.
+
+
+## 2026-10-25 — MDVR-KCL verification and three-corpus decision
+
+- Added MDVR-KCL via Zenodo API to the archive-audit script and workflow. In successful run https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40170614840, the 606,144,431-byte source file matched Zenodo's MD5. The archive yielded 73 readable mono WAV files at 44.1 kHz, durations 73.03902–220.63916 seconds, with no exact duplicate audio hashes.
+- MDVR-KCL participant IDs and raw file-to-label mapping were not verified. Its connected-speech tasks are not directly task-matched to UAMS sustained /a/.
+- Three raw corpora have passed basic file-level download/audio-header checks (IPVS, UAMS, MDVR-KCL), but three compatible independent participant cohorts have NOT been established.
+- IPVS duplicate pair is in the same parent directory under a PD-labelled path; whether it is a duplicate file or repeated take remains unresolved. IPVS spreadsheets include name/surname columns, requiring privacy/governance review before any demographic linkage.
+- NeuroVoz is a promising Spanish connected-speech corpus but Zenodo lists its files as restricted; no access has been granted.
+- Novelty remains conditional: 2026 limited-target calibration work uses overlapping datasets, so the only defensible candidate is a prespecified comparative evaluation of confidence-only versus confidence-plus-acoustic-distance error ranking, not a new general algorithm.
+- No model trained; no empirical prediction results; protocol not locked.
