@@ -1,6 +1,6 @@
 # Parkinson's Voice AI Research
 
-**Status:** Project setup and preliminary evidence audit. No model experiments or clinical performance claims have been produced.
+**Status (25 Oct 2026):** targeted novelty review and file-level archive audits completed for three candidate corpora. Participant/diagnosis validation and third-cohort access remain open; no model experiments or clinical performance claims have been produced.
 
 ## Objective
 Investigate voice-based machine-learning approaches for Parkinson's disease research, emphasizing cross-language generalization, demographic confounding, recording robustness, and calibration.
@@ -17,7 +17,9 @@ These questions remain provisional until literature and dataset feasibility revi
 - [x] Topic and broad objective selected
 - [x] Initial candidate studies and datasets identified
 - [ ] Structured literature review completed
-- [ ] Dataset access, labels, languages, and metadata verified
+- [x] Basic archive integrity and WAV-header audits completed for IPVS, UAMS and MDVR-KCL
+- [ ] Participant-level label/provenance, privacy/governance, and repeated-session checks completed
+- [ ] Third independent task-compatible cohort lawfully accessed and audited
 - [ ] Protocol and analysis plan prespecified
 - [ ] Reproducible baseline implemented
 - [ ] Generalization and bias analyses run
@@ -56,7 +58,7 @@ The targeted prior-art update found direct overlap with cross-corpus transfer, u
 - [Primary-study comparison matrix](docs/PRIMARY_STUDY_COMPARISON_MATRIX.md)
 - [Progress ledger](docs/PROGRESS.md)
 
-**Current blocker:** at least three independent, legally accessible cohorts are not yet verified. No models have been trained and no new experimental results are claimed.
+**Current blocker:** archive/file integrity has passed for IPVS, UAMS and MDVR-KCL via [GitHub Actions run 40175159872](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40175159872), but three compatible independent cohorts are not yet approved. IPVS participant/session mapping and direct-identifier governance remain unresolved; UAMS diagnosis provenance and participant independence need confirmation; MDVR-KCL participant-label mapping remains open and its connected-speech task is not matched to sustained /a/. No model has been trained and no new experimental results are claimed.
 
 
 See also the [targeted search log](docs/TARGETED_SEARCH_LOG_2026-10-25.md), which records the queries and source types actually checked to date.
@@ -89,4 +91,8 @@ This is a focused comparison of existing signals, not a claimed new general-purp
 
 ## Current gate status (2026-10-25)
 
-**Protocol remains unlocked.** A close-overlap public repository already reports IPVS/MDVR-KCL acoustic-shortcut and cross-corpus robustness work. Dataset metadata are identified, but raw archives and participant manifests have not been locally verified. See [Prior-art and dataset verification gate](docs/PRIOR_ART_AND_DATASET_GATE_2026-10-25.md).
+**Protocol remains unlocked; data gate not passed.** Archive integrity and audio-header checks have now passed for IPVS, UAMS and MDVR-KCL through a network-enabled runner, but participant-level diagnosis validity and a third task-compatible independent cohort remain unverified. EWA-DB is the prioritized access request, with mPower as a fallback; neither is approved or accessed. A close-overlap public repository already reports IPVS/MDVR-KCL shortcut and cross-corpus work, and recent BUCC 2026 work directly studies Parkinson speech-corpus comparability. Novelty is not cleared.
+
+- [Actual archive-integrity and data-gate audit](docs/FINAL_NOVELTY_AND_DATASET_AUDIT_2026-10-25.md)
+- [Third-cohort search and draft access requests](docs/THIRD_COHORT_AND_ACCESS_REQUEST_PLAN_2026-10-25.md)
+- [Current remaining blockers issue](https://github.com/culprit-k/parkinsons-voice-ai/issues/2)
