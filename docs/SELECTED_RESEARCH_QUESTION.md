@@ -111,3 +111,12 @@ The selected question remains a candidate only. A close-overlap public repositor
 The dataset gate is also not passed: public metadata have been inspected, but raw audio has not been downloaded, checksummed, unpacked or locally checked for unique participants, repeats, labels, tasks and duplicate sessions. ItalianPVS counts differ across descriptions (including 831 commonly reported recordings versus a mirror listing 839 uploaded files), which must be resolved from a versioned manifest.
 
 **Do not lock the protocol or begin confirmatory training yet.** See [PRIOR_ART_AND_DATASET_GATE_2026-10-25.md](PRIOR_ART_AND_DATASET_GATE_2026-10-25.md).
+
+
+## Final targeted novelty and data-gate update — 25 October 2026
+
+The targeted audit does not clear global novelty. Cross-dataset/cross-language PD voice modelling, demographic-confounding audits, uncertainty-aware PD screening, and generic label-free deployment monitoring are established areas. A public September 2026 repository also overlaps substantially on IPVS silence/channel shortcut audits and IPVS/MDVR-KCL cross-corpus modelling. The precise confidence-only versus confidence-plus-acoustic-distance error-ranking comparison remains a conditional voice-specific comparative study, not a new general OOD algorithm.
+
+The raw-data gate remains **NOT PASSED**. IPVS mirror metadata shows a 593 MB ZIP and host-displayed SHA-256, but the 839-file listing does not reconcile with the documented 831 WAV + six spreadsheets + ZIP inventory. UAMS metadata describes a 4.18 MB prolonged-/a/ dataset; the associated publication reports 40 PD and 41 controls in the public subset, but the archive and demographics workbook have not been audited locally. The runtime cannot resolve the dataset hosts, so there was no raw data download, local hash, WAV inspection, or participant-label join. See [the final targeted audit](FINAL_NOVELTY_AND_DATASET_AUDIT_2026-10-25.md) and [the archive verification script](../scripts/verify_voice_dataset_archives.py).
+
+No models were trained. The protocol must remain unlocked until archive integrity, participant keys, diagnostic label mapping, duplicates and access are verified, and a sufficient number of independent compatible cohorts is established.
