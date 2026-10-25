@@ -123,3 +123,10 @@ No models were trained. The protocol must remain unlocked until archive integrit
 
 
 Additional targeted search found a January 2026 confidence-gated PD-voice ensemble and a February 2026 speech-enhancement domain-shift detector based on prediction uncertainty. They are not identical to acoustic-distance-augmented participant-level error ranking, but further reinforce that the potential contribution is a narrow comparative external-validation study rather than a novel general method. See the [final audit](FINAL_NOVELTY_AND_DATASET_AUDIT_2026-10-25.md).
+
+
+## Raw data verification update — 25 October 2026
+
+The archive-integrity check is no longer metadata-only. See [the completed audit](FINAL_NOVELTY_AND_DATASET_AUDIT_2026-10-25.md) and [the successful workflow](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40170280356).
+
+IPVS checksum and WAV QC passed (831 WAVs; one exact duplicate pair), but participant-level mapping remains unresolved and a spreadsheet contains direct name/surname fields. UAMS archive checks passed (81 readable mono 8-kHz WAVs; 81 unique Sample IDs, 41 HC / 40 PwPD, all IDs matched to filenames). UAMS diagnostic provenance and independence need source confirmation. No third compatible cohort is established. Therefore the candidate question remains conditional, the protocol remains unlocked, and no model has been trained.
