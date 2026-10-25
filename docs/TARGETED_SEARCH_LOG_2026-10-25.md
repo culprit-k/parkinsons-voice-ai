@@ -80,3 +80,29 @@ Additional targeted searches included:
 ### Updated interpretation
 
 A sustained /a/ task contains little lexical-language information. If ItalianPVS, UAMS and mPower sustained vowels are compared, the correct claim is cross-dataset/recording-domain robustness of sustained-phonation screening, not isolated cross-language speech generalization. Language and data source remain entangled with device, environment, age, recruitment and protocol. A true language-generalization study of reading/conversation needs compatible connected-speech tasks and additional corpora.
+
+
+## Search update — 25 October 2026 (third-cohort and novelty citation-chain pass)
+
+### New queries executed
+- "public Parkinson's disease speech dataset language spontaneous speech labels open access connected speech dataset Spanish French German"
+- "Parkinson's speech dataset open access participant-level audio cohort"
+- "PD voice screening error detection confidence acoustic domain distance"
+- "Parkinson disease speech domain shift confidence detector errors out of distribution 2026"
+- "Parkinson voice dataset sustained vowel access EWA-DB ELRA S0489"
+- "mPower Synapse voice recordings data use statement diagnosis label provenance"
+
+### Newly verified primary sources
+| Source | What it adds | Consequence for our project |
+|---|---|---|
+| Ponchard & Serrano (May 2026), *A Comparative Study of Parkinsonian Speech Corpora for Deep Learning-Based Detection of Dysarthria*, BUCC 2026. [ACL Anthology](https://aclanthology.org/2026.bucc-1.2/) | Explicitly evaluates four corpora under intra-corpus, cross-corpus and out-of-domain settings; studies whether corpora can be combined and generalize across heterogeneous recording conditions/tasks. | Direct prior art for corpus-comparability and cross-corpus generalization. Our study cannot claim those broad ideas as new; novelty, if any, remains the specific incremental confidence-vs-confidence-plus-distance error-ranking comparison, which is not cleared. |
+| Hossain et al. (22 October 2026), *Cross-corpus consensus feature selection for language-invariant Parkinson's disease detection*. [Scientific Reports](https://www.nature.com/articles/s41598-026-76171-y) | Recent cross-corpus feature selection, acoustic/spectrogram dual-stream modeling and cross-linguistic validation. | Further narrows claims about invariant features or new cross-language classification architectures. |
+| EWA-DB, ELRA-S0489 catalogue. [ELRA](https://catalogue.elra.info/en-us/repository/browse/ELRA-S0489/) | Metadata describes 1,649 speakers, including a Parkinson's cohort and healthy controls; sustained-vowel, DDK, naming and picture-description tasks. WAV is described as available for 1,003 speakers who provided written consent. Catalogue currently displays ELRA licence options with a listed price of €0.00; the exact license terms and access prerequisites still must be checked. | Best request candidate for a third sustained-vowel cohort (Slovak), contingent on permitted access, audio-by-diagnosis availability, participant IDs and mapping. |
+| mPower access and transfer-learning paper (2024). [Scientific Reports](https://www.nature.com/articles/s41598-024-81824-x) | Raw recordings require validated Synapse research access, data-use statement and agreement to terms; label-source provenance is relevant because the study uses self-reported voice data. | Secondary route for sustained-vowel mobile recordings; not an unrestricted anonymous download and not approved until the label field is audited. |
+| Public survey of PD voice datasets (November 2025). [Zenodo record](https://zenodo.org/records/17651838) | Reviews ten public dataset resources and finds wide variability in task types, licensing/access, demographics and raw-audio availability. | Supports the approach of a data-availability/compatibility gate rather than treating every public feature table or data paper as a usable independent cohort. |
+
+### Revised third-cohort decision
+Priority access request: **EWA-DB (Slovak, ELRA-S0489)** because sustained-vowel phonation is explicitly listed. Secondary route: **mPower** through Synapse. NeuroVoz v3 remains restricted on Zenodo; PC-GITA is described as request-mediated; UNLaM's 119-vs-126 count/version discrepancy remains unresolved. None is counted as available until permission and participant-level label mapping are evidenced. Draft request messages and a detailed acceptance checklist are in [the access plan](THIRD_COHORT_AND_ACCESS_REQUEST_PLAN_2026-10-25.md).
+
+### Novelty verdict after this search
+**Still not cleared.** The closest reviewed literature already establishes cross-language/cross-corpus PD voice modelling, corpus-comparability evaluation, uncertainty/confidence-based monitoring, external validation and calibration. The selected question may remain a defensible comparative study, but a systematic database search, deduplication, citation-chain checking, and direct examination of any closely matching endpoint are still needed before protocol lock. We must not promise patentability or claim a novel general mathematical model.
