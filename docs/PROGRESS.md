@@ -112,3 +112,12 @@ Do not assume these resources are mutually compatible. Do not claim cross-langua
 - Status remains: protocol NOT LOCKED; confirmatory modelling NOT STARTED; raw-data integrity gate NOT PASSED. Sustained-/a/ cohort comparison should be described as recording-domain robustness, not lexical cross-language generalization.
 
 - Final search refinement found a Jan 2026 confidence-gated PD voice ensemble and a Feb 2026 uncertainty-based speech-domain shift detector. They are adjacent rather than exact matches for the candidate error-ranking endpoint, but further narrow the defensible contribution to a comparative validation study.
+
+
+## 2026-10-25 — Raw archive verification completed
+
+- Added a network-enabled GitHub Actions workflow because the local runtime could not resolve dataset hosts. The successful audit is https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40170280356. Only a sanitized aggregate report was uploaded; raw audio and participant paths were not published as artifacts.
+- IPVS: local SHA-256 matched the pinned mirror. Archive extracted to 831 WAV, 6 XLSX and 1 TXT. All 831 WAV headers were readable and mono; 671 at 16 kHz, 160 at 44.1 kHz. Folder-level label counts are 437 PD, 349 elderly controls and 45 young controls. One exact duplicate pair was found. Participant-level mapping remains unresolved; a spreadsheet contains direct name/surname fields, creating a privacy/governance blocker for demographic linkage.
+- UAMS: individual source files downloaded via Figshare API; per-file MD5 checks passed. Inventory contains 81 readable mono 8-kHz WAVs plus one workbook. The Parselmouth sheet has 81 unique IDs, 41 HC / 40 PwPD labels, and 81/81 ID-to-audio filename matches. No exact duplicate audio hashes were found.
+- Overall data gate remains NOT PASSED: IPVS duplicate and participant mapping are unresolved; UAMS diagnostic provenance and independent-participant status need confirmation; third independent compatible cohort not established.
+- No model training or empirical prediction evaluation has occurred; protocol remains NOT LOCKED.
