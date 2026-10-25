@@ -34,6 +34,7 @@ IPVS_EXPECTED_SHA256 = (
     "3c4cd221345f7a81f0eeaceedf44dedbfd33b08ecd18ab5a3307edefcfbacfed"
 )
 UAMS_URL = "https://api.figshare.com/v2/articles/23849127"
+MDVR_URL = "https://zenodo.org/api/records/2867216"
 AUDIO_EXTENSIONS = {".wav", ".flac", ".m4a", ".mp3", ".ogg"}
 
 
@@ -517,9 +518,87 @@ def audit_figshare_article(name: str, metadata_url: str, output: Path) -> dict[s
     return report
 
 
+def audit_zenodo_record(name: str, metadata_url: str, output: Path) -> dict[str, Any]:
+    """Download and verify the public files listed by a Zenodo record API."""
+    request = urllib.request.Request(
+        metadata_url,
+        headers={"User-Agent": "PDVoiceDatasetAudit/1.0 (research reproducibility)"},
+    )
+    with urllib.request.urlopen(request, timeout=60) as response:
+        metadata = json.load(response)
+    files = metadata.get("files", [])
+    if not files:
+        raise ValueError("Zenodo API returned no public files for the record")
+
+    base = output / name
+    download_dir = base / "downloads"
+    extraction_dir = base / "extracted"
+    download_dir.mkdir(parents=True, exist_ok=True)
+    extraction_dir.mkdir(parents=True, exist_ok=True)
+    checks: list[dict[str, Any]] = []
+
+    for item in files:
+        filename = Path(item.get("key", f"zenodo_file_{item.get('id')}")).name
+        destination = download_dir / filename
+        url = item.get("links", {}).get("self") or item.get("links", {}).get("download")
+        if not url:
+            raise ValueError(f"No public download URL for Zenodo file {filename}")
+        info = download(url, destination)
+        md5 = hashlib.md5()
+        with destination.open("rb") as stream:
+            for block in iter(lambda: stream.read(1024 * 1024), b""):
+                md5.update(block)
+        local_md5 = md5.hexdigest()
+        checksum = item.get("checksum", "")
+        expected_md5 = checksum.split(":", 1)[1] if checksum.startswith("md5:") else None
+        md5_match = local_md5.lower() == expected_md5.lower() if expected_md5 else None
+        if md5_match is False:
+            raise ValueError(
+                f"Zenodo MD5 mismatch for {filename}: expected {expected_md5}, got {local_md5}"
+            )
+        checks.append({
+            "filename_private": filename,
+            "bytes_local": destination.stat().st_size,
+            "sha256_local": info["sha256_local"],
+            "md5_local": local_md5,
+            "md5_expected": expected_md5,
+            "md5_match": md5_match,
+            "zenodo_file_id": item.get("id"),
+        })
+        if destination.suffix.lower() == ".zip" and zipfile.is_zipfile(destination):
+            safe_extract(destination, extraction_dir / destination.stem)
+        else:
+            shutil.copy2(destination, extraction_dir / filename)
+
+    nested = unpack_nested_zips(extraction_dir)
+    report = inventory(
+        extraction_dir, name, base / "private_manifests" / "placeholder.csv"
+    )
+    report.update({
+        "zenodo_record_id": metadata.get("id"),
+        "zenodo_doi": metadata.get("metadata", {}).get("doi"),
+        "zenodo_title": metadata.get("metadata", {}).get("title"),
+        "zenodo_license": metadata.get("metadata", {}).get("license"),
+        "source_file_count": len(files),
+        "source_file_checks": checks,
+        "archive_bytes": sum(item["bytes_local"] for item in checks),
+        "archive_sha256_local": None,
+        "host_sha256_expected": None,
+        "host_hash_match": None,
+        "spreadsheet_audit": audit_spreadsheets(extraction_dir),
+        "nested_zip_extractions": nested,
+        "status": "archive_downloaded_and_inventory_completed",
+        "warning": (
+            "Participant independence and diagnosis provenance require review of source "
+            "documentation; task is connected speech and is not task-matched to sustained /a/."
+        ),
+    })
+    return report
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--dataset", choices=("ipvs", "uams", "all"), default="all")
+    parser.add_argument("--dataset", choices=("ipvs", "uams", "mdvr", "all"), default="all")
     parser.add_argument("--output-dir", default="data/raw/_audit")
     args = parser.parse_args()
 
@@ -529,6 +608,8 @@ def main() -> int:
         targets.append(("ipvs", IPVS_URL, IPVS_EXPECTED_SHA256))
     if args.dataset in ("uams", "all"):
         targets.append(("uams", UAMS_URL, None))
+    if args.dataset in ("mdvr", "all"):
+        targets.append(("mdvr", MDVR_URL, None))
 
     summary: dict[str, Any] = {
         "audit_time_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
@@ -539,6 +620,8 @@ def main() -> int:
         try:
             if name == "uams":
                 summary["datasets"][name] = audit_figshare_article(name, url, output)
+            elif name == "mdvr":
+                summary["datasets"][name] = audit_zenodo_record(name, url, output)
             else:
                 summary["datasets"][name] = audit_one(name, url, expected, output)
             print(f"[{name}] inventory complete", flush=True)
