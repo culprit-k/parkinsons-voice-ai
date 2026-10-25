@@ -176,3 +176,13 @@ Do not assume these resources are mutually compatible. Do not claim cross-langua
 - Sanitized report: 240 recording rows, 80 participant IDs, exactly three repetitions per participant, balanced participant labels 40/40 and recording labels 120/120, no label inconsistency across repetitions, no missing acoustic-feature cells in the parser's selected feature columns, sex-coded field present and age absent.
 - Critical limitation: Dataset 489 provides engineered features, not raw voice recordings. It cannot count as a third raw-audio cohort or directly validate an audio-embedding/acoustic-domain-distance detector. Label semantics and extraction/task provenance still require review.
 - No raw audio, participant IDs, row-level records, model training or predictive performance metrics were included.
+
+
+## 2026-10-25 — Research establishment update
+
+- Resolved the UCI Dataset 489 target and sex-code interpretation from the official source: STATUS 0 = healthy, 1 = PD; gender 0 = man, 1 = woman. The audit's 44 columns are acoustic predictors; gender is a separate covariate and ID/recording/status are metadata. Three rows per person must stay grouped. This remains feature-only, not an audio cohort.
+- Confirmed EWA-DB is the highest-priority third-cohort request candidate (Slovak, includes sustained vowel); audio is stated to be released for 1,003 consenting speakers, but exact PD/control counts within the audio subset remain unknown. Access is gated and no permission has been obtained.
+- mPower is a possible fallback but requires validated/certified Synapse access and has self-reported PD status and repeat recordings.
+- UCI Dataset 301 does not provide raw WAV data in its UCI release; its separate test table is PD-only, so it does not satisfy the missing raw-audio PD/control cohort requirement.
+- Updated novelty judgement: cross-language PD voice models and uncertainty-aware assessment are already published (ParkMAE 2025/2026; Lim et al. 2025; Spanish-to-Italian uncertainty-aware work in June 2026). Our only candidate is a narrow comparison of domain-distance plus calibrated confidence versus confidence alone for participant-level error monitoring. No global novelty or "first" claim.
+- State unchanged: protocol NOT LOCKED; confirmatory modelling NOT STARTED; no models trained and no predictive metrics. See [research establishment update](RESEARCH_ESTABLISHMENT_UPDATE_2026-10-25.md).
