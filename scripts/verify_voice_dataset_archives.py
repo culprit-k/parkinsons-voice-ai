@@ -148,7 +148,25 @@ def wav_metadata(path: Path) -> dict[str, Any]:
                 "compression": audio.getcomptype(),
             }
     except (wave.Error, EOFError, OSError) as exc:
-        return {"wav_header_status": f"error: {type(exc).__name__}: {exc}"}
+        wave_error = f"{type(exc).__name__}: {exc}"
+        try:
+            import soundfile as sf
+            info = sf.info(str(path))
+            return {
+                "wav_header_status": "ok_soundfile_fallback",
+                "channels": info.channels,
+                "sample_width_bytes": None,
+                "sample_rate_hz": info.samplerate,
+                "frames": info.frames,
+                "duration_seconds": round(info.duration, 5),
+                "compression": info.format + "/" + str(info.subtype),
+                "stdlib_wave_error": wave_error,
+            }
+        except Exception as fallback_exc:
+            return {
+                "wav_header_status": f"error: {type(fallback_exc).__name__}: {fallback_exc}",
+                "stdlib_wave_error": wave_error,
+            }
 
 
 def inventory(root: Path, dataset: str, destination: Path) -> dict[str, Any]:
@@ -199,7 +217,11 @@ def inventory(root: Path, dataset: str, destination: Path) -> dict[str, Any]:
         "file_count_by_extension": dict(extensions),
         "audio_file_count": len(audio),
         "wav_file_count": len(wavs),
-        "wav_headers_readable": sum(row.get("wav_header_status") == "ok" for row in wavs),
+        "wav_headers_readable": sum(str(row.get("wav_header_status", "")).startswith("ok") for row in wavs),
+        "wav_header_error_counts": dict(Counter(
+            row.get("wav_header_status", "unknown")
+            for row in wavs if not str(row.get("wav_header_status", "")).startswith("ok")
+        )),
         "sample_rate_count_hz": dict(rates),
         "channel_count": dict(channels),
         "wav_duration_min_seconds": min(durations) if durations else None,
@@ -260,6 +282,91 @@ def audit_one(name: str, url: str, expected_sha: str | None, output: Path) -> di
     return report
 
 
+def audit_spreadsheets(root: Path) -> list[dict[str, Any]]:
+    """Summarize workbook structure and safe aggregate ID/label linkage metrics."""
+    try:
+        import openpyxl
+    except ImportError:
+        return [{"status": "openpyxl_not_installed"}]
+
+    audio_stems = {
+        path.stem.strip().lower()
+        for path in root.rglob("*")
+        if path.is_file() and path.suffix.lower() in AUDIO_EXTENSIONS
+    }
+    reports: list[dict[str, Any]] = []
+    for workbook_path in sorted(root.rglob("*.xlsx")):
+        workbook_report: dict[str, Any] = {
+            "workbook_filename_private": workbook_path.name,
+            "status": "ok",
+            "sheets": [],
+        }
+        try:
+            workbook = openpyxl.load_workbook(workbook_path, read_only=True, data_only=True)
+            for sheet in workbook.worksheets:
+                rows = list(sheet.iter_rows(values_only=True))
+                nonempty_rows = [tuple(row) for row in rows if any(value is not None for value in row)]
+                if not nonempty_rows:
+                    workbook_report["sheets"].append({
+                        "sheet_name_private": sheet.title,
+                        "nonempty_rows": 0,
+                    })
+                    continue
+                headers = [
+                    str(value).strip() if value is not None else ""
+                    for value in nonempty_rows[0]
+                ]
+                normalized = [value.lower() for value in headers]
+                id_index = next(
+                    (i for i, value in enumerate(normalized)
+                     if ("sample" in value and "id" in value) or value in {"id", "sample_id", "sample id"}),
+                    None,
+                )
+                label_index = next(
+                    (i for i, value in enumerate(normalized)
+                     if any(token in value for token in ("label", "diagnosis", "group", "status"))),
+                    None,
+                )
+                data_rows = nonempty_rows[1:]
+                ids = [
+                    str(row[id_index]).strip().lower()
+                    for row in data_rows
+                    if id_index is not None and id_index < len(row) and row[id_index] is not None
+                ]
+                labels = Counter(
+                    str(row[label_index]).strip()
+                    for row in data_rows
+                    if label_index is not None and label_index < len(row) and row[label_index] is not None
+                )
+                matched = 0
+                if id_index is not None:
+                    matched = sum(
+                        1 for sample_id in ids
+                        if sample_id in audio_stems
+                        or Path(sample_id).stem in audio_stems
+                        or any(stem.endswith(sample_id) for stem in audio_stems)
+                    )
+                workbook_report["sheets"].append({
+                    "sheet_name_private": sheet.title,
+                    "nonempty_rows_including_header": len(nonempty_rows),
+                    "data_rows": len(data_rows),
+                    "column_headers_private": headers,
+                    "id_column_detected": headers[id_index] if id_index is not None else None,
+                    "label_column_detected": headers[label_index] if label_index is not None else None,
+                    "rows_with_id": len(ids),
+                    "unique_ids": len(set(ids)),
+                    "rows_missing_id": max(0, len(data_rows) - len(ids)) if id_index is not None else None,
+                    "label_value_counts": dict(labels),
+                    "ids_matching_audio_filename": matched if id_index is not None else None,
+                    "ids_not_matching_audio_filename": max(0, len(set(ids)) - matched) if id_index is not None else None,
+                })
+            workbook.close()
+        except Exception as exc:
+            workbook_report["status"] = f"failed: {type(exc).__name__}: {exc}"
+        reports.append(workbook_report)
+    return reports
+
+
 def audit_figshare_article(name: str, metadata_url: str, output: Path) -> dict[str, Any]:
     """Download public Figshare article files individually through its public API."""
     request = urllib.request.Request(
@@ -304,7 +411,7 @@ def audit_figshare_article(name: str, metadata_url: str, output: Path) -> dict[s
             "md5_match": md5_match,
             "figshare_file_id": item.get("id"),
         })
-        if zipfile.is_zipfile(destination):
+        if destination.suffix.lower() == ".zip" and zipfile.is_zipfile(destination):
             safe_extract(destination, extraction_dir / destination.stem)
         else:
             shutil.copy2(destination, extraction_dir / filename)
@@ -314,6 +421,7 @@ def audit_figshare_article(name: str, metadata_url: str, output: Path) -> dict[s
         extraction_dir, name, base / "private_manifests" / "placeholder.csv"
     )
     report.update({
+        "spreadsheet_audit": audit_spreadsheets(extraction_dir),
         "figshare_article_id": metadata.get("id"),
         "figshare_title": metadata.get("title"),
         "figshare_license": metadata.get("license"),
