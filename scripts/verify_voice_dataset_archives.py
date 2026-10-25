@@ -210,6 +210,14 @@ def inventory(root: Path, dataset: str, destination: Path) -> dict[str, Any]:
         {"sha256": digest, "paths_private": paths}
         for digest, paths in hashes.items() if len(paths) > 1
     ]
+    duplicate_relationships = []
+    for group in duplicate_groups:
+        group_paths = [Path(path) for path in group["paths_private"]]
+        duplicate_relationships.append({
+            "group_size": len(group_paths),
+            "same_parent_directory": len({path.parent.as_posix() for path in group_paths}) == 1,
+            "cohort_groups": sorted({path_group_hint(path) for path in group_paths}),
+        })
     durations = [row["duration_seconds"] for row in wavs if row.get("duration_seconds") is not None]
 
     return {
@@ -228,6 +236,7 @@ def inventory(root: Path, dataset: str, destination: Path) -> dict[str, Any]:
         "wav_duration_min_seconds": min(durations) if durations else None,
         "wav_duration_max_seconds": max(durations) if durations else None,
         "duplicate_audio_hash_groups": duplicate_groups,
+        "duplicate_audio_relationships": duplicate_relationships,
         "cohort_path_summary": cohort_path_summary(root),
         "private_manifest": str(manifest),
         "warning": (
