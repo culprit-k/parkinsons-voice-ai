@@ -113,3 +113,18 @@ The candidate question remains an **unlocked comparative reliability question**:
 - **EWA-DB Zenodo access is confirmed restricted.** A research access form is required; the provider sends a EULA and issues the download link after receiving the signed agreement. The catalogue's listed €0 price is not a grant of access. Exact PD/control numbers among audio-available people must be checked after access. [Zenodo access instructions](https://zenodo.org/records/10952480).
 - **Additional cross-language prior art:** Hassanat et al. (29 April 2026) report an Arabic cohort of 40 people (17 PD, 23 controls) and independent Spanish evaluation on 100 people. This makes any broad "new cross-language PD classifier" claim untenable. [PubMed](https://pubmed.ncbi.nlm.nih.gov/42100562/).
 - **HeyJay! (June 2026)** adds 8,669 English atypical-speech utterances and speech-quality ratings, including PD, but it is restricted-access and is not established as a labelled PD/control screening cohort from the public summary. Consider only for a separate accessibility/robustness question after access and diagnosis stratification are verified. [Dataset article](https://www.nature.com/articles/s41597-026-07497-5) · [ICPSR record](https://www.icpsr.umich.edu/web/ICPSR/studies/39448).
+
+
+## EWA-DB cohort count reconciliation and access action — 25 October 2026
+
+The access-specific checklist is now at [EWA_DB_ACCESS_AND_AUDIT_CHECKLIST_2026-10-25.md](EWA_DB_ACCESS_AND_AUDIT_CHECKLIST_2026-10-25.md). It includes a draft message to the listed corresponding author and the local-only audit utility [`scripts/audit_ewa_db_local.py`](../scripts/audit_ewa_db_local.py).
+
+Important cohort-size discrepancy to resolve with the custodian:
+- Data descriptor: 1,649 total speakers, of whom 175 are labelled PD, 2 mixed AD+PD, 87 AD, 62 MCI, and 1,323 controls.
+- Descriptor: 1,122 speakers meet the stated inclusion criteria; WAV files are publishable for 1,003 speakers who gave recording-publication consent.
+- ParkMAE evaluation table: 956 EWA-DB speakers, 95 PD and 861 controls, 6,692 audio files, 88 h 10 min.
+These are not interchangeable sample sizes. The ParkMAE subset may reflect task, group and inclusion filtering; it does not prove that all such files are available to this project. Request counts of unique audio-available participants by diagnosis and task, and a de-identified manifest.
+
+The EWA-DB data descriptor reports manifest/diagnostic complexity: the PD group includes manifest and prodromal cases recruited by different routes, and some speakers do not meet every predefined inclusion criterion. If the manifest allows, prespecify manifest-PD-only as primary; keep prodromal and mixed AD+PD out of the principal PD-vs-HC contrast or treat them separately. EWA recordings were collected via different mobile devices/sites/environments, with audio quality flags and variable contexts, so include these as domain/quality factors rather than assuming homogeneous recording conditions.
+
+No request has been submitted and no EWA audio has been downloaded. Promotion remains pending written access approval, EULA review, task-specific PD/HC counts, ID/repeat-session verification, privacy/governance review, and local audit.
