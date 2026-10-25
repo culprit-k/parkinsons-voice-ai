@@ -197,3 +197,6 @@ Do not assume these resources are mutually compatible. Do not claim cross-langua
 - Added `docs/EWA_DB_ACCESS_AND_AUDIT_CHECKLIST_2026-10-25.md` with the ready-to-send message, access instructions, audit plan and promotion rules.
 - Next external dependency: researcher submits the restricted Zenodo access request with their own identity, reads and signs the EULA only after review, and sends the custodian clarifying questions. Assistant has not submitted a request or signed/accepted terms.
 - Protocol remains NOT LOCKED; no model training or results.
+
+
+- Added automated tests for the EWA-DB local-audit script. GitHub Actions run [40183230376](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40183230376) passed both synthetic tests: correct aggregate counts/cross-label duplicate detection and no private paths/IDs in JSON; missing class folders fail closed. The workflow reads only synthetic test WAVs and did not access EWA-DB.
