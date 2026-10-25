@@ -132,3 +132,12 @@ Do not assume these resources are mutually compatible. Do not claim cross-langua
 - NeuroVoz is a promising Spanish connected-speech corpus but Zenodo lists its files as restricted; no access has been granted.
 - Novelty remains conditional: 2026 limited-target calibration work uses overlapping datasets, so the only defensible candidate is a prespecified comparative evaluation of confidence-only versus confidence-plus-acoustic-distance error ranking, not a new general algorithm.
 - No model trained; no empirical prediction results; protocol not locked.
+
+
+## 2026-10-25 — Third-cohort search and verification-tool hardening
+
+- Confirmed the three-dataset GitHub Actions run 40170614840 completed successfully and downloaded the sanitized result artifact for review. IPVS SHA-256 matched its pinned mirror; UAMS per-file MD5 checks and 81/81 sample-ID-to-filename matches passed; MDVR-KCL Zenodo MD5 matched. All WAV headers were readable for the three audited releases.
+- Hardened the spreadsheet audit in scripts/verify_voice_dataset_archives.py: workbook ID-to-audio matching now uses exact normalized filename stems instead of permissive suffix/sub-string matching; aggregate counts include duplicate ID rows and IDs with conflicting labels without printing identifier values.
+- Added docs/THIRD_COHORT_AND_ACCESS_REQUEST_PLAN_2026-10-25.md with an evidence-based shortlist, the EWA-DB priority request, mPower fallback steps, NeuroVoz permission request, and access/approval promotion criteria.
+- Third-cohort search: EWA-DB is the priority request because the catalogue lists sustained-vowel phonation and a consented audio subset; mPower is the next sustained-vowel candidate through Synapse; NeuroVoz v3 is restricted; PC-GITA is request-mediated; UNLaM has an unresolved cohort/version count discrepancy. No external request has been sent and no access has been granted.
+- The overall data gate remains NOT PASSED: IPVS participant/session mapping and PII governance are open; UAMS label provenance and participant independence are open; MDVR-KCL participant-label mapping is open and its task differs; a third compatible cohort is not yet approved. No model has been trained, no results exist, protocol remains NOT LOCKED.
