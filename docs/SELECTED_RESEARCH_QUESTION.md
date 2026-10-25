@@ -50,13 +50,15 @@ Do not claim prospective safety. A “defer” result means the automated screen
 
 ## Candidate data and feasibility
 
-### Primary pilot candidates
-- **ItalianPVS/IPVS:** raw audio includes sustained vowels and other tasks; reported cohort includes 28 PD, 22 elderly controls and 15 young controls. Primary classification should use PD vs elderly controls; young controls are a separate sensitivity analysis. [Official data portal](https://ieee-dataport.org/open-access/italian-parkinsons-voice-and-speech).
-- **UAMS telephone voice samples:** public Figshare record describes prolonged /a/ WAV files and linked demographics; related literature reports 40 PD and 41 controls. [Dataset record](https://figshare.com/articles/dataset/Voice_Samples_for_Patients_with_Parkinson_s_Disease_and_Healthy_Controls/23849127). Must verify unique IDs, file manifest, repeat recordings and label provenance locally.
-- **mPower (possible third domain):** sustained /a/ phone recordings exist, but access requires Synapse research procedures and PD status may rely on self-reported diagnosis; this cohort is not approved until those details are verified. [Scientific Data](https://www.nature.com/articles/sdata201611).
+### Candidate cohorts after actual raw-file audit
+- **ItalianPVS/IPVS:** the pinned public mirror archive SHA-256 matched; 831/831 WAV headers readable (671 at 16 kHz, 160 at 44.1 kHz). The extraction contains 831 WAV + 6 XLSX + 1 TXT. One exact duplicate-audio pair was found, and at least one spreadsheet contains direct name/surname columns. Participant/session/label mapping is unresolved; do not attempt name-to-audio linkage without governance review. [Official portal](https://ieee-dataport.org/open-access/italian-parkinsons-voice-and-speech).
+- **UAMS telephone voice samples:** file-level MD5 checks passed; 81/81 8-kHz mono WAV headers readable; 81 unique Sample IDs, 41 HC / 40 PwPD, all 81 IDs matched audio filename stems. Clinical-label provenance and participant independence/repeated visits still need source confirmation. [Figshare record](https://figshare.com/articles/dataset/Voice_Samples_for_Patients_with_Parkinson_s_Disease_and_Healthy_Controls/23849127).
+- **MDVR-KCL:** Zenodo MD5 matched; 73/73 44.1-kHz mono WAV headers readable. Its read-text and spontaneous-dialogue tasks are not matched to the sustained-/a/ primary task, and participant-to-diagnosis mapping remains unverified. [Zenodo record](https://zenodo.org/records/2867216).
+- **Best third-cohort request:** EWA-DB (Slovak; ELRA-S0489), which catalogue metadata describe as having sustained-vowel tasks and WAV audio for a consented subset. Access, eligible PD/control recordings and label/ID mapping are not yet approved. [ELRA catalogue](https://catalogue.elra.info/en-us/repository/browse/ELRA-S0489/).
+- **Second access route:** mPower sustained-/a/ recordings through Synapse research access; check data-use conditions, repeated observations and whether PD labels are self-reported. NeuroVoz v3 is restricted; PC-GITA is request-mediated; UNLaM counts/version need reconciliation. See [third-cohort and access request plan](THIRD_COHORT_AND_ACCESS_REQUEST_PLAN_2026-10-25.md).
 
 ### Data go/no-go
-No raw audio or label manifests have been downloaded/checked in this project. The study requires at least **three independent, legally accessible participant cohorts** for the intended confirmatory benchmark; two cohorts can support only a limited pilot with wide uncertainty. mPower can be used only after access and diagnosis-label audit. UNLaM and NeuroVoz remain alternatives only after exact versions, access and participant overlap are verified.
+Raw audio archives for IPVS, UAMS and MDVR-KCL have been downloaded and passed basic archive/audio-header checks through GitHub Actions [run 40170614840](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40170614840). This is not equivalent to three approved independent cohorts: IPVS participant/label mapping and privacy are unresolved, UAMS diagnostic provenance/independence needs confirmation, and MDVR-KCL lacks a verified participant-label map and is not task-matched to sustained vowels. The intended confirmatory benchmark requires at least **three independent, legally accessible task-compatible cohorts**. If only two clear the gate, call it a feasibility pilot and do not claim broad language generalization.
 
 ## Draft methods to lock only after the data gate
 
@@ -139,3 +141,10 @@ IPVS, UAMS and MDVR-KCL source files have now been downloaded and checked throug
 IPVS checksum and audio QC passed, but the participant mapping remains unresolved, a duplicate PD-path pair needs adjudication, and the package contains a spreadsheet with direct name/surname fields. UAMS has 81 readable 8-kHz mono WAVs, 81 unique Sample IDs, 41 HC / 40 PwPD, and 81/81 ID-to-filename matches. MDVR-KCL has 73 readable 44.1-kHz mono WAVs, but participant/label linkage is not verified. UAMS sustained /a/ and MDVR-KCL connected speech are not task-matched. NeuroVoz requires access approval.
 
 The current question remains a conditional comparative study, not a novelty-cleared method. Three downloaded corpora do not yet equal three compatible, independent cohorts. Do not lock the protocol or train confirmatory models until privacy, participant linkage, task compatibility and independent-cohort availability are resolved.
+
+
+## Current cohort and access status — 25 October 2026
+
+The third-cohort search has identified EWA-DB as the first request target and mPower as a sustained-vowel access fallback. EWA-DB's catalogue reports sustained-vowel phonation and audio for a subset who provided written consent; access has not been granted. mPower requires Synapse research access and its diagnosis source must be checked. Neither is counted as available. Access email drafts and the acceptance checklist are in [THIRD_COHORT_AND_ACCESS_REQUEST_PLAN_2026-10-25.md](THIRD_COHORT_AND_ACCESS_REQUEST_PLAN_2026-10-25.md).
+
+The protocol and model training remain on hold. A cross-language claim requires a task-appropriate design and verified independent cohorts; a sustained-vowel comparison should be described as cross-dataset/recording-domain robustness, not lexical language generalization.
