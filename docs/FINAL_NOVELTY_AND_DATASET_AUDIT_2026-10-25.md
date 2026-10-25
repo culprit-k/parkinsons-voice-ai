@@ -260,3 +260,12 @@ mPower remains a fallback: it contains sustained /a/ recordings but uses self-re
 The candidate research question remains: whether a prespecified source-reference acoustic-domain-distance score improves ranking/detection of **participant-level errors** beyond calibrated model confidence on independent held-out cohorts. Novelty is not cleared: prior work already includes multilingual ParkMAE, cross-language Korean/Taiwanese PD speech and a 2026 Spanish-to-Italian uncertainty-aware assessment study. Any contribution must be framed as a narrowly defined comparative reliability benchmark—not a first-of-its-kind model. [ParkMAE](https://www.nature.com/articles/s41598-025-30251-7) · [Lim et al.](https://pubmed.ncbi.nlm.nih.gov/39739129/) · [2026 uncertainty-aware cross-language work](https://doi.org/10.1007/s40846-026-01040-y).
 
 No model has been trained and no performance results have been produced. Protocol and confirmatory modelling gates remain closed.
+
+
+## Latest targeted literature/access check — 25 October 2026
+
+The EWA-DB Zenodo record confirms a **restricted** status: researchers must request access, receive the EULA, return a signed scanned copy and then receive a download link. It has not been downloaded or approved for this project. The displayed €0 license price does not change this access gate. [Official record](https://zenodo.org/records/10952480).
+
+The latest targeted novelty pass found another close 2026 cross-language PD classifier: Hassanat et al. used 40 Arabic speakers (17 PD, 23 controls) and evaluated on an independent Spanish cohort of 100. Also, the 2026 HeyJay! corpus describes 8,669 English atypical-speech utterances including PD, with expert speech-quality ratings; its ICPSR release is restricted and is not confirmed as a direct PD/healthy-control cohort. These updates reinforce that cross-language classification and speech-quality analysis are not novel by themselves. [Hassanat et al.](https://pubmed.ncbi.nlm.nih.gov/42100562/) · [HeyJay! paper](https://www.nature.com/articles/s41597-026-07497-5) · [ICPSR record](https://www.icpsr.umich.edu/web/ICPSR/studies/39448).
+
+No exact match was established for the narrower confidence-only versus confidence-plus-source-distance error-monitoring comparison in the targeted search, but the search is not a complete systematic review and cannot support a global novelty or patentability statement. Keep the hypothesis provisional and record the exact final search strings, dates and deduplicated screening decisions before locking the protocol.
