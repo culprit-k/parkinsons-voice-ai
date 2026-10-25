@@ -85,3 +85,8 @@ First inspect the names of the top-level group folders locally and pass the exac
 ## Promotion decision rule
 
 EWA-DB becomes an approved third cohort only after legal access is documented; sustained /a/ recordings exist for both PD and healthy controls; participant-level diagnosis/ID/task mapping and repeat-session scheme are understood; license-governed metadata use is settled; dataset integrity passes; and independent held-out status is defensible. Until then, status is **candidate / access pending**, and no confirmatory model training starts.
+
+
+## Utility test result
+
+The aggregate-only utility's synthetic test workflow passed: [GitHub Actions run 40183230376](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40183230376). It verified group/recording counts, exact duplicate detection across labels, that participant IDs/file names/local paths do not appear in aggregate JSON, and that missing class folders fail closed. The workflow used synthetic files only; it is not an EWA-DB data audit.
