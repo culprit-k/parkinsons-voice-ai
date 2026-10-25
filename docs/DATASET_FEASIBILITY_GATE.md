@@ -117,3 +117,9 @@ This gives us three *downloaded audio corpora*, but **not three independent, com
 **Fallback:** mPower offers sustained-/a/ voice records but is accessed through Synapse research procedures and may depend on self-reported diagnosis. **Additional request candidate:** NeuroVoz v3 (restricted) and PC-GITA (request-mediated). UNLaM is a metadata/repository lead with an unresolved 119 vs 126 participant-count/version discrepancy. Details and ready-to-edit emails are in [THIRD_COHORT_AND_ACCESS_REQUEST_PLAN_2026-10-25.md](THIRD_COHORT_AND_ACCESS_REQUEST_PLAN_2026-10-25.md).
 
 If three compatible independent cohorts do not clear the gates, do not force a confirmatory paper: either preregister and label the work as a two-cohort feasibility pilot or pivot to a reproducibility/systematic-review study. Keep the protocol unlocked until then.
+
+## Additional public resource audited: UCI Dataset 489
+
+The official UCI Dataset 489 audit completed successfully in [run 40176480093](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40176480093). It contains 240 rows from 80 participants, three repeated recordings/feature rows per participant, balanced participant labels (40/40), no cross-repetition label inconsistencies, and no missing values in the selected acoustic-feature columns. Sex-coded information is present; age is absent. See [official UCI record](https://archive.ics.uci.edu/dataset/489/parkinson+dataset+with+replicated+acoustic+features).
+
+**Gate decision: NOT compatible as an audio cohort.** This is a feature-only release with no WAV files, so it cannot be used as a raw-audio cohort or directly compared with audio embeddings/domain-distance scores. It may be considered for a separate feature-only, participant-grouped analysis after label semantics, original feature-extraction provenance and task comparability are verified. The coded label mapping is not yet cleared. Do not count this as the missing third compatible audio cohort.
