@@ -130,3 +130,12 @@ Additional targeted search found a January 2026 confidence-gated PD-voice ensemb
 The archive-integrity check is no longer metadata-only. See [the completed audit](FINAL_NOVELTY_AND_DATASET_AUDIT_2026-10-25.md) and [the successful workflow](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40170280356).
 
 IPVS checksum and WAV QC passed (831 WAVs; one exact duplicate pair), but participant-level mapping remains unresolved and a spreadsheet contains direct name/surname fields. UAMS archive checks passed (81 readable mono 8-kHz WAVs; 81 unique Sample IDs, 41 HC / 40 PwPD, all IDs matched to filenames). UAMS diagnostic provenance and independence need source confirmation. No third compatible cohort is established. Therefore the candidate question remains conditional, the protocol remains unlocked, and no model has been trained.
+
+
+## Three-corpus file audit update — 25 October 2026
+
+IPVS, UAMS and MDVR-KCL source files have now been downloaded and checked through the [successful GitHub Actions audit](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40170614840). File-level results and limits are in the [final audit](FINAL_NOVELTY_AND_DATASET_AUDIT_2026-10-25.md).
+
+IPVS checksum and audio QC passed, but the participant mapping remains unresolved, a duplicate PD-path pair needs adjudication, and the package contains a spreadsheet with direct name/surname fields. UAMS has 81 readable 8-kHz mono WAVs, 81 unique Sample IDs, 41 HC / 40 PwPD, and 81/81 ID-to-filename matches. MDVR-KCL has 73 readable 44.1-kHz mono WAVs, but participant/label linkage is not verified. UAMS sustained /a/ and MDVR-KCL connected speech are not task-matched. NeuroVoz requires access approval.
+
+The current question remains a conditional comparative study, not a novelty-cleared method. Three downloaded corpora do not yet equal three compatible, independent cohorts. Do not lock the protocol or train confirmatory models until privacy, participant linkage, task compatibility and independent-cohort availability are resolved.
