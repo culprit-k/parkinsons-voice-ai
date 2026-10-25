@@ -247,3 +247,16 @@ Aggregate results:
 **Interpretation:** this adds a fourth audited public data resource, but it does **not** establish a third compatible audio cohort for the proposed confidence-versus-distance audio benchmark. Its repeated engineered features may support a separate participant-grouped feature-only replication only if original feature extraction and task provenance are sufficiently documented and compatible. The public labels' clinical semantics still need confirmation from the official variable description/source paper before interpreting coded values as control/PD. Do not pool this feature-only release with WAV audio as if they were the same input modality.
 
 No model was trained and no predictive performance was calculated.
+
+
+## Post-audit establishment update — 25 October 2026
+
+The latest source check resolves UCI Dataset 489's label coding: its official variable text says STATUS 0 = Healthy and 1 = PD; Gender 0 = Man and 1 = Woman. The 44 enumerated acoustic predictors are separate from gender, participant ID, recording number and status. The rows are repeated observations from 80 subjects, not 240 independent people. The feature-only cohort remains unusable as a raw-audio external cohort. [Official UCI definition](https://archive.ics.uci.edu/dataset/489/parkinson+dataset+with+replicated+acoustic+features).
+
+The leading candidate for the missing third raw-audio cohort is EWA-DB (Slovak): 1,649 speakers overall, including 175 PD and 1,323 healthy controls; WAV audio is reported for 1,003 consented speakers, but the label/group counts within that audio subset must be verified. Access is gated through ELRA, and it is not counted as available until authorized access, audio-specific IDs and compatible task labels are confirmed. [Scientific Data description](https://www.nature.com/articles/s41597-024-04171-6) · [ISLRN record](https://www.islrn.org/resources/730-022-142-264-9/).
+
+mPower remains a fallback: it contains sustained /a/ recordings but uses self-reported PD status, repeated observations and controlled Synapse access. UCI Dataset 301 is not a raw-audio substitute in its UCI release; it provides extracted features and a test set containing PD subjects only. [mPower data access/label caveats](https://www.nature.com/articles/s41598-024-81824-x) · [UCI Dataset 301](https://archive.ics.uci.edu/dataset/301/parkinson+speech+dataset+with+multiple+types+of+sound+recordings).
+
+The candidate research question remains: whether a prespecified source-reference acoustic-domain-distance score improves ranking/detection of **participant-level errors** beyond calibrated model confidence on independent held-out cohorts. Novelty is not cleared: prior work already includes multilingual ParkMAE, cross-language Korean/Taiwanese PD speech and a 2026 Spanish-to-Italian uncertainty-aware assessment study. Any contribution must be framed as a narrowly defined comparative reliability benchmark—not a first-of-its-kind model. [ParkMAE](https://www.nature.com/articles/s41598-025-30251-7) · [Lim et al.](https://pubmed.ncbi.nlm.nih.gov/39739129/) · [2026 uncertainty-aware cross-language work](https://doi.org/10.1007/s40846-026-01040-y).
+
+No model has been trained and no performance results have been produced. Protocol and confirmatory modelling gates remain closed.
