@@ -4,7 +4,7 @@
 
 **Selected direction:** a narrowly scoped, participant-level external-validation study testing whether acoustic-domain distance adds information beyond predictive confidence when identifying errors from Parkinson's disease (PD) voice-screening models.
 
-This is the best current balance of scientific usefulness, possible independent contribution, public-data feasibility, and manageable computational requirements for an MBBS student without assumed patient access. It is **not** declared novel or publication-guaranteed. The literature search is targeted, not exhaustive, and data access has not yet passed its integrity gate.
+This is the best current balance of scientific usefulness, possible independent contribution, public-data feasibility, and manageable computational requirements for a researcher without assumed patient access. It is **not** declared novel or publication-guaranteed. The literature search is targeted, not exhaustive, and data access has not yet passed its integrity gate.
 
 ## Selected working title
 
