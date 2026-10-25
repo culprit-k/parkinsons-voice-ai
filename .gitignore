@@ -1,0 +1,17 @@
+# Research datasets and derived private manifests
+/data/
+*.wav
+*.flac
+*.m4a
+*.mp3
+*.ogg
+*.zip
+*.7z
+*.tar
+*.tar.gz
+*_manifest_PRIVATE.csv
+*_PRIVATE.json
+__pycache__/
+*.py[cod]
+.venv/
+venv/
