@@ -267,6 +267,7 @@ def audit_one(name: str, url: str, expected_sha: str | None, output: Path) -> di
     nested = unpack_nested_zips(extraction_dir)
     report = inventory(extraction_dir, name, base / "private_manifests" / "placeholder.csv")
     report.update({
+        "spreadsheet_audit": audit_spreadsheets(extraction_dir),
         "archive_path": str(archive),
         "archive_bytes": info["bytes"],
         "archive_sha256_local": info["sha256_local"],
