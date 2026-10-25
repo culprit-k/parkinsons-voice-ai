@@ -18,7 +18,7 @@ Use the [official Zenodo record](https://zenodo.org/records/10952480), sign in o
 
 ## Questions to send the data custodian
 
-1. Is access to the WAV release permitted for an MBBS student's academic secondary-data project based at Bukhara State Medical Institute, Uzbekistan? Which institutional, supervisor, ethics or data-use documents are required?
+1. Is access to the WAV release permitted for an academic secondary-data project? Which institutional, supervisor, ethics or data-use documents are required?
 2. Among the WAV-released participants, how many unique people have PD, healthy-control, mixed AD+PD, AD and MCI labels? For each group, how many have the sustained /a/ task? Could we receive a de-identified participant-level manifest with random IDs, task/recording IDs and diagnosis labels, under the EULA?
 3. Can the provider reconcile the official counts (1,649 total; 1,122 meeting defined inclusion criteria; 1,003 with published WAVs) with the 956-person PD/control subset (95 PD/861 controls; 6,692 recordings) reported by ParkMAE? Is that subset reproducible from the current release/version?
 4. Does the PD folder include both manifest and prodromal PD? Can the manifest identify these separately, and indicate the diagnostic basis and any available Hoehn–Yahr/severity or medication-state fields?
