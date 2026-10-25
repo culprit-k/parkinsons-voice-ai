@@ -75,7 +75,7 @@ Remote mirror metadata reviewed:
 - Host-displayed SHA-256: 3c4cd221345f7a81f0eeaceedf44dedbfd33b08ecd18ab5a3307edefcfbacfed. This is host metadata, not a hash independently computed by our project.
 - The mirror reports 839 uploaded files and its converted viewer reports around 1.66k rows; the latter must not be treated as a raw WAV or participant count.
 
-**Unresolved inventory discrepancy:** prior dataset documentation describes 831 WAVs (437 PD, 349 elderly controls, 45 young controls) plus six spreadsheets. Adding the ZIP itself gives 838 files, while the mirror lists 839 files. The difference is unresolved. The archive itself must be downloaded and inventoried; it is not safe to choose one count without evidence.
+**Inventory count reconciled:** the downloaded archive extracted to 831 WAV + 6 XLSX + 1 TXT = 838 extracted files. The public mirror listing contains 839 items because it also lists the ZIP archive itself. This explains the one-item difference between the listing and extracted file inventory; no extra WAV is inferred.
 
 A separate public repository reports that three of the 28 PD folders are repeat sessions, resulting in 25 unique PD participants; it also reports acquisition confounding and an IPVS silence-only AUROC of 1.000. These observations matter as public prior art but have not been reproduced by this project's own data processing.
 
@@ -83,11 +83,11 @@ A separate public repository reports that three of the 28 PD folders are repeat 
 |---|---|
 | Public mirror/licence/source metadata observed | Verified remotely |
 | ZIP size and host-displayed hash recorded | Verified remotely as page metadata only |
-| ZIP bytes downloaded into our project | **Not done; runtime DNS fails** |
-| SHA-256 recomputed locally | **Not done** |
-| ZIP unpacked; 839-vs-838 discrepancy reconciled | **Not done** |
-| WAV sample rate, encoding, channels, durations, corruption inspected | **Not done** |
-| Participant IDs/repeated sessions/demographic label joins audited | **Not done** |
+| ZIP bytes downloaded and extracted through GitHub Actions | **PASS** — [run 40170614840](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40170614840) |
+| SHA-256 recomputed locally on runner | **PASS** — matches pinned mirror digest |
+| Extracted inventory reconciled with mirror listing | **PASS** — 838 extracted files plus the ZIP listing item = 839 listed items |
+| WAV format/header, channels, sample rates, duration and exact duplicate hashes inspected | **PASS for file-level QC** — 831/831 headers readable; one duplicate hash pair |
+| Participant IDs/repeated sessions/clinical label joins audited | **OPEN** — the spreadsheets do not supply a fully verified anonymized participant/audio/diagnosis mapping; direct names/surnames appear in at least one workbook |
 
 ### UAMS telephone-recorded prolonged /a/
 
@@ -99,7 +99,7 @@ Remote metadata says:
 - Voice files are WAV recordings of prolonged /a/ recorded using participants' telephones.
 - The associated literature describes a public subset with 40 PD and 41 controls. The original paper and a later correction should be checked before relying on nonessential methods or performance claims. [Original paper](https://pubmed.ncbi.nlm.nih.gov/37996478/) · [Correction record](https://pubmed.ncbi.nlm.nih.gov/42562853/)
 
-**Integrity status:** the Figshare download endpoint was inaccessible in this runtime. No ZIP or workbook was downloaded. Actual WAV count, unique IDs, duplicates/repeats, sample rates, demographic joins, and label provenance are unverified locally. The remote file size and paper cohort counts are not a substitute for inspecting the archive.
+**Integrity status:** file-level audit passed in [GitHub Actions run 40170614840](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40170614840). Three Figshare source files were downloaded individually through the public API; their published per-file MD5 checks passed. The extracted inventory is 81 WAV + one XLSX workbook. All 81/81 WAV headers are readable, mono at 8 kHz, with durations 1.51612–7.208 s. The Parselmouth sheet has 81 rows, 81 unique Sample IDs, 41 HC and 40 PwPD labels, no missing IDs, and 81/81 exact filename-stem matches. No exact duplicate-audio hashes were detected. The remaining uncertainty is whether each sample ID corresponds to a distinct individual/no repeat visit and how diagnosis was established; those require source-document confirmation.
 
 ### mPower
 
@@ -109,7 +109,7 @@ Status: possible third cohort, **not approved** pending access, label-provenance
 
 ### MDVR-KCL
 
-Source: [Zenodo DOI 10.5281/zenodo.2867216](https://doi.org/10.5281/zenodo.2867216). The public dataset is described as English continuous speech, whereas UAMS and the intended IPVS comparison use sustained /a/. The raw archive and checksum have not been verified by this project. Do not count MDVR-KCL as an interchangeable third cohort in a sustained-vowel analysis. It could support a separate continuous-speech design, but the public Parkinson-Voice-Detection repository already overlaps substantially on IPVS/MDVR-KCL shortcut controls and cross-corpus evaluation.
+Source: [Zenodo record](https://zenodo.org/records/2867216). The source file was downloaded through the Zenodo API; its MD5 matched Zenodo metadata. The extracted inventory contains 73 WAV files, all with readable headers, mono at 44.1 kHz, durations 73.03902–220.63916 s, and no exact duplicate-audio hash groups. The raw participant-ID and file-to-diagnosis manifest has **not** been verified. Its read-text and spontaneous-dialogue tasks are not interchangeable with sustained /a/. Do not count MDVR-KCL as the sustained-vowel third cohort; it may support a separate connected-speech design if participant-label mapping is verified. The public Parkinson-Voice-Detection repository is close prior art for IPVS/MDVR-KCL shortcut controls and cross-corpus evaluation.
 
 ## 3. Final data decision
 
@@ -125,9 +125,7 @@ Important scope correction: comparing sustained /a/ cohorts tests cross-dataset/
 
 ## 4. Reproducible next step and stop/go criteria
 
-In a network-enabled research environment, attempt the two public archives and write the audit files outside Git:
-- IPVS ZIP: use the pinned Hugging Face link above and check SHA-256 against the host metadata.
-- UAMS Figshare: https://figshare.com/ndownloader/articles/23849127
+The archive-audit script has now run successfully on a network-enabled GitHub Actions runner for IPVS, UAMS and MDVR-KCL; see [run 40170614840](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40170614840). Raw archives, individual audio manifests and private summaries remain only in the runner workspace and were not uploaded to GitHub. The checked-in workflow uploads only a sanitized aggregate report.
 
 The companion script at scripts/verify_voice_dataset_archives.py performs archive downloads, local SHA-256 calculation, safe ZIP extraction, audio file inventory, basic WAV-header inspection and duplicate-file hash reporting. It writes raw data and private manifests under data/raw/_audit/; these must never be committed. The script has **not** been executed successfully in this network-restricted runtime.
 
@@ -139,7 +137,7 @@ Even when the script runs, additional human/data-curation checks remain mandator
 5. Establish three independent, compatible and legally accessible participant cohorts, or explicitly downgrade to a two-cohort pilot.
 6. Freeze the statistical analysis plan before looking at the held-out cohort labels or selecting error-detection metrics.
 
-**Final status:** targeted novelty review completed; broad novelty claims rejected; narrow comparison retained only as a conditional study direction; local raw-data integrity verification blocked by runtime DNS failure; no data downloads, local hashes, participant manifest audits, models or empirical results are claimed.
+**Final status:** targeted novelty review completed but global novelty is **not cleared**; broad algorithm novelty claims are rejected; a narrow comparison remains a conditional study direction. Archive/audio file-integrity checks passed for IPVS, UAMS and MDVR-KCL in the runner. Participant/diagnosis mapping, privacy/governance, UAMS diagnosis provenance, MDVR-KCL participant linkage, and a third compatible independent cohort remain unresolved. No model has been trained and no predictive results have been produced.
 
 
 ## Additional targeted search results — confidence gating and speech-domain shift
