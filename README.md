@@ -70,3 +70,8 @@ The broad generic “label-free monitoring/abstention” idea is not a new metho
 - [Updated prior-art review](docs/UPDATED_PRIOR_ART_REVIEW_2026-10-25.md)
 - [Dataset feasibility gate](docs/DATASET_FEASIBILITY_GATE.md)
 - [Targeted search log](docs/TARGETED_SEARCH_LOG_2026-10-25.md)
+
+
+## Final design clarification
+
+The current sustained-/a/ pilot is a cross-dataset/recording-domain study, not an isolated language-generalization experiment. See the [final decision memo](docs/FINAL_RESEARCH_DECISION_2026-10-25.md), [dataset gate](docs/DATASET_FEASIBILITY_GATE.md) and [targeted search log](docs/TARGETED_SEARCH_LOG_2026-10-25.md).

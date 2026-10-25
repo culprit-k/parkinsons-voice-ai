@@ -106,3 +106,26 @@ The study can show that a risk score predicts error in these datasets; it cannot
 ## Final recommendation
 
 Proceed with this narrow candidate as a **conditional empirical benchmark**. Do not claim the original generic monitoring/abstention concept is novel, do not start a large model-training pipeline yet, and do not promise three-language external validation until a third cohort is actually accessible, independent, and task-compatible.
+
+
+## Final targeted-query update (2026-10-25)
+
+### Stronger prior-art boundary
+
+Hireš et al. (2023) already directly tested inter-dataset generalization of voice-based PD classification across four datasets using sustained vowel phonation and found poor external/mixed-dataset performance. The target study cannot claim novelty for cross-dataset transfer itself. [PubMed](https://pubmed.ncbi.nlm.nih.gov/37801807/).
+
+Zahir et al. (2026) reports 203 participants in a single-center dataset and subject-wise internal cross-validation with very high performance after integrating speech-recognition-derived features; the authors explicitly note multicenter validation and calibration as future work. This supports prioritizing external validation over another within-cohort architecture paper. [JMIR](https://medinform.jmir.org/2026/1/e94063).
+
+Su & Sun (2026) proposed "label-free PD screening" from frozen face/voice encoders, but here "label-free" means the disease score is fitted without PD labels; it does not test whether target-domain risk scores predict errors by a supervised voice classifier. This distinction must be explicit. [arXiv](https://arxiv.org/abs/2608.08976); [MICCAI proceedings](https://papers.miccai.org/miccai-2026-sat/MI4MedFM_021.html).
+
+### Revised task interpretation
+
+A sustained /a/ project using ItalianPVS and UAMS Figshare is **not a clean language-generalization experiment**. Sustained vowels contain little lexical-language information, while the cohorts differ in recording apparatus, collection environment, recruitment, demographics and clinical labels. The correct primary claim is cross-dataset/recording-domain robustness in sustained-phonation screening. A true language-generalization study needs comparable connected-speech tasks across languages and more corpus sources.
+
+### Additional feasibility details
+
+mPower includes smartphone sustained /a/ recordings up to 10 seconds, but its raw dataset is distributed through Synapse access procedures requiring user validation/certification, a data-use statement and source terms. Some studies use a self-reported professional-diagnosis field to label PD. This is a potential third external cohort only after the specific fields, access and participant IDs are verified. [Scientific Data](https://www.nature.com/articles/sdata201611); [recent transfer-learning paper](https://www.nature.com/articles/s41598-024-81824-x).
+
+The UAMS Figshare record provides linked demographics and telephone-recorded prolonged /a/ WAVs under CC BY 4.0, but our project has not downloaded the files or checked unique participants/repeats. The UNLaM Spanish data now have a repository lead through the 2026 voice-uncertainty article; the 119-vs-126 count discrepancy and exact versioned manifest still need resolution. The Italian Mendeley dataset cited by the same article may be the same ItalianPVS-derived cohort and must not be counted as independent without sample-ID/provenance verification.
+
+**Current verdict remains conditional GO for a feasibility pilot, HOLD for confirmatory training.** The most specific candidate gap is per-participant prediction of external classification error using label-free risk scores in PD voice screening; an exhaustive database and citation-chain audit is still required before any priority claim.

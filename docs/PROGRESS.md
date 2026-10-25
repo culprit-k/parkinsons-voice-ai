@@ -71,3 +71,12 @@ Do not assume these resources are mutually compatible. Do not claim cross-langua
 - Detailed a methodology limitation in the September 2026 LODO paper: it calls two aggregated results “subject-level” even though the methods say their unit for mPower/MDVR is recording, and it acknowledges segment-level validation and a single random seed. These are directly reported limitations, not proof that all external results are invalid.
 - Added UAMS Figshare sustained-/a/ telephone-recorded audio as a second public raw-audio candidate alongside ItalianPVS. The exact participant manifest remains unaudited. A third independent cohort is not yet verified; mPower access/label provenance and UNLaM raw data availability remain open checks.
 - Overall: **conditional GO** for a small task-matched feasibility pilot and completion of access/novelty gates; **HOLD** on confirmatory training and novelty claims until a third suitable cohort and participant IDs/labels are verified. No experiments or data downloads claimed.
+
+
+## 2026-10-25 — Final targeted-query synthesis and design correction
+
+- Added Hireš et al. (2023), which directly demonstrates inter-dataset performance degradation for sustained-vowel PD voice classification across four datasets; cross-corpus transfer itself is not a novelty claim.
+- Added Zahir et al. (2026) single-center participant-wise model and its stated need for external/multicenter validation; added Su & Sun (2026) label-free face/voice screening and distinguished it from target-domain error monitoring.
+- Updated mPower access details: sustained /a/ up to 10 seconds, Synapse research access, and potential dependence on self-reported professional diagnosis.
+- Corrected the intended interpretation: ItalianPVS/UAMS sustained-/a/ comparisons test cross-dataset/recording-domain robustness, not isolated language generalization.
+- No recordings downloaded, participant IDs/labels audited locally, or models trained. The data gate remains incomplete.

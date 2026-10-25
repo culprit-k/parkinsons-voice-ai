@@ -67,3 +67,18 @@ This is an attractive task-matched external cohort for ItalianPVS, but the two-c
 ## Revised current access decision
 
 Two plausible public raw-audio cohorts are identifiable for a task-matched sustained-/a/ pilot: ItalianPVS and UAMS Figshare. A third task-compatible, independent cohort is **not yet approved**. mPower requires research access and a label-provenance audit; UNLaM has a report that describes a database and a 2026 paper claiming open data, but an exact versioned raw-audio download manifest has not been verified here; NeuroVoz v3 is restricted. See the final decision memo for the current decision and exact go/no-go criteria.
+
+
+## Final targeted-check notes
+
+### mPower sustained /a/ is potentially task-compatible but restricted
+The mPower methods literature describes smartphone sustained /a/ recordings up to 10 seconds under uncontrolled daily conditions. Raw data access uses Synapse account validation/certification, an intended-use statement and source-specific terms. Some voice studies identify PD using self-report of having received a professional diagnosis. mPower is a plausible third domain only after confirming the exact diagnostic variable, missingness, number of unique participants, repeat recordings/medication timing and legal use. Do not equate app self-report with independent chart-confirmed diagnosis.
+
+### UNLaM/Mendeley report needs provenance resolution
+The 2026 Spanish-to-Italian voice paper says Spanish data are openly available from the UNLaM Parkinson Voice Database and Italian data from Mendeley Data DOI https://doi.org/10.17632/4yryrv6xrh.1. This is a specific repository lead, but does not prove the Italian cohort is independent of standard ItalianPVS; nor does it resolve why the Spanish cohort is reported as 119 by its original database paper and n=126 in a 2026 paper. Confirm repository metadata, source paper, sample IDs, labels and exact version before counting any additional cohort.
+
+### Task comparability is not language generalization
+UAMS and ItalianPVS both contain sustained /a/ recordings, but their comparison combines language community, recording apparatus, environment, collection site, recruitment, age/sex distribution and label definition. The vowel contains no lexical content, so these two datasets cannot establish generalization of speech recognition or linguistic content across languages. The appropriate primary pilot claim is cross-dataset/recording-domain robustness of sustained phonation.
+
+### Current data status
+No raw recordings or demographic files have been downloaded in this project. UAMS and ItalianPVS are candidate public resources, not yet integrity-validated datasets; mPower is a restricted-access candidate, UNLaM is a repository lead with unresolved cohort/version counts, and NeuroVoz v3 is restricted. The data gate remains incomplete.

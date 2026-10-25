@@ -53,3 +53,30 @@ Searches used general web-index queries and citation/source-page inspection. Que
 5. Search backward references and forward citations for SUDO, D3M, selective classification, label-free performance estimation and each direct PD paper.
 6. Extract cohorts, unique participants, task, language, device/site, target-label use, split unit, metrics, uncertainty, subgroup evaluation, code and access status.
 7. Update the study matrix before finalizing the protocol. Do not claim systematic-review compliance until those steps are documented.
+
+
+## 2026-10-25 — Final targeted query pass
+
+Additional targeted searches included:
+- "On the inter-dataset generalization of machine learning approaches to Parkinson's disease detection from voice";
+- Parkinson voice + participant-level error detection, confidence, OOD, abstention and external validation;
+- label-free PD screening from face/voice, differentiated from label-free performance monitoring;
+- mPower sustained-vowel voice and eligibility/access terms;
+- UAMS prolonged-vowel dataset sample-ID and task details;
+- ItalianPVS participant counts, license and sustained-vowel structure;
+- 2026 voice screening models and whether external validation was performed.
+
+### Newly confirmed/important records
+
+| Record | Verified information | Research implication |
+|---|---|---|
+| Hireš et al. (2023), "On the inter-dataset generalization of machine learning approaches to Parkinson's disease detection from voice," International Journal of Medical Informatics 179:105237, DOI 10.1016/j.ijmedinf.2023.105237. [PubMed](https://pubmed.ncbi.nlm.nih.gov/37801807/) | Tests four datasets (CzechPD, PC-GITA, ITA, RMIT-PD) on sustained vowel phonation and reports rapid degradation in external/mixed-dataset testing. | Cross-dataset generalization on sustained vowels is directly established; it cannot be our novelty claim. |
+| Zahir et al. (2026), JMIR Medical Informatics 14:e94063, DOI 10.2196/94063. [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC13255941/) | 203 participants in one center; subject-wise 5-fold CV; multiview spectrogram model and recognition-ratio feature; authors explicitly say broader multicenter validation and probability-calibration analysis remain needed. | Another strong within-cohort model exists, but it does not replace external validation. |
+| Su & Sun (2026), "Label-Free Parkinson’s Disease Screening from Face and Voice through Mechanistic Interpretability," [arXiv](https://arxiv.org/abs/2608.08976), also published in MICCAI 2026 satellite proceedings [here](https://papers.miccai.org/miccai-2026-sat/MI4MedFM_021.html). | Constructs a PD score using frozen pretrained encoders without using PD labels to fit that score; uses YouTubePD and reports voice-only AUROC 0.765, fused score 0.802; authors flag potential optimism in face-side/fused validation. | "Label-free PD screening" exists, but means label-free disease-score construction; it is not necessarily prediction of errors by an already-supervised classifier on new target data. Must clearly distinguish the terms. |
+| mPower sustained-vowel methods/access. [Scientific Data](https://www.nature.com/articles/sdata201611), [2024 transfer-learning paper](https://www.nature.com/articles/s41598-024-81824-x). | Participants recorded /a/ up to 10 s via smartphone under uncontrolled daily conditions. Access involves Synapse account validation/certification, a data-use statement and terms. Some papers use self-report of a professional PD diagnosis to form labels. | Potential third domain/task match, but exact diagnosis field, access and participant grouping require an approved manifest. It is not an unrestricted anonymous download. |
+| UAMS Figshare. [Dataset record](https://figshare.com/articles/dataset/Voice_Samples_for_Patients_with_Parkinson_s_Disease_and_Healthy_Controls/23849127), [related paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC10667335/). | Public 4.18 MB CC BY 4.0 record describes sample-ID-linked demographics and telephone WAV files with prolonged /a/. A related study reports 40 PD and 41 controls. | Good task-matched pilot candidate; still verify actual manifest, ID uniqueness and repeat samples locally. |
+| ItalianPVS. [IEEE DataPort](https://ieee-dataport.org/open-access/italian-parkinsons-voice-and-speech), [2026 dataset description](https://www.mdpi.com/2673-8430/6/3/15). | 65 participants: 28 PD, 22 elderly controls, 15 young controls; CC BY 4.0 is reported. Dataset contains 831 recordings in common descriptions, across tasks. | Use PD vs elderly controls in a primary binary analysis; keep young controls separate because age may be a shortcut. |
+
+### Updated interpretation
+
+A sustained /a/ task contains little lexical-language information. If ItalianPVS, UAMS and mPower sustained vowels are compared, the correct claim is cross-dataset/recording-domain robustness of sustained-phonation screening, not isolated cross-language speech generalization. Language and data source remain entangled with device, environment, age, recruitment and protocol. A true language-generalization study of reading/conversation needs compatible connected-speech tasks and additional corpora.
