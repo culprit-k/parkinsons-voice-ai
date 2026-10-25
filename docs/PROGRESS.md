@@ -110,3 +110,5 @@ Do not assume these resources are mutually compatible. Do not claim cross-langua
 - Network-enabled archive preflight against Hugging Face, Figshare and Zenodo fails with DNS resolution errors in this runtime. No raw audio was downloaded, no hash was recomputed locally, and no WAV or participant manifest was inspected locally.
 - Added scripts/verify_voice_dataset_archives.py and .gitignore to support a later local audit without committing speech files/private manifests.
 - Status remains: protocol NOT LOCKED; confirmatory modelling NOT STARTED; raw-data integrity gate NOT PASSED. Sustained-/a/ cohort comparison should be described as recording-domain robustness, not lexical cross-language generalization.
+
+- Final search refinement found a Jan 2026 confidence-gated PD voice ensemble and a Feb 2026 uncertainty-based speech-domain shift detector. They are adjacent rather than exact matches for the candidate error-ranking endpoint, but further narrow the defensible contribution to a comparative validation study.
