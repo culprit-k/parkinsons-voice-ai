@@ -34,9 +34,9 @@ Use the [official Zenodo record](https://zenodo.org/records/10952480), sign in o
 
 Dear Dr. Rusko and the EWA-DB team,
 
-I am an MBBS student at Bukhara State Medical Institute in Uzbekistan, preparing a secondary-data research project on the reliability of voice-based Parkinson's disease screening across independent cohorts. I am interested in using EWA-DB as a held-out external cohort, with the primary analysis limited to the sustained /a/ phonation task and any connected-speech analysis prespecified separately.
+I am preparing an academic secondary-data research project on the reliability of voice-based Parkinson's disease screening across independent cohorts. I am interested in using EWA-DB as a held-out external cohort, with the primary analysis limited to the sustained /a/ phonation task and any connected-speech analysis prespecified separately.
 
-I have read the EWA-DB data descriptor and the restricted Zenodo record. I understand that access requires a request and an End User License Agreement (EULA). Could you advise whether student-led academic secondary analysis is eligible, and what supervisor, institutional or ethics/governance documentation is required? I will obtain any required institutional determination before analysis and will follow the granted terms.
+I have read the EWA-DB data descriptor and the restricted Zenodo record. I understand that access requires a request and an End User License Agreement (EULA). Could you advise whether academic secondary analysis is eligible, and what institutional or ethics/governance documentation is required? I will obtain any required institutional determination before analysis and will follow the granted terms.
 
 Before finalizing the study design, could you also clarify the number of unique participants with available WAV recordings in the PD and healthy-control groups for sustained /a/ phonation; whether manifest and prodromal PD can be identified separately; and whether a de-identified participant/task/recording manifest is available under the agreement? The public descriptor reports 1,649 total speakers, 1,122 meeting defined inclusion criteria, and 1,003 with published WAV recordings, whereas the ParkMAE paper reports a 956-person PD/control EWA-DB subset (95 PD, 861 controls; 6,692 audio files). I would appreciate guidance on how these counts map to the current release.
 
@@ -46,8 +46,8 @@ Thank you for your time and for making this resource available to research.
 
 Best regards,  
 [Full name]  
-MBBS student, Bukhara State Medical Institute, Uzbekistan  
-[Institutional email]  
+[Contact email]  
+[Institutional affiliation, only if required and approved for sharing]  
 [Supervisor/contact, if required]
 
 ## Audit plan once access is granted
