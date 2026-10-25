@@ -50,7 +50,7 @@ The current latest Zenodo version (v3, record [10.5281/zenodo.13647600](https://
 
 ## Current go/no-go
 
-**Data gate is NOT passed.** MDVR-KCL and ItalianPVS are the two most immediately plausible raw-audio candidates, but the project has not yet completed a local access and integrity check for either, and a third independent fully usable corpus is not yet established.
+**Data gate is NOT passed.** IPVS, UAMS and MDVR-KCL now have successful file-level archive/audio checks, but none is fully approved for the planned confirmatory benchmark: IPVS participant/session/label mapping and privacy are unresolved, UAMS diagnosis provenance/independence are unresolved, and MDVR-KCL participant-label mapping is unresolved and the task is not sustained vowel. A third independent task-compatible cohort has not been approved.
 
 Proceed with verification of these two plus UNLaM/PC-GITA/NeuroVoz/EWA-DB access. If a third cohort cannot be obtained legally and reliably, narrow the study to a two-corpus pilot and avoid broad multilingual claims, or pivot to a review/reproducibility paper. Do not begin confirmatory model training until the cohort manifest and protocol are versioned.
 
