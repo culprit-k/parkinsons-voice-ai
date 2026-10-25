@@ -64,6 +64,8 @@ This is a targeted novelty audit, **not** a completed PRISMA-style systematic re
 
 ## 2. Dataset metadata and integrity findings
 
+> **Editorial status note:** The subsection below began as a remote-metadata-only snapshot. Where it conflicts with the actual archive findings in the “Addendum: actual archive verification completed on GitHub Actions” near the end of this file, the later addendum is authoritative. The stale per-dataset status rows in this early snapshot are being retained only to preserve the audit trail of what was known before the runner job.
+
 ### Italian Parkinson's Voice and Speech (IPVS / ItalianPVS)
 
 Sources: [official IEEE DataPort record](https://ieee-dataport.org/open-access/italian-parkinsons-voice-and-speech), DOI 10.21227/aw6b-tg17; [public Hugging Face mirror](https://huggingface.co/datasets/birgermoell/Italian_Parkinsons_Voice_and_Speech/tree/main/italian_parkinson).
@@ -115,11 +117,7 @@ Source: [Zenodo record](https://zenodo.org/records/2867216). The source file was
 
 **Raw-data gate: FAIL / NOT PASSED.** This is a status of our verification process, not proof the datasets are unusable.
 
-Two candidates are identified for a sustained-/a/ recording-domain feasibility study:
-- IPVS: usable candidate, subject to resolving the mirror inventory discrepancy, participant identity, and acquisition confounding.
-- UAMS: usable candidate, subject to archive and workbook verification.
-
-mPower may be a third recording domain, but access and labels have not passed. Therefore, a three-cohort confirmatory benchmark is **not currently established**.
+Two **provisional** candidates for a sustained-/a/ recording-domain feasibility study are IPVS and UAMS, but neither is approved for final analysis. IPVS file integrity passed; participant/session and label mapping remain unresolved and the source package contains direct identifiers. UAMS archive integrity and filename linkage passed; clinical diagnosis provenance and unique-participant/repeat-visit status require confirmation. MDVR-KCL passed file-level integrity but its tasks and participant-label linkage do not support the sustained-vowel primary benchmark. EWA-DB is the priority third-cohort access request; mPower is a secondary access route. Neither has been approved or obtained. Therefore, a three-cohort confirmatory benchmark is **not currently established**.
 
 Important scope correction: comparing sustained /a/ cohorts tests cross-dataset/recording-domain robustness. It does not, by itself, test lexical cross-language generalization. For a genuine language-generalization claim, we would need compatible connected-speech tasks and methods that separate language from site, task, device, recruitment and demographic differences.
 
