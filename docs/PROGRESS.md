@@ -150,3 +150,12 @@ Do not assume these resources are mutually compatible. Do not claim cross-langua
 - Opened [Issue #2: Remaining data-gate blockers before protocol lock](https://github.com/culprit-k/parkinsons-voice-ai/issues/2) as a checklist for custodian/governance review, UAMS label provenance, MDVR mapping, third-cohort access and novelty completion.
 - Drafted EWA-DB and NeuroVoz permission-request emails in the access-plan document. No email or access request was sent, no restricted data were accessed, and no terms were accepted on the user's behalf.
 - Current decision remains **HOLD confirmatory modeling**: a third independent task-compatible cohort is not available/approved; IPVS mapping/privacy and UAMS clinical provenance remain open; MDVR-KCL task and label mapping are not fit for the primary sustained-vowel analysis. No model or empirical prediction results exist.
+
+
+## 2026-10-25 — Additional distance-based audio OOD prior-art check
+
+- Ran focused searches for the specific PD-voice question and for audio feature-distance/error-detection methods. Added Bukhsh & Saeed (ICASSP 2023) on deep k-nearest-neighbour distance for OOD audio, Yilmaz & Toraman (NAACL 2022) on distance-to-uniform out-of-scope detection, Sony Research's 2024 audio-disease uncertainty plus latent-distance framework, and a 2026 medical-imaging failure-detection benchmark to the targeted search log and prior-art review.
+- This strengthens the novelty boundary: feature distance, confidence, uncertainty, audio OOD detection and comparative failure ranking are established method families. No exact match was found in this query pass for the specific participant-level confidence-only versus confidence-plus-distance comparison on held-out PD-voice cohorts; this is not evidence of universal absence.
+- The candidate question remains only a prespecified empirical comparison on independent PD-voice cohorts. A full database/citation-chain review is still required before novelty clearance; no new general OOD detector is justified.
+- The sanitized final workflow run [40175159872](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40175159872) succeeded. The public report includes aggregate match-quality fields and no sample ID values/private paths.
+- [Issue #2](https://github.com/culprit-k/parkinsons-voice-ai/issues/2) tracks the remaining dataset, governance, access and protocol gates. No emails were sent and no external access approval was obtained.
