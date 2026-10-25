@@ -97,3 +97,16 @@ Do not assume these resources are mutually compatible. Do not claim cross-langua
 - Metadata-level dataset checks identified count/manifest discrepancies requiring local verification: ItalianPVS cohort and file counts vary across descriptions; a public mirror lists 839 uploaded files, while commonly cited reports say 831 recordings. UAMS metadata describes prolonged-/a/ files and a demographic key but the actual archive and IDs have not been audited. mPower requires access/label review.
 - No raw audio archive has been downloaded, hashed, unpacked or locally audited. No model has been trained. No protocol has been locked.
 - Added docs/PRIOR_ART_AND_DATASET_GATE_2026-10-25.md as the current source of truth for prior-art and dataset gate status.
+
+
+## 2026-10-25 — Final targeted novelty and data integrity audit
+
+- Added docs/FINAL_NOVELTY_AND_DATASET_AUDIT_2026-10-25.md with the final targeted novelty verdict, the close-overlap prior-art matrix and remote metadata findings separated from local raw-file verification.
+- Broad novelty claims are rejected: cross-dataset/cross-language PD voice, acoustic shortcut auditing, demographic confounding analysis, uncertainty-aware screening and generic label-free reliability monitoring all have prior art.
+- The narrow confidence-only versus confidence-plus-acoustic-distance error-ranking question remains a conditional comparative-validation study, not a cleared novel algorithm claim.
+- Inspected the public Parkinson-Voice-Detection GitHub tree beyond its README: 183 entries include methods, phase scripts, notebooks, findings, tables/figures, dataset version notes and a model artifact. Its empirical numbers were not reproduced by this project, but it is material public prior art for IPVS shortcut controls and IPVS/MDVR-KCL cross-corpus evaluation.
+- IPVS remote metadata displays a 593 MB ZIP and host-side SHA-256 3c4cd221345f7a81f0eeaceedf44dedbfd33b08ecd18ab5a3307edefcfbacfed. The mirror's 839-file listing does not reconcile with commonly documented 831 WAVs + six spreadsheets + the ZIP itself (838 items). This remains unresolved.
+- UAMS Figshare metadata describes a 4.18 MB CC BY 4.0 archive of prolonged-/a/ WAVs linked to demographics; the associated literature reports 40 PD and 41 controls for the public subset. Actual archive bytes and workbook joins remain unverified.
+- Network-enabled archive preflight against Hugging Face, Figshare and Zenodo fails with DNS resolution errors in this runtime. No raw audio was downloaded, no hash was recomputed locally, and no WAV or participant manifest was inspected locally.
+- Added scripts/verify_voice_dataset_archives.py and .gitignore to support a later local audit without committing speech files/private manifests.
+- Status remains: protocol NOT LOCKED; confirmatory modelling NOT STARTED; raw-data integrity gate NOT PASSED. Sustained-/a/ cohort comparison should be described as recording-domain robustness, not lexical cross-language generalization.
