@@ -150,3 +150,53 @@ Two further sources found during the final targeted search strengthen the conser
 - **Detection of actionable domain shifts in speech enhancement systems by tracking prediction uncertainty**, published 28 February 2026. This speech-processing study explicitly monitors prediction uncertainty to identify shifts associated with degraded performance. It concerns speech enhancement and shift-at-the-batch/system level, not PD diagnosis or participant-level classification-error ranking, but it is clear adjacent prior art for using uncertainty as a speech-domain-shift signal. [Paper](https://link.springer.com/article/10.1186/s13636-026-00448-3)
 
 These sources do not prove that the exact candidate comparison has already been done, but further reduce support for presenting confidence gating or speech-domain monitoring as a novel method. The plausible contribution remains a narrow comparative test: does a frozen acoustic-distance signal add value beyond confidence for identifying errors in independent PD-voice cohorts?
+
+
+## Addendum: actual archive verification completed on GitHub Actions — 25 October 2026
+
+This addendum supersedes the earlier statement in this document that raw archive verification had not been performed. The initial local runtime could not resolve the dataset hosts, so I added a network-enabled GitHub Actions workflow and ran the archive audit there. No audio or participant-level manifest was uploaded as an artifact; only a sanitized aggregate report was uploaded.
+
+### IPVS archive — byte integrity and audio inventory passed; participant mapping remains unresolved
+
+- Downloaded archive size: **592,905,531 bytes**.
+- Locally computed SHA-256: 3c4cd221345f7a81f0eeaceedf44dedbfd33b08ecd18ab5a3307edefcfbacfed.
+- This exactly matches the SHA-256 shown by the pinned public mirror.
+- Extracted inventory: **831 WAV + 6 XLSX + 1 TXT = 838 files**. The mirror's 839-item upload count includes the ZIP itself, explaining the apparent discrepancy.
+- All **831/831 WAV headers** were readable; all were mono. 671 were 16 kHz and 160 were 44.1 kHz. Durations ranged from 3.375 to 250.3125 seconds.
+- Folder labels yield 437 PD-labelled, 349 elderly-control-labelled and 45 young-control-labelled WAV files. These are recording counts, not participant counts.
+- Exact content-hash audit found one duplicate group of two WAV files. The private paths were not published; this duplicate pair must be located in the private manifest and adjudicated before model splitting.
+- One or more spreadsheets contain name and surname columns alongside demographics. **Direct identifiers are present in the public package.** Do not copy or commit these spreadsheets, names, or raw audio into this GitHub repository. Do not attempt to link names to audio for the research protocol without a data-governance/ethics review. The current automatic audit does not establish a reliable participant-ID-to-label mapping for IPVS.
+- Nested folder structure is not a reliable participant manifest on its own: PD recordings are organised across multiple directory levels. A source-specific, privacy-preserving mapping is still needed to resolve repeated sessions and unique participants.
+
+### UAMS telephone vowel archive — archive and ID-label join checks passed at the file level
+
+The public Figshare API was used to download the source files individually after its "download all" endpoint returned HTTP 401.
+
+- Total downloaded source-file bytes: **4,378,057**.
+- The audit completed all available per-file MD5 checks against the public API metadata without a mismatch.
+- Extracted inventory: **81 WAV files plus one XLSX workbook**.
+- All **81/81 WAV headers** were readable; all were mono at 8 kHz. Durations ranged from 1.51612 to 7.208 seconds.
+- The workbook's Parselmouth sheet contains 81 rows, 81 unique Sample IDs, no missing Sample IDs, and labels **41 HC / 40 PwPD**.
+- All **81/81** Sample IDs matched an audio filename; zero unmatched IDs were found.
+- The same workbook contains derived-feature sheets. For the planned reproducible analysis, use the raw WAV files and recompute features from the audio rather than treating precomputed feature sheets as independent recordings.
+- The audit found no exact duplicate-audio hash groups among the 81 WAV files.
+- The workbook contains demographic fields (age and sex), but no direct name/surname fields were detected in the sheet used for ID-label linkage. Diagnosis provenance and participant independence still need confirmation from the dataset paper/data documentation.
+
+### What has and has not passed
+
+| Gate | Result |
+|---|---|
+| IPVS archive byte integrity | **PASS** — local SHA-256 matches pinned mirror |
+| IPVS WAV header and basic format inventory | **PASS** |
+| IPVS duplicate-file review | **OPEN** — one exact duplicate pair |
+| IPVS unique participant/session and label mapping | **OPEN** — no verified participant-level manifest; direct identifiers present in workbook |
+| UAMS source-file checksum checks | **PASS** — per-file MD5 checks passed |
+| UAMS WAV header and basic format inventory | **PASS** |
+| UAMS Sample ID to audio filename linkage | **PASS** — 81/81 matched |
+| UAMS unique participant count | **Provisionally 81 Sample IDs**; independence/repeated visits require source confirmation |
+| Three independent compatible cohorts | **NOT ESTABLISHED** |
+| Protocol lock / confirmatory modelling | **NOT APPROVED** |
+
+The workflow ran successfully at GitHub Actions audit run 40170280356: https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40170280356. The earlier first run failed because Figshare's all-files endpoint returned 401; the subsequent API-based individual-file run succeeded. The workflow report deliberately excludes raw audio and participant-level paths.
+
+**Updated decision:** archive integrity is now verified for IPVS and UAMS, but the dataset feasibility gate as a whole remains **NOT PASSED**. The main blocker is no longer download access; it is the IPVS participant/label mapping and direct-identifier risk, plus the absence of a third independent, compatible cohort. No model has been trained and no predictive results have been produced.
