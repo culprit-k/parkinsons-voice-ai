@@ -45,11 +45,29 @@ def main() -> int:
     features = dataset.data.features.copy()
     targets = dataset.data.targets.copy() if dataset.data.targets is not None else pd.DataFrame()
     variables = dataset.variables.copy() if dataset.variables is not None else pd.DataFrame()
+    id_table = (
+        dataset.data.ids.copy()
+        if getattr(dataset.data, "ids", None) is not None
+        else pd.DataFrame()
+    )
+    original = (
+        dataset.data.original.copy()
+        if getattr(dataset.data, "original", None) is not None
+        else pd.DataFrame()
+    )
 
-    frame = features.copy()
-    for col in targets.columns:
-        if col not in frame.columns:
-            frame[col] = targets[col].values
+    # UCI's client separates role=ID columns from .features on some datasets.
+    # Prefer the full original table when present, otherwise reconstruct it by
+    # combining IDs, features and targets row-wise without publishing any rows.
+    if not original.empty:
+        frame = original.copy()
+    else:
+        frame = pd.concat(
+            [table.reset_index(drop=True) for table in (id_table, features, targets)
+             if table is not None and not table.empty],
+            axis=1
+        )
+        frame = frame.loc[:, ~frame.columns.duplicated()]
 
     columns = list(frame.columns)
     id_col = find_column(columns, ("subject_id", "subject", "participant_id", "patient_id", "id"))
