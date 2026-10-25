@@ -103,3 +103,13 @@ Not completed:
 - Model training, results or performance comparisons.
 
 These boundaries are deliberate: they prevent a paper from making unsupported claims.
+
+
+## Addendum: raw archive checks completed — 25 October 2026
+
+The earlier status above that raw archives had not been downloaded is superseded by the completed [GitHub Actions audit](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40170280356).
+
+- IPVS archive SHA-256 was recomputed locally and matches the pinned mirror. Extracted inventory: 831 WAV, 6 XLSX, 1 TXT. All WAV headers readable; mono; 671 at 16 kHz and 160 at 44.1 kHz. Folder-level counts: 437 PD-labelled, 349 elderly-control-labelled and 45 young-control-labelled recordings. One exact duplicate pair was detected. Participant-level mapping remains unresolved, and a workbook contains direct name/surname fields; treat this as a data-governance and privacy blocker for demographic linkage.
+- UAMS files were downloaded individually through the public Figshare API. Available per-file MD5 checks passed. There are 81 readable mono WAVs at 8 kHz and one workbook. The Parselmouth sheet has 81 unique Sample IDs, labels 41 HC / 40 PwPD, and all 81 IDs match audio filenames.
+- The raw-file gate is now partially passed for IPVS and UAMS. Overall feasibility is still NOT PASSED because IPVS unique-participant/label mapping and duplicate adjudication remain open, UAMS diagnostic provenance/participant independence need confirmation, and a third independent compatible cohort is not established.
+- No model was trained; no predictive results exist. Protocol remains NOT LOCKED.
