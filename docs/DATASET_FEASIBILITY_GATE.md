@@ -1,7 +1,7 @@
 # Dataset feasibility and independence gate
 
 **Audit date:** 2026-10-25  
-**Status:** two public archives downloaded and inspected on GitHub Actions; partial file-integrity checks passed, but the overall dataset gate remains NOT PASSED.
+**Current status (25 Oct 2026):** three public source archives have passed basic file-level integrity/audio-header checks on GitHub Actions (IPVS, UAMS, MDVR-KCL). The overall dataset gate remains **NOT PASSED** because participant/diagnosis mapping, privacy/provenance and task-compatible third-cohort access remain unresolved.
 
 ## Decision rule
 
@@ -11,8 +11,8 @@ The intended cross-corpus monitoring benchmark requires **at least three indepen
 
 | Dataset | Reported design/cohort | Availability and known barrier | Status |
 |---|---|---|---|
-| MDVR-KCL | UK English; reported 16 PD / 21 controls; several speech tasks; smartphone/telephone-style recordings. | [Zenodo DOI 10.5281/zenodo.2867216](https://doi.org/10.5281/zenodo.2867216). Lower-friction raw-audio candidate; verify exact package, participant manifest, labels and licence. | Candidate A, not yet locally verified. |
-| ItalianPVS/IPVS | Italian; common elderly-control subset 28 PD / 22 controls (n=50); full release also includes 15 young controls. | [IEEE DataPort official record](https://ieee-dataport.org/open-access/italian-parkinsons-voice-and-speech). Portal access/terms and exact manifests need checking. | Candidate B, not yet locally verified. |
+| MDVR-KCL | UK English; literature reports 16 PD / 21 controls; read text and spontaneous dialogue. | [Zenodo DOI 10.5281/zenodo.2867216](https://doi.org/10.5281/zenodo.2867216). Archive MD5 and 73 WAV headers passed in run 40170614840; participant-label mapping and task are not compatible with a vowel-only primary analysis. | **File integrity PASS; participant/label gate OPEN; connected-speech candidate only.** |
+| ItalianPVS/IPVS | Italian; reported 28 PD, 22 elderly controls and 15 young controls; multiple speech tasks. | [IEEE DataPort official record](https://ieee-dataport.org/open-access/italian-parkinsons-voice-and-speech) and [pinned public mirror](https://huggingface.co/datasets/birgermoell/Italian_Parkinsons_Voice_and_Speech/tree/main/italian_parkinson). SHA-256 matched the pinned mirror; 831/831 WAV headers passed. One exact duplicate pair found. Spreadsheet contains direct name/surname fields; do not attempt name-to-audio linkage pending governance review. | **File integrity/audio QC PASS; participant/session and privacy gates OPEN.** |
 | UNLaM Parkinson Voice Database | Argentine Spanish; original article reports 55 PD + 64 controls (119); a 2026 paper reports n=126. | Dataset described as available in the literature; exact downloadable raw-audio manifest, version, licence and explanation for count difference need verification. | Potential third cohort; not approved. |
 | PC-GITA | Colombian Spanish; commonly described as about 50 PD and 50 healthy controls. | Raw audio described as available by academic/institutional request through Universidad de Antioquia. Permission is not assumed. | Request candidate. |
 | NeuroVoz | Spanish; data paper reports 54 PD and 58 controls. | [Zenodo record](https://zenodo.org/records/10777657) is restricted; request/approval required. | Request candidate. |
@@ -81,7 +81,7 @@ The 2026 Spanish-to-Italian voice paper says Spanish data are openly available f
 UAMS and ItalianPVS both contain sustained /a/ recordings, but their comparison combines language community, recording apparatus, environment, collection site, recruitment, age/sex distribution and label definition. The vowel contains no lexical content, so these two datasets cannot establish generalization of speech recognition or linguistic content across languages. The appropriate primary pilot claim is cross-dataset/recording-domain robustness of sustained phonation.
 
 ### Current data status
-No raw recordings or demographic files have been downloaded in this project. UAMS and ItalianPVS are candidate public resources, not yet integrity-validated datasets; mPower is a restricted-access candidate, UNLaM is a repository lead with unresolved cohort/version counts, and NeuroVoz v3 is restricted. The data gate remains incomplete.
+The network-enabled workflow has now downloaded and audited raw source files for IPVS, UAMS and MDVR-KCL. IPVS: 831 readable WAV files, checksum match, one duplicate pair, unresolved participant/session mapping, and name/surname fields in an included spreadsheet. UAMS: 81 readable WAVs, source MD5 checks passed, 81 unique IDs and 81/81 filename matches with 41 HC and 40 PwPD labels; clinical label provenance and independent-participant status remain open. MDVR-KCL: 73 readable WAVs and Zenodo MD5 match; raw participant/diagnosis mapping remains unverified. The gate remains incomplete.
 
 
 ## Selected study requirement
@@ -91,7 +91,7 @@ The selected question is about whether source-reference acoustic distance adds b
 
 ## Current gate status — 2026-10-25
 
-No raw archives have been downloaded, hashed, unpacked or locally audited in this project. ItalianPVS public descriptions and a Hugging Face mirror show count discrepancies (commonly cited 831 recordings versus 839 uploaded files listed by the mirror; the mirror also contains a large ZIP). The UAMS Figshare metadata describe linked sample IDs and prolonged-/a/ WAV files, but actual IDs and files have not been checked. mPower requires access and diagnostic-label review. The dataset gate is **not passed**. See [PRIOR_ART_AND_DATASET_GATE_2026-10-25.md](PRIOR_ART_AND_DATASET_GATE_2026-10-25.md) for the required manifest checklist.
+Raw archives have been downloaded, hashed/checked against source metadata, unpacked and audited in the GitHub Actions runner; see runs [40170280356](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40170280356) and [40170614840](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40170614840). The extracted IPVS inventory is 831 WAV + 6 XLSX + 1 TXT (838 files), while the mirror listing has a separate 839-item discrepancy that is not reconciled. UAMS ID-to-filename linkage passed. mPower still requires research access and label review. The overall dataset gate remains **NOT PASSED** because participant/session mapping, provenance and a third compatible independent cohort remain open.
 
 
 ## Raw archive verification update — 25 October 2026
@@ -108,3 +108,12 @@ The network-enabled audit has now downloaded and inspected the IPVS and UAMS sou
 The Zenodo archive audit succeeded at [GitHub Actions run 40170614840](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40170614840). The downloaded source archive was 606,144,431 bytes and its MD5 matched Zenodo metadata. It contains 73 readable mono WAV files at 44.1 kHz, with durations 73.03902–220.63916 seconds; no exact duplicate audio hashes were detected. Raw participant IDs and file-to-diagnosis linkage were not verified. The literature describes read-text and spontaneous-dialogue tasks, so this corpus is not task-matched to UAMS sustained /a/ recordings.
 
 This gives us three *downloaded audio corpora*, but **not three independent, compatible cohorts for the current prespecified question**. The task mismatch and unresolved IPVS mapping remain disqualifying for confirmatory modeling.
+
+
+## Third-cohort search result — current as of 25 October 2026
+
+**Priority request:** EWA-DB (Slovak; ELRA-S0489). The catalogue describes sustained-vowel phonation and says WAV audio is available for a consented subset. It is potentially compatible, but access/license, the actual PD/control audio subset, stable participant IDs, task labels and diagnosis provenance must be verified. Start from the [ELRA catalogue](https://catalogue.elra.info/en-us/repository/browse/ELRA-S0489/) and the [OneVoice-MSD collaborative dataset request form](https://forms.gle/58vskDQBY8xdBNd39) / contact listed on that dataset page. Do not describe it as downloaded or available until permission is approved.
+
+**Fallback:** mPower offers sustained-/a/ voice records but is accessed through Synapse research procedures and may depend on self-reported diagnosis. **Additional request candidate:** NeuroVoz v3 (restricted) and PC-GITA (request-mediated). UNLaM is a metadata/repository lead with an unresolved 119 vs 126 participant-count/version discrepancy. Details and ready-to-edit emails are in [THIRD_COHORT_AND_ACCESS_REQUEST_PLAN_2026-10-25.md](THIRD_COHORT_AND_ACCESS_REQUEST_PLAN_2026-10-25.md).
+
+If three compatible independent cohorts do not clear the gates, do not force a confirmatory paper: either preregister and label the work as a two-cohort feasibility pilot or pivot to a reproducibility/systematic-review study. Keep the protocol unlocked until then.
