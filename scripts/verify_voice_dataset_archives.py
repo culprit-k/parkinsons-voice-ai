@@ -227,6 +227,7 @@ def inventory(root: Path, dataset: str, destination: Path) -> dict[str, Any]:
         "wav_duration_min_seconds": min(durations) if durations else None,
         "wav_duration_max_seconds": max(durations) if durations else None,
         "duplicate_audio_hash_groups": duplicate_groups,
+        "cohort_path_summary": cohort_path_summary(root),
         "private_manifest": str(manifest),
         "warning": (
             "Group names inferred from file paths are hints, not validated diagnoses. "
@@ -281,6 +282,45 @@ def audit_one(name: str, url: str, expected_sha: str | None, output: Path) -> di
         "status": "archive_downloaded_and_inventory_completed",
     })
     return report
+
+
+def cohort_path_summary(root: Path) -> dict[str, Any]:
+    """Aggregate label-folder and participant-folder counts without exposing names."""
+    groups: dict[str, dict[str, Any]] = {}
+    for path in sorted(root.rglob("*.wav")):
+        rel = path.relative_to(root)
+        group = path_group_hint(rel)
+        if group == "unknown":
+            continue
+        parts = rel.parts
+        group_idx = next(
+            (i for i, part in enumerate(parts)
+             if path_group_hint(Path(part)) == group),
+            None,
+        )
+        participant_dir = None
+        if group_idx is not None and group_idx + 1 < len(parts) - 1:
+            participant_dir = parts[group_idx + 1]
+        entry = groups.setdefault(group, {
+            "wav_count": 0,
+            "participant_folder_keys_private": set(),
+            "recordings_per_folder_private": Counter(),
+        })
+        entry["wav_count"] += 1
+        if participant_dir is not None:
+            entry["participant_folder_keys_private"].add(participant_dir)
+            entry["recordings_per_folder_private"][participant_dir] += 1
+
+    output: dict[str, Any] = {}
+    for group, item in groups.items():
+        counts = list(item["recordings_per_folder_private"].values())
+        output[group] = {
+            "wav_count": item["wav_count"],
+            "participant_folder_count": len(item["participant_folder_keys_private"]),
+            "participant_folders_with_multiple_wavs": sum(count > 1 for count in counts),
+            "max_wavs_in_one_participant_folder": max(counts) if counts else None,
+        }
+    return output
 
 
 def audit_spreadsheets(root: Path) -> list[dict[str, Any]]:
@@ -375,6 +415,7 @@ def audit_spreadsheets(root: Path) -> list[dict[str, Any]]:
                     "nonempty_rows_including_header": len(nonempty_rows),
                     "data_rows": len(data_rows),
                     "column_headers_private": headers,
+                    "direct_name_fields_present": any(value in {"name", "first name", "surname", "last name"} for value in normalized),
                     "id_column_detected": headers[id_index] if id_index is not None else None,
                     "label_column_detected": headers[label_index] if label_index is not None else None,
                     "rows_with_id": len(ids),
