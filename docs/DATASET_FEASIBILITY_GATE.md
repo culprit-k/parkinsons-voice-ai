@@ -136,3 +136,10 @@ mPower remains a fallback: it contains sustained /a/ recordings but uses self-re
 The candidate research question remains: whether a prespecified source-reference acoustic-domain-distance score improves ranking/detection of **participant-level errors** beyond calibrated model confidence on independent held-out cohorts. Novelty is not cleared: prior work already includes multilingual ParkMAE, cross-language Korean/Taiwanese PD speech and a 2026 Spanish-to-Italian uncertainty-aware assessment study. Any contribution must be framed as a narrowly defined comparative reliability benchmark—not a first-of-its-kind model. [ParkMAE](https://www.nature.com/articles/s41598-025-30251-7) · [Lim et al.](https://pubmed.ncbi.nlm.nih.gov/39739129/) · [2026 uncertainty-aware cross-language work](https://doi.org/10.1007/s40846-026-01040-y).
 
 No model has been trained and no performance results have been produced. Protocol and confirmatory modelling gates remain closed.
+
+
+## EWA-DB access status and next audit
+
+EWA-DB is still **candidate/access pending**. The Zenodo record is restricted and requires an access request, signed EULA and download link. See [the access and audit checklist](EWA_DB_ACCESS_AND_AUDIT_CHECKLIST_2026-10-25.md). A local, aggregate-only WAV inventory utility is committed at [`scripts/audit_ewa_db_local.py`](../scripts/audit_ewa_db_local.py); a synthetic test passed, but it has not been run on EWA data.
+
+Do not assume a single sample size: published sources report 1,649 total speakers (175 PD, 1,323 HC, others neurodegenerative/mixed), 1,122 meeting study inclusion criteria, 1,003 with publishable WAV audio, and a 956-person PD/control subset (95 PD / 861 controls; 6,692 recordings; 88 h 10 min) used in ParkMAE. Request the task-specific available sample counts and current release/manifest to reconcile these numbers. Include diagnostic/prodromal PD definitions and repeat sessions in the audit. No access request has been submitted and no model has been trained.
