@@ -26,7 +26,7 @@ A sustained-vowel model evaluates sustained phonation/acoustic patterns. Vowel-o
 
 For each custodian, ask:
 
-1. What license, data-use agreement, institutional affiliation, ethics approval or other prerequisites apply to an MBBS student conducting secondary analysis without new recruitment?
+1. What license, data-use agreement, institutional affiliation, ethics approval or other prerequisites apply to an academic researcher conducting secondary analysis without new recruitment?
 2. May the project access raw audio, de-identified participant IDs, PD/control labels, permitted age/sex fields, task labels, recording/device/site metadata, medication state and relevant clinical scores?
 3. Does each participant have a stable ID linking recordings/tasks and visits? How are repeat visits, trials and multiple recordings represented?
 4. What is the operational diagnosis definition and source: clinician diagnosis, chart review, self-report, questionnaire or other? Are controls screened for neurological/voice conditions?
@@ -40,7 +40,7 @@ For each custodian, ask:
 
 Dear EWA-DB / ELRA data-access team,
 
-I am an MBBS student at [institution] preparing a prespecified secondary-data study of voice-based Parkinson's disease screening. The study would use previously collected recordings only; we are not recruiting participants or making clinical decisions from a model.
+I am preparing a prespecified academic secondary-data study of voice-based Parkinson's disease screening. The study would use previously collected recordings only; we are not recruiting participants or making clinical decisions from a model.
 
 I am writing to ask about eligibility and the exact terms for research access to EWA-DB, particularly the sustained-vowel task. Could you clarify whether the permitted release includes de-identified participant-level IDs, PD/control labels, task identifiers and basic permitted demographics for speakers with accessible WAV files? I would also appreciate details on the current license/data-use agreement, any fees, institutional sign-off or ethics documentation required, and publication/code-sharing restrictions.
 
@@ -60,7 +60,7 @@ Best regards,
 
 Dear NeuroVoz research team,
 
-I am an MBBS student at [institution] planning a prespecified secondary-data study of robustness and error monitoring for voice-based Parkinson's disease screening. I reviewed the NeuroVoz paper and the Zenodo v3 record, which currently appears access-restricted.
+I am planning a prespecified academic secondary-data study of robustness and error monitoring for voice-based Parkinson's disease screening. I reviewed the NeuroVoz paper and the Zenodo v3 record, which currently appears access-restricted.
 
 Could you please advise whether access may be granted for an academically supervised student project, the required affiliation and ethics/governance documents, and whether de-identified participant IDs and diagnostic labels can be supplied with the recordings? The immediate analysis of interest would be the sustained-vowel task, with connected-speech tasks reserved for a separate, appropriately matched analysis. I would follow all data-use, privacy, retention and publication conditions and would not redistribute raw audio.
 
