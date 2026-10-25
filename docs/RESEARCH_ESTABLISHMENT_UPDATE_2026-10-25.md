@@ -42,3 +42,18 @@ Source: [UCI Dataset 301](https://archive.ics.uci.edu/dataset/301/parkinson+spee
 6. Only promote an access candidate after written access/license terms, task-matched audio in both groups, usable participant IDs and labels, repeat-session handling, demographics/provenance and cohort independence are verified.
 
 No model was trained, no performance estimate was produced, and no clinical efficacy or novelty is claimed in this update.
+
+
+## Additional targeted check — 25 October 2026
+
+### Access status verified from the EWA-DB record
+
+The EWA-DB Zenodo record is marked **Restricted**. The stated workflow is to request access using its form, receive the End User License Agreement (EULA), return a scanned signed EULA, and then receive a download link. The listing's €0 license-price fields do not equal granted access or remove this EULA requirement. This makes EWA-DB the first access request to pursue, but not a currently available cohort. [Zenodo EWA-DB access page](https://zenodo.org/records/10952480).
+
+### Additional prior art from 2026
+
+A further close study was found: Hassanat et al. (published 29 April 2026) created an Arabic PD speech sample of 40 participants (17 PD, 23 controls) and tested on an independent Spanish cohort of 100. It reports feature-engineered/Whisper-based classification and cross-language evaluation. This further confirms that cross-language PD classification itself cannot be the claimed novelty. [PubMed / full text](https://pubmed.ncbi.nlm.nih.gov/42100562/).
+
+HeyJay! was published in *Scientific Data* on 3 June 2026. It describes 8,669 English utterances from atypical-speech participants including PD and ALS, with transcripts/intents and speech-quality ratings. Its ICPSR release is restricted and the abstract does not establish a ready-to-use PD-versus-healthy-control cohort, so it is not promoted as a primary screening cohort. It could later be relevant to a separate robustness/accessibility question if participant-level diagnosis and permissible access are confirmed. [Scientific Data article](https://www.nature.com/articles/s41597-026-07497-5) · [ICPSR data record](https://www.icpsr.umich.edu/web/ICPSR/studies/39448).
+
+These findings strengthen the decision: the candidate contribution is the prespecified participant-level comparison of error-monitoring strategies, not cross-language detection or an uncertainty-aware score by itself. The formal protocol remains unlocked pending access and exact-claim search/duplicate screening.
