@@ -1,0 +1,99 @@
+name: Verify public Parkinson voice archives
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/verify_voice_dataset_archives.py"
+      - ".github/workflows/verify-voice-datasets.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-archives:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out research code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Download, hash and inventory public archives
+        id: audit
+        continue-on-error: true
+        run: |
+          python scripts/verify_voice_dataset_archives.py --dataset all
+
+      - name: Build a sanitized shareable summary
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          source = Path("data/raw/_audit/aggregate_summary_PRIVATE.json")
+          destination = Path("audit-results")
+          destination.mkdir(exist_ok=True)
+          output = {
+              "note": "Sanitized archive-integrity report. No audio, participant manifest, or file paths are included.",
+              "datasets": {}
+          }
+          if source.exists():
+              raw = json.loads(source.read_text(encoding="utf-8"))
+              output["audit_time_utc"] = raw.get("audit_time_utc")
+              for name, item in raw.get("datasets", {}).items():
+                  if item.get("status") == "FAILED":
+                      output["datasets"][name] = {
+                          "status": "FAILED",
+                          "error": item.get("error"),
+                          "url": item.get("url"),
+                      }
+                      continue
+                  duplicates = item.get("duplicate_audio_hash_groups", [])
+                  output["datasets"][name] = {
+                      "status": item.get("status"),
+                      "archive_bytes": item.get("archive_bytes"),
+                      "archive_sha256_local": item.get("archive_sha256_local"),
+                      "host_sha256_expected": item.get("host_sha256_expected"),
+                      "host_hash_match": item.get("host_hash_match"),
+                      "file_count_all_types": item.get("file_count_all_types"),
+                      "file_count_by_extension": item.get("file_count_by_extension"),
+                      "audio_file_count": item.get("audio_file_count"),
+                      "wav_file_count": item.get("wav_file_count"),
+                      "wav_headers_readable": item.get("wav_headers_readable"),
+                      "sample_rate_count_hz": item.get("sample_rate_count_hz"),
+                      "channel_count": item.get("channel_count"),
+                      "wav_duration_min_seconds": item.get("wav_duration_min_seconds"),
+                      "wav_duration_max_seconds": item.get("wav_duration_max_seconds"),
+                      "duplicate_audio_hash_group_count": len(duplicates),
+                      "nested_zip_extractions": [
+                          {k: v for k, v in result.items() if k != "archive_relative_path"}
+                          for result in item.get("nested_zip_extractions", [])
+                      ],
+                  }
+          else:
+              output["error"] = "The local audit script did not produce its summary file."
+          (destination / "sanitized_archive_audit.json").write_text(
+              json.dumps(output, indent=2), encoding="utf-8"
+          )
+          print(json.dumps(output, indent=2))
+          PY
+
+      - name: Upload sanitized audit result only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sanitized-voice-dataset-audit
+          path: audit-results/sanitized_archive_audit.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Fail if either archive failed verification
+        if: steps.audit.outcome != 'success'
+        run: exit 1
