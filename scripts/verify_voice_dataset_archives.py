@@ -313,22 +313,45 @@ def audit_spreadsheets(root: Path) -> list[dict[str, Any]]:
                         "nonempty_rows": 0,
                     })
                     continue
+                header_idx = 0
+                header_score = -1
+                for candidate_idx, candidate_row in enumerate(nonempty_rows[:10]):
+                    candidate_headers = [
+                        str(value).strip().lower() if value is not None else ""
+                        for value in candidate_row
+                    ]
+                    score = sum(
+                        any(token in value for token in (
+                            "id", "sample", "subject", "participant", "filename",
+                            "label", "diagnosis", "disease", "condition", "class",
+                            "group", "status", "age", "sex", "gender",
+                        ))
+                        for value in candidate_headers
+                    )
+                    if score > header_score:
+                        header_score = score
+                        header_idx = candidate_idx
                 headers = [
                     str(value).strip() if value is not None else ""
-                    for value in nonempty_rows[0]
+                    for value in nonempty_rows[header_idx]
                 ]
                 normalized = [value.lower() for value in headers]
                 id_index = next(
                     (i for i, value in enumerate(normalized)
-                     if ("sample" in value and "id" in value) or value in {"id", "sample_id", "sample id"}),
+                     if any(token in value for token in (
+                         "sample id", "sample_id", "participant", "subject", "filename",
+                         "patient id", "recording id", "file id"
+                     )) or value.strip() in {"id", "sample", "subject_id", "subject id"}),
                     None,
                 )
                 label_index = next(
                     (i for i, value in enumerate(normalized)
-                     if any(token in value for token in ("label", "diagnosis", "group", "status"))),
+                     if any(token in value for token in (
+                         "label", "diagnosis", "disease", "condition", "class", "group", "status"
+                     ))),
                     None,
                 )
-                data_rows = nonempty_rows[1:]
+                data_rows = nonempty_rows[header_idx + 1:]
                 ids = [
                     str(row[id_index]).strip().lower()
                     for row in data_rows
