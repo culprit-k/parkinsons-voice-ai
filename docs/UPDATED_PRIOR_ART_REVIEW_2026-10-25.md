@@ -154,3 +154,14 @@ Two additional sources further restrict the novelty space:
 - Hossain et al. (published 22 October 2026), *Cross-corpus consensus feature selection for language-invariant Parkinson's disease detection*. [Scientific Reports](https://www.nature.com/articles/s41598-026-76171-y). Consequence: another current study focuses on cross-corpus feature consistency, language-invariant modeling and external evaluation. We must not claim novelty for those broad objectives.
 
 These papers do not, from the abstracts reviewed, establish that the exact confidence-only versus confidence-plus-source-distance participant-error ranking comparison has already been done. That is a limited absence-of-match observation, not evidence that no match exists. The candidate remains **plausible but not cleared** until a database-grade search and citation-chain inspection are completed.
+
+
+## Additional close method-family overlap — feature-distance OOD for audio
+
+Bukhsh & Saeed's *On Out-of-Distribution Detection for Audio with Deep Nearest Neighbors* (ICASSP 2023) already uses feature-space k-nearest-neighbour distance to identify OOD audio/speech inputs across several recognition tasks. [IEEE conference resource page](https://resourcecenter.ieee.org/conferences/icassp-2023/spsicassp23vid0558) · [author research page](https://zaharah.github.io/ood_audio/). Accordingly, a source-reference acoustic or embedding-distance score is not novel by itself.
+
+The Sony Research publication page for *Uncertainty Quantification and Calibration for Audio-driven Disease Diagnosis* (2024) describes an audio-driven disease framework that combines uncertainty estimation with independent kernel distance learning in latent space. [Source](https://www.sony.com/en/SonyInfo/technology/publications/uncertainty-quantification-and-calibration-for-audio-driven-disease-diagnosis/). This is not Parkinson-specific and its described evaluation is respiratory disease, but it further narrows novelty for the general distance-plus-uncertainty method family.
+
+A 2026 medical-imaging preprint compares multiple confidence-scoring functions and aggregation strategies for failure detection under distribution shift. [Steinmetz et al., medRxiv](https://www.medrxiv.org/content/10.64898/2026.05.04.26350496v1.full). This provides adjacent prior art for comparative failure-detection benchmarking, even though it is not a voice dataset.
+
+**Updated decision:** retain only a potential PD-voice-specific evaluation of whether a fixed feature-distance score adds information beyond a fixed confidence baseline for participant-level external errors. This is an empirical comparison, not a new OOD method. Novelty remains uncleared pending the database-grade review and citation chaining.
