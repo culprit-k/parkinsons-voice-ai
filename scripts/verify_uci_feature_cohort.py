@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import io
 import json
+import re
 import shutil
 import subprocess
 import tempfile
@@ -17,6 +18,7 @@ import urllib.request
 import zipfile
 from pathlib import Path
 from typing import Any
+from urllib.parse import urljoin
 
 import pandas as pd
 from ucimlrepo import fetch_ucirepo
@@ -121,12 +123,10 @@ def read_table_bytes(payload: bytes, filename: str) -> pd.DataFrame:
 
 
 def load_official_uci_table(dataset_id: int) -> tuple[pd.DataFrame, str]:
-    """Use the public UCI API data URL if ucimlrepo cannot import this legacy release."""
+    """Download a public UCI table through its API file URL or official page link."""
     api_url = f"https://archive.ics.uci.edu/api/dataset?id={dataset_id}"
-    request = urllib.request.Request(
-        api_url,
-        headers={"User-Agent": "PDVoiceDatasetAudit/1.0 (research reproducibility)"}
-    )
+    headers = {"User-Agent": "PDVoiceDatasetAudit/1.0 (research reproducibility)"}
+    request = urllib.request.Request(api_url, headers=headers)
     with urllib.request.urlopen(request, timeout=60) as response:
         envelope = json.load(response)
     data = envelope.get("data", envelope)
@@ -139,19 +139,45 @@ def load_official_uci_table(dataset_id: int) -> tuple[pd.DataFrame, str]:
                 for f in files if isinstance(f, dict)
             ]
             data_url = next((link for link in links if link), None)
+
+    # Some legacy UCI records have a metadata API entry but no import URL. In that
+    # case parse only downloadable file links from the official dataset page.
+    if not data_url:
+        page_url = DATASETS[dataset_id]["source"]
+        request = urllib.request.Request(page_url, headers=headers)
+        with urllib.request.urlopen(request, timeout=60) as response:
+            html = response.read().decode("utf-8", errors="replace")
+        hrefs = re.findall(r"""href\s*=\s*["']([^"']+)["']""", html, flags=re.I)
+        candidates = [
+            urljoin(page_url, href)
+            for href in hrefs
+            if f"/static/public/{dataset_id}/" in href.lower()
+            or re.search(r"\.(?:csv|tsv|zip|rar|arff|data|txt)(?:\?|$)", href, flags=re.I)
+        ]
+        candidates = list(dict.fromkeys(candidates))
+        if candidates:
+            # Prefer tabular text/CSV over archives; the loader handles ZIP/RAR too.
+            candidates.sort(
+                key=lambda url: (
+                    0 if re.search(r"\.(?:csv|tsv|data|txt)(?:\?|$)", url, flags=re.I) else 1,
+                    len(url),
+                )
+            )
+            data_url = candidates[0]
+
     if not data_url:
         raise ValueError(
-            f"Official UCI API has no import URL for dataset {dataset_id}; "
-            f"metadata keys={sorted(data.keys())}"
+            f"Official UCI API/page did not expose a downloadable table for dataset {dataset_id}; "
+            f"metadata keys={sorted(data.keys())}; data_url={data.get('data_url')!r}"
         )
-    request = urllib.request.Request(
-        data_url,
-        headers={"User-Agent": "PDVoiceDatasetAudit/1.0 (research reproducibility)"}
-    )
+    request = urllib.request.Request(str(data_url), headers=headers)
     with urllib.request.urlopen(request, timeout=90) as response:
         payload = response.read()
         reported_name = response.headers.get("Content-Disposition", "")
-        filename = reported_name.split("filename=", 1)[-1].strip('"') if "filename=" in reported_name else Path(data_url).name
+        filename = (
+            reported_name.split("filename=", 1)[-1].strip('"')
+            if "filename=" in reported_name else Path(str(data_url).split("?", 1)[0]).name
+        )
     frame = read_table_bytes(payload, filename)
     return frame, str(data_url)
 
