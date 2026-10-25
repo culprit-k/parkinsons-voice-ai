@@ -231,3 +231,19 @@ NeuroVoz is a potentially valuable Spanish cohort with both sustained-vowel and 
 A new source search identified EWA-DB (ELRA-S0489) as the prioritized third-cohort request: the catalogue describes 1,649 speakers, audio for 1,003 speakers with written consent, and sustained-vowel phonation among the tasks. This is **not access confirmation**. mPower is another task-matched option via Synapse, but the literature describes account validation, a data-use statement and terms of use, and potential self-reported PD labels. NeuroVoz remains restricted at Zenodo. See [the third-cohort/access plan](THIRD_COHORT_AND_ACCESS_REQUEST_PLAN_2026-10-25.md).
 
 The target study must stay focused on sustained-vowel acoustic-domain robustness if it uses IPVS, UAMS and a vowel cohort. Do not claim lexical or spontaneous-language generalization from sustained vowels. No cohort is approved for final analysis until access, participant IDs, diagnostic provenance, repeats, task mapping and cross-cohort independence are documented. No model has been trained; no performance results exist.
+
+## UCI Dataset 489 audit — successful workflow run
+
+A sanitized automated audit completed successfully on 25 October 2026: [GitHub Actions run 40176480093](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40176480093). The official UCI record is [Parkinson Dataset with replicated acoustic features](https://archive.ics.uci.edu/dataset/489/parkinson+dataset+with+replicated+acoustic+features), DOI 10.24432/C5701F, listed under CC BY 4.0.
+
+Aggregate results:
+- 240 rows/recordings from **80 participant IDs**, exactly 3 repeated recordings per participant.
+- Participant-level labels are balanced at 40 / 40; row-level labels are balanced at 120 / 120.
+- No participant changed label across the three repeated rows.
+- 44 engineered feature columns were detected by the audit parser; no missing cells were detected in those acoustic-feature columns.
+- A sex/gender-coded field is present; age is not present.
+- The release contains **no raw WAV audio**. It is a feature-only cohort.
+
+**Interpretation:** this adds a fourth audited public data resource, but it does **not** establish a third compatible audio cohort for the proposed confidence-versus-distance audio benchmark. Its repeated engineered features may support a separate participant-grouped feature-only replication only if original feature extraction and task provenance are sufficiently documented and compatible. The public labels' clinical semantics still need confirmation from the official variable description/source paper before interpreting coded values as control/PD. Do not pool this feature-only release with WAV audio as if they were the same input modality.
+
+No model was trained and no predictive performance was calculated.
