@@ -1,7 +1,7 @@
 # Dataset feasibility and independence gate
 
 **Audit date:** 2026-10-25  
-**Status:** preliminary evidence audit; no local data download or identity check completed in this update.
+**Status:** two public archives downloaded and inspected on GitHub Actions; partial file-integrity checks passed, but the overall dataset gate remains NOT PASSED.
 
 ## Decision rule
 
@@ -92,3 +92,12 @@ The selected question is about whether source-reference acoustic distance adds b
 ## Current gate status — 2026-10-25
 
 No raw archives have been downloaded, hashed, unpacked or locally audited in this project. ItalianPVS public descriptions and a Hugging Face mirror show count discrepancies (commonly cited 831 recordings versus 839 uploaded files listed by the mirror; the mirror also contains a large ZIP). The UAMS Figshare metadata describe linked sample IDs and prolonged-/a/ WAV files, but actual IDs and files have not been checked. mPower requires access and diagnostic-label review. The dataset gate is **not passed**. See [PRIOR_ART_AND_DATASET_GATE_2026-10-25.md](PRIOR_ART_AND_DATASET_GATE_2026-10-25.md) for the required manifest checklist.
+
+
+## Raw archive verification update — 25 October 2026
+
+The network-enabled audit has now downloaded and inspected the IPVS and UAMS source files. See the final audit addendum and successful GitHub Actions run 40170280356.
+
+- **IPVS:** local SHA-256 matches the pinned mirror. Extracted inventory is 831 WAV + 6 XLSX + 1 TXT (838 files); 831/831 WAV headers readable, all mono, 671 at 16 kHz and 160 at 44.1 kHz. Path-derived labels cover 437 PD, 349 elderly controls and 45 young controls. One exact duplicate-audio hash group contains two WAV files. The participant-level mapping is not resolved. A spreadsheet contains direct name/surname fields; no identifying values have been copied to the repository, and the dataset must not be used for linked demographic analysis until governance/ethics and privacy-preserving mapping are resolved.
+- **UAMS:** individual files downloaded through the public Figshare API; all available per-file MD5 checks passed. Inventory is 81 mono WAV files at 8 kHz plus one workbook. All WAV headers are readable; duration range is 1.51612–7.208 s. The Parselmouth sheet has 81 unique Sample IDs and labels 41 HC / 40 PwPD; all 81 IDs match audio filenames. Repeated visits/participant independence and diagnosis provenance still need confirmation.
+- **Overall gate:** IPVS archive integrity and audio QC PASS; UAMS file integrity, audio QC and sample-ID-to-filename linkage PASS. IPVS participant/session mapping remains OPEN, and the exact duplicate pair needs adjudication. Three independent, compatible cohorts are not established. Protocol remains NOT LOCKED; modelling remains NOT STARTED.
