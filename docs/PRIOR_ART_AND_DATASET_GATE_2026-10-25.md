@@ -113,3 +113,16 @@ The earlier status above that raw archives had not been downloaded is superseded
 - UAMS files were downloaded individually through the public Figshare API. Available per-file MD5 checks passed. There are 81 readable mono WAVs at 8 kHz and one workbook. The Parselmouth sheet has 81 unique Sample IDs, labels 41 HC / 40 PwPD, and all 81 IDs match audio filenames.
 - The raw-file gate is now partially passed for IPVS and UAMS. Overall feasibility is still NOT PASSED because IPVS unique-participant/label mapping and duplicate adjudication remain open, UAMS diagnostic provenance/participant independence need confirmation, and a third independent compatible cohort is not established.
 - No model was trained; no predictive results exist. Protocol remains NOT LOCKED.
+
+
+## Addendum: three archive audits and final compatibility decision
+
+The raw archives for IPVS, UAMS and MDVR-KCL were downloaded and inspected through the successful [GitHub Actions run](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40170614840).
+
+- IPVS: checksum matched; 831 readable mono WAVs (671 at 16 kHz, 160 at 44.1 kHz), plus 6 XLSX and 1 TXT. Path categories contain 437 PD, 349 elderly-control and 45 young-control recordings. One exact duplicate pair occurs within the same parent directory under a PD-labelled path. Participant-level mapping remains unresolved. A workbook contains name/surname fields, so privacy/governance must be addressed before demographic linkage.
+- UAMS: per-file MD5 checks passed; 81 readable mono WAVs at 8 kHz. Its Parselmouth sheet contains 81 unique Sample IDs, 41 HC / 40 PwPD, and all 81 IDs match audio filenames. No exact duplicate hashes.
+- MDVR-KCL: Zenodo MD5 matched; 73 readable mono WAVs at 44.1 kHz, 73.04–220.64 seconds, no exact duplicate hashes. The raw participant/label manifest has not been verified. The literature describes read-text and spontaneous-dialogue tasks.
+
+Three corpora have now passed basic file-level download and audio-header checks, but this is not three compatible cohorts. UAMS is sustained /a/; MDVR-KCL is connected speech; IPVS contains multiple tasks but participant-level mapping is not cleared. NeuroVoz, a potential Spanish connected-speech cohort, is marked restricted at Zenodo and is not available for this audit without access approval. Overall data gate remains NOT PASSED; protocol remains NOT LOCKED.
+
+Novelty note: recent 2026 work on limited-target-data calibration reports cross-dataset transfer using a dataset set that includes IPVS, MDVR-KCL and a US sustained-"ah" cohort, further narrowing any claim that cross-dataset calibration/transfer itself is new. Our candidate remains, at best, a narrow comparative evaluation of error ranking by confidence versus confidence plus acoustic distance, pending a more complete citation-chain search.
