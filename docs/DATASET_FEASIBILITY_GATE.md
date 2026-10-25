@@ -52,7 +52,7 @@ The current latest Zenodo version (v3, record [10.5281/zenodo.13647600](https://
 
 **Data gate is NOT passed.** IPVS, UAMS and MDVR-KCL now have successful file-level archive/audio checks, but none is fully approved for the planned confirmatory benchmark: IPVS participant/session/label mapping and privacy are unresolved, UAMS diagnosis provenance/independence are unresolved, and MDVR-KCL participant-label mapping is unresolved and the task is not sustained vowel. A third independent task-compatible cohort has not been approved.
 
-Proceed with verification of these two plus UNLaM/PC-GITA/NeuroVoz/EWA-DB access. If a third cohort cannot be obtained legally and reliably, narrow the study to a two-corpus pilot and avoid broad multilingual claims, or pivot to a review/reproducibility paper. Do not begin confirmatory model training until the cohort manifest and protocol are versioned.
+Next priority is to request EWA-DB access and, in parallel if useful, follow the mPower Synapse research-access process. NeuroVoz and PC-GITA are additional request candidates; UNLaM remains a version/manifest lead. Do not treat any as available until permission, raw task-compatible PD/control audio, stable participant IDs and diagnosis provenance are verified. If a third cohort cannot be obtained legally and reliably, narrow the project to a two-corpus feasibility pilot or pivot to a reproducibility/systematic-review paper. Do not begin confirmatory model training until the cohort manifest and protocol are versioned.
 
 
 ## Additional candidate: UAMS telephone-recorded voice samples
@@ -62,7 +62,7 @@ A second candidate with an explicit public raw-audio record was identified durin
 - Description says the demographic file links sample IDs to two .wav archives (PD_AH.zip and HC_AH.zip), containing prolonged /a/ recordings made by telephone; the record advertises a 4.18 MB download and CC BY 4.0.
 - A related paper reports 81 voice records (40 PD and 41 healthy controls). The actual manifest must still be checked to confirm one sample per unique person, no repeat recordings, label provenance, and exact demographic denominators.
 
-This is an attractive task-matched external cohort for ItalianPVS, but the two-cohort design alone is a limited pilot, not sufficient evidence for broad language generalization. The public existence of the record does not mean the files have been downloaded or validated by this project.
+This is an attractive task-matched candidate for ItalianPVS. The source files have now been downloaded via the public Figshare API: 81/81 WAV headers passed, source MD5 checks passed, and 81/81 Sample IDs matched audio filename stems. The two-cohort design alone remains a limited pilot, not sufficient evidence for broad language generalization. Clinical label provenance and independent-participant status still need confirmation.
 
 ## Revised current access decision
 
@@ -91,12 +91,12 @@ The selected question is about whether source-reference acoustic distance adds b
 
 ## Current gate status — 2026-10-25
 
-Raw archives have been downloaded, hashed/checked against source metadata, unpacked and audited in the GitHub Actions runner; see runs [40170280356](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40170280356) and [40170614840](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40170614840). The extracted IPVS inventory is 831 WAV + 6 XLSX + 1 TXT (838 files), while the mirror listing has a separate 839-item discrepancy that is not reconciled. UAMS ID-to-filename linkage passed. mPower still requires research access and label review. The overall dataset gate remains **NOT PASSED** because participant/session mapping, provenance and a third compatible independent cohort remain open.
+Raw archives have been downloaded, checked against source metadata, unpacked and audited in the GitHub Actions runner; see runs [40170280356](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40170280356) and [40170614840](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40170614840). IPVS contains 831 WAV + 6 XLSX + 1 TXT = 838 extracted files; the mirror lists 839 items including the ZIP itself. This explains the one-item difference in the listing versus extracted archive inventory. UAMS ID-to-filename linkage passed. mPower still requires research access and label review. The overall dataset gate remains **NOT PASSED** because participant/session mapping, provenance and a third compatible independent cohort remain open.
 
 
 ## Raw archive verification update — 25 October 2026
 
-The network-enabled audit has now downloaded and inspected the IPVS and UAMS source files. See the final audit addendum and successful GitHub Actions run 40170280356.
+The network-enabled audit first downloaded and inspected IPVS and UAMS (run 40170280356), then added MDVR-KCL and stricter ID-to-filename checks (runs 40170614840 and 40174963060). See the final audit addendum for exact per-cohort findings.
 
 - **IPVS:** local SHA-256 matches the pinned mirror. Extracted inventory is 831 WAV + 6 XLSX + 1 TXT (838 files); 831/831 WAV headers readable, all mono, 671 at 16 kHz and 160 at 44.1 kHz. Path-derived labels cover 437 PD, 349 elderly controls and 45 young controls. One exact duplicate-audio hash group contains two WAV files. The participant-level mapping is not resolved. A spreadsheet contains direct name/surname fields; no identifying values have been copied to the repository, and the dataset must not be used for linked demographic analysis until governance/ethics and privacy-preserving mapping are resolved.
 - **UAMS:** individual files downloaded through the public Figshare API; all available per-file MD5 checks passed. Inventory is 81 mono WAV files at 8 kHz plus one workbook. All WAV headers are readable; duration range is 1.51612–7.208 s. The Parselmouth sheet has 81 unique Sample IDs and labels 41 HC / 40 PwPD; all 81 IDs match audio filenames. Repeated visits/participant independence and diagnosis provenance still need confirmation.
