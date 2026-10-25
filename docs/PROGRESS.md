@@ -167,3 +167,12 @@ Do not assume these resources are mutually compatible. Do not claim cross-langua
 - The analysed 81-record UAMS subset (40 PD / 41 HC) was obtained after excluding recordings shorter than 1.5 seconds after trimming; its mean ages were 66.6 ± 9.0 years for PD and 47.9 ± 14.5 for HC. This is a major potential age shortcut, so any future model comparison must include an age-only baseline and appropriate sensitivity analysis.
 - The August 6, 2026 correction states that a CNN-pipeline implementation issue in the 2023 UAMS paper required revising the reported CNN mean AUC from 0.97/0.96 to 0.83/0.83. We must cite the correction and avoid repeating superseded figures as valid results.
 - Still open: document one independent participant per released Sample ID/no repeat visits; determine whether a sensible age-restricted analysis leaves a sufficiently powered sample. This is a data/design limitation, not a reason to hide the cohort.
+
+
+## 2026-10-25 — UCI Dataset 489 feature-cohort audit
+
+- Added an aggregate-only audit for official UCI Dataset 489 after the repository's ucimlrepo import path reported that the legacy record was not available for import.
+- The direct-download fallback via the official UCI dataset page succeeded. Workflow: [40176480093](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40176480093).
+- Sanitized report: 240 recording rows, 80 participant IDs, exactly three repetitions per participant, balanced participant labels 40/40 and recording labels 120/120, no label inconsistency across repetitions, no missing acoustic-feature cells in the parser's selected feature columns, sex-coded field present and age absent.
+- Critical limitation: Dataset 489 provides engineered features, not raw voice recordings. It cannot count as a third raw-audio cohort or directly validate an audio-embedding/acoustic-domain-distance detector. Label semantics and extraction/task provenance still require review.
+- No raw audio, participant IDs, row-level records, model training or predictive performance metrics were included.
