@@ -1,0 +1,89 @@
+name: Verify UCI repeated sustained-vowel feature cohort
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/verify_uci_feature_cohort.py"
+      - ".github/workflows/verify-uci-feature-cohort.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-uci-features:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out research code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install UCI client and table-reader libraries
+        run: |
+          python -m pip install --disable-pip-version-check ucimlrepo pandas
+          sudo apt-get update -qq
+          sudo apt-get install -y 7zip || sudo apt-get install -y p7zip-full || true
+
+      - name: Fetch and inspect official UCI feature dataset
+        run: |
+          python scripts/verify_uci_feature_cohort.py --dataset-id 489 --output data/raw/_audit/uci_feature_cohort_PRIVATE.json
+
+      - name: Build sanitized shareable summary
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          source = Path("data/raw/_audit/uci_feature_cohort_PRIVATE.json")
+          output = Path("audit-results")
+          output.mkdir(exist_ok=True)
+          if not source.exists():
+              report = {
+                  "status": "FAILED",
+                  "note": "Feature audit did not produce an aggregate report.",
+                  "participant_ids_or_rows_emitted": False
+              }
+          else:
+              raw = json.loads(source.read_text(encoding="utf-8"))
+              keys = [
+                  "source", "doi", "uci_dataset_id", "dataset_description", "license",
+                  "raw_voice_audio_in_release", "data_access_method",
+                  "source_download_url_from_official_api", "status", "row_count_recordings",
+                  "feature_column_count", "participant_count",
+                  "recording_count_per_subject_min", "recording_count_per_subject_max",
+                  "recording_count_per_subject_all_equal_expected",
+                  "expected_recordings_per_subject", "recording_indicator_detected",
+                  "recording_indicator_unique_values_min_per_subject",
+                  "label_column_detected", "recording_level_label_counts",
+                  "participant_level_label_counts",
+                  "subjects_with_more_than_one_label_across_repetitions",
+                  "age_variable_present", "sex_variable_present",
+                  "sex_recording_level_counts", "acoustic_features_missing_value_cells",
+                  "feature_schema_note", "limitations", "participant_ids_or_rows_emitted"
+              ]
+              report = {key: raw.get(key) for key in keys}
+              report["note"] = (
+                  "Sanitized UCI feature-cohort audit only; no raw voice audio, subject IDs "
+                  "or row-level records are included."
+              )
+          (output / "uci_feature_cohort_audit.json").write_text(
+              json.dumps(report, indent=2), encoding="utf-8"
+          )
+          print(json.dumps(report, indent=2))
+          PY
+
+      - name: Upload sanitized summary only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sanitized-uci-feature-cohort-audit
+          path: audit-results/uci_feature_cohort_audit.json
+          if-no-files-found: error
+          retention-days: 30
