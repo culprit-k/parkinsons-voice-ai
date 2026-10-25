@@ -242,3 +242,10 @@ Why narrow it:
 Primary dataset task is sustained /a/ because two openly posted raw-audio sources (ItalianPVS and UAMS Figshare) explicitly include comparable prolonged/sustained vowels. This is a pilot setup only: a third independent cohort is not yet verified, and cohort counts/IDs must be audited locally before confirmatory experiments.
 
 See the final research decision memo for the full design, prior-art verdict, dataset matrix and go/no-go gates.
+
+
+## Selected narrowing — 25 October 2026
+
+The one selected primary question is whether **source-reference acoustic-domain distance adds useful information beyond predictive confidence for detecting participant-level errors** on independent held-out PD voice datasets.
+
+The 2026 PARK multimodal PD-screening paper already relates model uncertainty to performance decline, so “uncertainty predicts mistakes” alone is too weak. Our candidate difference is the incremental voice-specific acoustic-distance comparison under held-out voice-corpus evaluation. It is a comparative application study, not a new OOD method. See [SELECTED_RESEARCH_QUESTION.md](SELECTED_RESEARCH_QUESTION.md) for the draft analysis plan and gates.

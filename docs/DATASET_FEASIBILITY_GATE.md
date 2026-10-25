@@ -82,3 +82,8 @@ UAMS and ItalianPVS both contain sustained /a/ recordings, but their comparison 
 
 ### Current data status
 No raw recordings or demographic files have been downloaded in this project. UAMS and ItalianPVS are candidate public resources, not yet integrity-validated datasets; mPower is a restricted-access candidate, UNLaM is a repository lead with unresolved cohort/version counts, and NeuroVoz v3 is restricted. The data gate remains incomplete.
+
+
+## Selected study requirement
+
+The selected question is about whether source-reference acoustic distance adds beyond predictive confidence for detecting participant-level external errors. That requires raw audio or harmonized participant-level acoustic features from at least three independently sampled, legally accessible cohorts, with participant IDs and diagnosis labels validated. ItalianPVS and UAMS are only candidate sources; mPower needs access and label provenance checks. If only two datasets are cleared, the project must be labelled a pilot, not a confirmatory cross-corpus study.

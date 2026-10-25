@@ -80,3 +80,11 @@ Do not assume these resources are mutually compatible. Do not claim cross-langua
 - Updated mPower access details: sustained /a/ up to 10 seconds, Synapse research access, and potential dependence on self-reported professional diagnosis.
 - Corrected the intended interpretation: ItalianPVS/UAMS sustained-/a/ comparisons test cross-dataset/recording-domain robustness, not isolated language generalization.
 - No recordings downloaded, participant IDs/labels audited locally, or models trained. The data gate remains incomplete.
+
+
+## 2026-10-25 — Single research direction selected
+
+- Selected the most defensible current candidate: test whether source-reference acoustic-domain distance adds predictive value beyond classifier confidence for detecting participant-level errors on held-out PD voice datasets.
+- This narrower claim explicitly accounts for the 2026 PARK multimodal study, which already connects prediction uncertainty to lower performance, and for established cross-corpus/OOD literature.
+- The proposed contribution is an independent voice-only comparative validation of an existing signal, not a new general OOD algorithm. Novelty remains un-cleared pending systematic searching and citation chaining.
+- Data gate remains open: ItalianPVS and UAMS are raw-audio candidates; mPower is a possible third cohort only after research access and diagnosis-label review. No data have been downloaded, no model trained and no results generated.

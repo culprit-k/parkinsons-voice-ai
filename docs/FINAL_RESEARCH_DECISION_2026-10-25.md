@@ -129,3 +129,10 @@ mPower includes smartphone sustained /a/ recordings up to 10 seconds, but its ra
 The UAMS Figshare record provides linked demographics and telephone-recorded prolonged /a/ WAVs under CC BY 4.0, but our project has not downloaded the files or checked unique participants/repeats. The UNLaM Spanish data now have a repository lead through the 2026 voice-uncertainty article; the 119-vs-126 count discrepancy and exact versioned manifest still need resolution. The Italian Mendeley dataset cited by the same article may be the same ItalianPVS-derived cohort and must not be counted as independent without sample-ID/provenance verification.
 
 **Current verdict remains conditional GO for a feasibility pilot, HOLD for confirmatory training.** The most specific candidate gap is per-participant prediction of external classification error using label-free risk scores in PD voice screening; an exhaustive database and citation-chain audit is still required before any priority claim.
+
+
+## Selected final direction
+
+The current selected question is now **whether source-reference acoustic-domain distance adds predictive value beyond confidence for detecting participant-level errors on independent held-out PD voice datasets**. See [SELECTED_RESEARCH_QUESTION.md](SELECTED_RESEARCH_QUESTION.md) for the chosen title, comparator set, primary endpoint, data gate and full draft design.
+
+This is chosen as the best current balance of usefulness, feasible methods and a potentially independent contribution. It is not a novelty certification: the 2026 PARK multimodal study already links prediction uncertainty and worse performance, and full prior-art screening remains required.

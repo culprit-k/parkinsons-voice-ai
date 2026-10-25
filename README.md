@@ -75,3 +75,13 @@ The broad generic “label-free monitoring/abstention” idea is not a new metho
 ## Final design clarification
 
 The current sustained-/a/ pilot is a cross-dataset/recording-domain study, not an isolated language-generalization experiment. See the [final decision memo](docs/FINAL_RESEARCH_DECISION_2026-10-25.md), [dataset gate](docs/DATASET_FEASIBILITY_GATE.md) and [targeted search log](docs/TARGETED_SEARCH_LOG_2026-10-25.md).
+
+
+## Selected research direction
+
+**Question:** Does adding source-reference acoustic-domain distance to predictive confidence improve participant-level detection of wrong PD voice-screening predictions on independent held-out cohorts?
+
+This is a focused comparison of existing signals, not a claimed new general-purpose method. The 2026 PARK multimodal screening study already evaluates uncertainty–performance relationships, so our candidate must test the incremental value of voice-specific acoustic distance beyond confidence. Data and novelty gates remain open.
+
+- [Selected research question and draft protocol](docs/SELECTED_RESEARCH_QUESTION.md)
+- [Final research decision](docs/FINAL_RESEARCH_DECISION_2026-10-25.md)
