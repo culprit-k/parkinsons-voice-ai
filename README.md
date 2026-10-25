@@ -60,3 +60,13 @@ The targeted prior-art update found direct overlap with cross-corpus transfer, u
 
 
 See also the [targeted search log](docs/TARGETED_SEARCH_LOG_2026-10-25.md), which records the queries and source types actually checked to date.
+
+
+## Final research decision (2026-10-25)
+
+The broad generic “label-free monitoring/abstention” idea is not a new method. The current candidate is a narrower participant-level external-error benchmark for sustained-vowel PD voice screening. This remains a conditional research direction, not a cleared novelty claim; third-cohort access and participant-ID validation are still needed.
+
+- [Final research decision and proposed design](docs/FINAL_RESEARCH_DECISION_2026-10-25.md)
+- [Updated prior-art review](docs/UPDATED_PRIOR_ART_REVIEW_2026-10-25.md)
+- [Dataset feasibility gate](docs/DATASET_FEASIBILITY_GATE.md)
+- [Targeted search log](docs/TARGETED_SEARCH_LOG_2026-10-25.md)

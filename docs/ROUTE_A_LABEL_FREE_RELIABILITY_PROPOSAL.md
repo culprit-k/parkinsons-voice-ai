@@ -224,3 +224,21 @@ If the dataset gate fails, pivot to a transparent two-corpus pilot or a review/r
 The latest targeted pass also found Siniukov et al. (2025) on HuBERT-based multilingual adaptation, Ibarra et al. (2023) on corpus/language-independent screening and shortcut reduction, and Francesconi et al. (2026) on fairness-aware partial-label voice-domain adaptation. These make broad claims about cross-language robustness, domain adaptation, fairness-aware representations or shortcut mitigation even less defensible as standalone novelty.
 
 The updated decision is unchanged: test existing label-free monitors as an empirical comparative benchmark only if data feasibility is confirmed. The method comparison must include or justify excluding relevant existing approaches; the paper must remain honest if the result is a replication or domain-specific evaluation rather than a methodological invention.
+
+
+---
+
+## Version 0.3 — primary question narrowed after deeper prior-art and data audit
+
+The primary endpoint is now **participant-level error detection** under held-out dataset shift, not a combined test of participant-level deferral and batch-level performance monitoring.
+
+**Revised primary RQ:** In sustained-vowel Parkinson’s voice screening, do label-free confidence and acoustic/representation-distance scores identify incorrect predictions on a held-out data source better than confidence alone, and what error–coverage and subgroup-deferral trade-offs result?
+
+Why narrow it:
+- The general idea of label-free monitoring is established by SUDO and D3M; OOD risk control has been evaluated in medical classification, including PD-related smartphone activity data, though not specifically in PD voice-screening.
+- Three or more target corpora provide too few independent observations for a strong claim about a general batch-level monitoring law; overlapping bootstrap batches do not solve this.
+- A per-participant risk-score benchmark can be evaluated against held-out errors after the score is frozen, without allowing target labels into inference/tuning.
+
+Primary dataset task is sustained /a/ because two openly posted raw-audio sources (ItalianPVS and UAMS Figshare) explicitly include comparable prolonged/sustained vowels. This is a pilot setup only: a third independent cohort is not yet verified, and cohort counts/IDs must be audited locally before confirmatory experiments.
+
+See the final research decision memo for the full design, prior-art verdict, dataset matrix and go/no-go gates.

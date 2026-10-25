@@ -61,3 +61,13 @@ Do not assume these resources are mutually compatible. Do not claim cross-langua
 - Created docs/TARGETED_SEARCH_LOG_2026-10-25.md to distinguish searches actually run from the planned full systematic search. The current evidence retrieval was web-based and targeted; it is not represented as a completed database systematic review.
 - Verified that NeuroVoz counts depend on release: current v3 reports 112 participants (54 PD / 58 controls; 2,977 recordings), while v1.0.0 reports 108 (53 PD / 55 controls; 2,903 recordings). Both records mark files as restricted. Count/version and access must be logged in the dataset manifest.
 - No models trained. No audio downloaded. No target labels or performance metrics created.
+
+
+## 2026-10-25 — Final research-direction decision after deeper prior-art/data search
+
+- Added docs/FINAL_RESEARCH_DECISION_2026-10-25.md: conditional-go decision, revised primary question, concise protocol sketch, prior-art verdict, data matrix and stop/go gates.
+- Narrowed Route A v0.3 to per-participant error detection under held-out dataset shift. Batch-level monitoring (SUDO/D3M) is separate and secondary/exploratory only because there are few independent corpora.
+- Found OOD risk-control studies in general medical ML and Parkinson-related smartphone movement data (not voice), plus a 2026 label-free PD face/voice screening preprint. This strengthens the view that no generic label-free/OOD novelty claim is warranted.
+- Detailed a methodology limitation in the September 2026 LODO paper: it calls two aggregated results “subject-level” even though the methods say their unit for mPower/MDVR is recording, and it acknowledges segment-level validation and a single random seed. These are directly reported limitations, not proof that all external results are invalid.
+- Added UAMS Figshare sustained-/a/ telephone-recorded audio as a second public raw-audio candidate alongside ItalianPVS. The exact participant manifest remains unaudited. A third independent cohort is not yet verified; mPower access/label provenance and UNLaM raw data availability remain open checks.
+- Overall: **conditional GO** for a small task-matched feasibility pilot and completion of access/novelty gates; **HOLD** on confirmatory training and novelty claims until a third suitable cohort and participant IDs/labels are verified. No experiments or data downloads claimed.

@@ -53,3 +53,17 @@ The current latest Zenodo version (v3, record [10.5281/zenodo.13647600](https://
 **Data gate is NOT passed.** MDVR-KCL and ItalianPVS are the two most immediately plausible raw-audio candidates, but the project has not yet completed a local access and integrity check for either, and a third independent fully usable corpus is not yet established.
 
 Proceed with verification of these two plus UNLaM/PC-GITA/NeuroVoz/EWA-DB access. If a third cohort cannot be obtained legally and reliably, narrow the study to a two-corpus pilot and avoid broad multilingual claims, or pivot to a review/reproducibility paper. Do not begin confirmatory model training until the cohort manifest and protocol are versioned.
+
+
+## Additional candidate: UAMS telephone-recorded voice samples
+
+A second candidate with an explicit public raw-audio record was identified during the deeper search:
+- Figshare page: https://figshare.com/articles/dataset/Voice_Samples_for_Patients_with_Parkinson_s_Disease_and_Healthy_Controls/23849127
+- Description says the demographic file links sample IDs to two .wav archives (PD_AH.zip and HC_AH.zip), containing prolonged /a/ recordings made by telephone; the record advertises a 4.18 MB download and CC BY 4.0.
+- A related paper reports 81 voice records (40 PD and 41 healthy controls). The actual manifest must still be checked to confirm one sample per unique person, no repeat recordings, label provenance, and exact demographic denominators.
+
+This is an attractive task-matched external cohort for ItalianPVS, but the two-cohort design alone is a limited pilot, not sufficient evidence for broad language generalization. The public existence of the record does not mean the files have been downloaded or validated by this project.
+
+## Revised current access decision
+
+Two plausible public raw-audio cohorts are identifiable for a task-matched sustained-/a/ pilot: ItalianPVS and UAMS Figshare. A third task-compatible, independent cohort is **not yet approved**. mPower requires research access and a label-provenance audit; UNLaM has a report that describes a database and a 2026 paper claiming open data, but an exact versioned raw-audio download manifest has not been verified here; NeuroVoz v3 is restricted. See the final decision memo for the current decision and exact go/no-go criteria.

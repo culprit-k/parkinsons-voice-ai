@@ -61,3 +61,20 @@ This matrix currently covers selected high-overlap studies and supporting review
 ### Dataset version control note
 
 NeuroVoz latest Zenodo v3 (record [10.5281/zenodo.13647600](https://zenodo.org/records/13647600)) reports 112 participants, 54 PD / 58 controls and 2,977 recordings; older v1.0.0 (record [10.5281/zenodo.10777657](https://zenodo.org/records/10777657)) reports 108 participants, 53 PD / 55 controls and 2,903 recordings. Files on both records are marked **Restricted**. Use one exact permitted version, not mixed counts.
+
+
+## Final design decision: distinguish participant-level error ranking from batch monitoring
+
+| Topic | Evidence | Decision for our primary study |
+|---|---|---|
+| General medical OOD risk control | Weng et al. 2025 compare detectors on image, transcriptomic and Parkinson-related smartphone activity time series; performance varies by detector/modality. [PubMed](https://pubmed.ncbi.nlm.nih.gov/41127928/) | Adjacent prior art. Our potential contribution is restricted to voice modality and an explicitly participant-level external-error endpoint. |
+| Dataset-shift confidence scores in health ML | Park et al. NeurIPS 2021 includes PD-related movement/activity and OOD detection. [NeurIPS](https://proceedings.neurips.cc/paper_files/paper/2021/hash/17e23e50bedc63b4095e3d8204ce063b-Abstract.html) | General method pre-exists; no generic novelty claim. |
+| Label-free screen vs model monitoring | Su & Sun, arXiv:2608.08976, a label-free PD screen based on face and voice encoders. [arXiv](https://arxiv.org/abs/2608.08976) | Acknowledge the term, but distinguish a disease score that does not use PD labels during fitting from a risk score that predicts an already-trained classifier's errors on target data. |
+| Batch-level deployment monitoring | SUDO (2024) and D3M (NeurIPS 2025) | Not primary for this project: real independent target-domain count is small, and per-domain results should not be made statistically persuasive by creating overlapping bootstrap batches. |
+| Per-participant external error detection | General confidence and OOD detection exist, but the targeted search did not identify a direct PD-voice study with this exact prespecified endpoint. | **Candidate primary endpoint**, subject to complete prior-art search. Compare confidence-only with a small number of distance/uncertainty scores; target labels used only after scores are frozen. |
+| UAMS telephone recordings | 81 voice records (40 PD, 41 control per related article), prolonged /a/, public Figshare CC BY 4.0. | Candidate task-matched raw audio alongside ItalianPVS. Verify unique participant ID mapping before use. |
+| ItalianPVS | 65-participant full cohort (28 PD, 22 elderly controls, 15 young controls); 831 recordings in common descriptions; public CC BY 4.0. | Candidate task-matched raw audio. Use PD versus elderly controls as primary; analyze young controls separately. |
+
+---
+
+See the final research decision memo for the conditional-go decision and full protocol sketch.
