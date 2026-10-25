@@ -215,3 +215,10 @@ The Zenodo API download and inventory succeeded in [GitHub Actions run 401706148
 ### Duplicate-file adjudication refinement
 
 The IPVS duplicate-audio pair is in the same parent directory and both files fall under the PD-labelled path category. This suggests an exact duplicate within one folder, but it does not prove whether it is a duplicated file, a repeated session or a valid repeated take. The private manifest must be reviewed locally before deduplication. No file paths or participant names were published.
+
+
+### Final novelty boundary after dataset audit
+
+The candidate should not be framed as a novel general cross-dataset calibration method. A 2026 limited-target-data calibration paper reports cross-dataset PD-speech transfer using overlapping corpora including IPVS, MDVR-KCL and a US sustained-/ah cohort; the exact endpoint differs, but this is additional close prior art for transfer/calibration on the same data ecosystem. See [the 2026 study](https://nhsjs.com/2026/limited-target-data-calibration-improves-cross-dataset-transfer-for-parkinsons-disease-detection-from-speech/).
+
+NeuroVoz is a potentially valuable Spanish connected-speech cohort, but the current Zenodo record lists its files as restricted. We have not downloaded it and cannot count it as available without access approval. The cross-language connected-speech path therefore remains blocked on lawful access to a third cohort and verified participant-level mappings.
