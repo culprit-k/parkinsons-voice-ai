@@ -33,7 +33,7 @@ IPVS_URL = (
 IPVS_EXPECTED_SHA256 = (
     "3c4cd221345f7a81f0eeaceedf44dedbfd33b08ecd18ab5a3307edefcfbacfed"
 )
-UAMS_URL = "https://figshare.com/ndownloader/articles/23849127"
+UAMS_URL = "https://api.figshare.com/v2/articles/23849127"
 AUDIO_EXTENSIONS = {".wav", ".flac", ".m4a", ".mp3", ".ogg"}
 
 
@@ -260,6 +260,80 @@ def audit_one(name: str, url: str, expected_sha: str | None, output: Path) -> di
     return report
 
 
+def audit_figshare_article(name: str, metadata_url: str, output: Path) -> dict[str, Any]:
+    """Download public Figshare article files individually through its public API."""
+    request = urllib.request.Request(
+        metadata_url,
+        headers={"User-Agent": "PDVoiceDatasetAudit/1.0 (research reproducibility)"},
+    )
+    with urllib.request.urlopen(request, timeout=60) as response:
+        metadata = json.load(response)
+
+    files = metadata.get("files", [])
+    if not files:
+        raise ValueError("Figshare API returned no public files for the article")
+
+    base = output / name
+    download_dir = base / "downloads"
+    extraction_dir = base / "extracted"
+    download_dir.mkdir(parents=True, exist_ok=True)
+    extraction_dir.mkdir(parents=True, exist_ok=True)
+    file_checks: list[dict[str, Any]] = []
+
+    for item in files:
+        filename = Path(item.get("name", f"figshare_file_{item.get('id')}")).name
+        destination = download_dir / filename
+        info = download(item["download_url"], destination)
+        md5 = hashlib.md5()
+        with destination.open("rb") as stream:
+            for block in iter(lambda: stream.read(1024 * 1024), b""):
+                md5.update(block)
+        local_md5 = md5.hexdigest()
+        expected_md5 = item.get("computed_md5") or item.get("supplied_md5")
+        md5_match = local_md5.lower() == expected_md5.lower() if expected_md5 else None
+        if md5_match is False:
+            raise ValueError(
+                f"Figshare MD5 mismatch for {filename}: expected {expected_md5}, got {local_md5}"
+            )
+        file_checks.append({
+            "filename_private": filename,
+            "bytes_local": destination.stat().st_size,
+            "sha256_local": info["sha256_local"],
+            "md5_local": local_md5,
+            "md5_expected": expected_md5,
+            "md5_match": md5_match,
+            "figshare_file_id": item.get("id"),
+        })
+        if zipfile.is_zipfile(destination):
+            safe_extract(destination, extraction_dir / destination.stem)
+        else:
+            shutil.copy2(destination, extraction_dir / filename)
+
+    nested = unpack_nested_zips(extraction_dir)
+    report = inventory(
+        extraction_dir, name, base / "private_manifests" / "placeholder.csv"
+    )
+    report.update({
+        "figshare_article_id": metadata.get("id"),
+        "figshare_title": metadata.get("title"),
+        "figshare_license": metadata.get("license"),
+        "figshare_version": metadata.get("version"),
+        "figshare_source_file_count": len(files),
+        "figshare_source_file_checks": file_checks,
+        "archive_bytes": sum(item["bytes_local"] for item in file_checks),
+        "archive_sha256_local": None,
+        "host_sha256_expected": None,
+        "host_hash_match": None,
+        "nested_zip_extractions": nested,
+        "status": "archive_downloaded_and_inventory_completed",
+        "warning": (
+            "Audio files were inventoried, but workbook-to-audio participant joins and "
+            "diagnostic provenance require separate inspection."
+        ),
+    })
+    return report
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--dataset", choices=("ipvs", "uams", "all"), default="all")
@@ -280,7 +354,10 @@ def main() -> int:
     for name, url, expected in targets:
         print(f"[{name}] starting download/inventory", flush=True)
         try:
-            summary["datasets"][name] = audit_one(name, url, expected, output)
+            if name == "uams":
+                summary["datasets"][name] = audit_figshare_article(name, url, output)
+            else:
+                summary["datasets"][name] = audit_one(name, url, expected, output)
             print(f"[{name}] inventory complete", flush=True)
         except Exception as exc:
             summary["datasets"][name] = {
