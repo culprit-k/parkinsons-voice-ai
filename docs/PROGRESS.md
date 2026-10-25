@@ -159,3 +159,11 @@ Do not assume these resources are mutually compatible. Do not claim cross-langua
 - The candidate question remains only a prespecified empirical comparison on independent PD-voice cohorts. A full database/citation-chain review is still required before novelty clearance; no new general OOD detector is justified.
 - The sanitized final workflow run [40175159872](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40175159872) succeeded. The public report includes aggregate match-quality fields and no sample ID values/private paths.
 - [Issue #2](https://github.com/culprit-k/parkinsons-voice-ai/issues/2) tracks the remaining dataset, governance, access and protocol gates. No emails were sent and no external access approval was obtained.
+
+## 2026-10-25 — UAMS source-provenance review and correction check
+
+- Read the 2025 peer-reviewed study that uses the public UAMS telephone-vowel archive and the August 2026 author correction to its 2023 precursor study.
+- Diagnosis-source asymmetry is now documented rather than left wholly unresolved: the UAMS PD participants were professionally diagnosed by a movement-disorders neurologist; healthy controls were not neurologically examined and self-reported relevant voice/neurological/psychiatric conditions.
+- The analysed 81-record UAMS subset (40 PD / 41 HC) was obtained after excluding recordings shorter than 1.5 seconds after trimming; its mean ages were 66.6 ± 9.0 years for PD and 47.9 ± 14.5 for HC. This is a major potential age shortcut, so any future model comparison must include an age-only baseline and appropriate sensitivity analysis.
+- The August 6, 2026 correction states that a CNN-pipeline implementation issue in the 2023 UAMS paper required revising the reported CNN mean AUC from 0.97/0.96 to 0.83/0.83. We must cite the correction and avoid repeating superseded figures as valid results.
+- Still open: document one independent participant per released Sample ID/no repeat visits; determine whether a sensible age-restricted analysis leaves a sufficiently powered sample. This is a data/design limitation, not a reason to hide the cohort.
