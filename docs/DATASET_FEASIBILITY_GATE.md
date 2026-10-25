@@ -87,3 +87,8 @@ No raw recordings or demographic files have been downloaded in this project. UAM
 ## Selected study requirement
 
 The selected question is about whether source-reference acoustic distance adds beyond predictive confidence for detecting participant-level external errors. That requires raw audio or harmonized participant-level acoustic features from at least three independently sampled, legally accessible cohorts, with participant IDs and diagnosis labels validated. ItalianPVS and UAMS are only candidate sources; mPower needs access and label provenance checks. If only two datasets are cleared, the project must be labelled a pilot, not a confirmatory cross-corpus study.
+
+
+## Current gate status — 2026-10-25
+
+No raw archives have been downloaded, hashed, unpacked or locally audited in this project. ItalianPVS public descriptions and a Hugging Face mirror show count discrepancies (commonly cited 831 recordings versus 839 uploaded files listed by the mirror; the mirror also contains a large ZIP). The UAMS Figshare metadata describe linked sample IDs and prolonged-/a/ WAV files, but actual IDs and files have not been checked. mPower requires access and diagnostic-label review. The dataset gate is **not passed**. See [PRIOR_ART_AND_DATASET_GATE_2026-10-25.md](PRIOR_ART_AND_DATASET_GATE_2026-10-25.md) for the required manifest checklist.

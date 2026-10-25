@@ -88,3 +88,12 @@ Do not assume these resources are mutually compatible. Do not claim cross-langua
 - This narrower claim explicitly accounts for the 2026 PARK multimodal study, which already connects prediction uncertainty to lower performance, and for established cross-corpus/OOD literature.
 - The proposed contribution is an independent voice-only comparative validation of an existing signal, not a new general OOD algorithm. Novelty remains un-cleared pending systematic searching and citation chaining.
 - Data gate remains open: ItalianPVS and UAMS are raw-audio candidates; mPower is a possible third cohort only after research access and diagnosis-label review. No data have been downloaded, no model trained and no results generated.
+
+
+## 2026-10-25 — Novelty and dataset gate strengthened; protocol remains unlocked
+
+- Found a major close-overlap public repository (created 2026-09-12; updated 2026-09-26) that already reports IPVS/MDVR-KCL cross-corpus acoustic-shortcut audits, silence controls, eGeMAPSv02, CMVN, LOCO nested validation, calibration and subgroup checks. Its empirical claims are not independently verified here, but it must be treated as prior art. Do not claim the same corpus pair/audit as our headline contribution.
+- Re-reviewed ParkMAE (cross-linguistic multi-corpus evaluation), Hireš et al. (cross-dataset sustained vowels), Hossain et al. (cross-corpus feature stability), Guo et al. (voice uncertainty and Spanish-to-Italian evaluation), PARK (2026 multimodal uncertainty/external validation), SUDO/D3M and medical OOD risk-control work. The selected incremental question remains provisional; novelty is not cleared.
+- Metadata-level dataset checks identified count/manifest discrepancies requiring local verification: ItalianPVS cohort and file counts vary across descriptions; a public mirror lists 839 uploaded files, while commonly cited reports say 831 recordings. UAMS metadata describes prolonged-/a/ files and a demographic key but the actual archive and IDs have not been audited. mPower requires access/label review.
+- No raw audio archive has been downloaded, hashed, unpacked or locally audited. No model has been trained. No protocol has been locked.
+- Added docs/PRIOR_ART_AND_DATASET_GATE_2026-10-25.md as the current source of truth for prior-art and dataset gate status.

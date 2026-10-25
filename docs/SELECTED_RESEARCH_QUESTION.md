@@ -102,3 +102,12 @@ For each external cohort, compare the **AUROC of the risk score for distinguishi
 ## Final recommendation
 
 **This is the single selected research direction.** Proceed with the literature and dataset feasibility gates for this specific question. Do not change the topic again unless the broader search finds direct overlap or the required data cannot be accessed. If the data gate fails, transparently re-scope to a two-cohort feasibility report or a reproducibility study rather than claiming the original benchmark was completed.
+
+
+## Status update — provisional, not locked
+
+The selected question remains a candidate only. A close-overlap public repository already reports IPVS/MDVR-KCL acoustic-shortcut auditing, leave-one-corpus-out modeling, channel normalization, eGeMAPSv02, calibration and subgroup checks. The incremental comparison of acoustic distance beyond confidence may still differ, but the novelty gate is not passed.
+
+The dataset gate is also not passed: public metadata have been inspected, but raw audio has not been downloaded, checksummed, unpacked or locally checked for unique participants, repeats, labels, tasks and duplicate sessions. ItalianPVS counts differ across descriptions (including 831 commonly reported recordings versus a mirror listing 839 uploaded files), which must be resolved from a versioned manifest.
+
+**Do not lock the protocol or begin confirmatory training yet.** See [PRIOR_ART_AND_DATASET_GATE_2026-10-25.md](PRIOR_ART_AND_DATASET_GATE_2026-10-25.md).

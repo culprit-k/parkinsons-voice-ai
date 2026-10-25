@@ -85,3 +85,8 @@ This is a focused comparison of existing signals, not a claimed new general-purp
 
 - [Selected research question and draft protocol](docs/SELECTED_RESEARCH_QUESTION.md)
 - [Final research decision](docs/FINAL_RESEARCH_DECISION_2026-10-25.md)
+
+
+## Current gate status (2026-10-25)
+
+**Protocol remains unlocked.** A close-overlap public repository already reports IPVS/MDVR-KCL acoustic-shortcut and cross-corpus robustness work. Dataset metadata are identified, but raw archives and participant manifests have not been locally verified. See [Prior-art and dataset verification gate](docs/PRIOR_ART_AND_DATASET_GATE_2026-10-25.md).

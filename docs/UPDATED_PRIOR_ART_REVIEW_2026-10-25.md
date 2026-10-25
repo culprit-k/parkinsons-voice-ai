@@ -137,3 +137,10 @@ The current primary question is a potentially useful **PD-voice application benc
 - The UAMS Figshare record explicitly links demographics to prolonged-vowel WAV files recorded by telephone and advertises CC BY 4.0. The dataset has not been locally downloaded or verified. [Figshare](https://figshare.com/articles/dataset/Voice_Samples_for_Patients_with_Parkinson_s_Disease_and_Healthy_Controls/23849127).
 - mPower sustained /a/ samples are obtainable via qualified research access rather than anonymous unrestricted download; access entails Synapse user validation/certification, a data-use statement and source terms. Some studies use a self-reported professional-diagnosis field. [Scientific Data](https://www.nature.com/articles/sdata201611); [transfer-learning study](https://www.nature.com/articles/s41598-024-81824-x).
 - The sustained-vowel study design must be described as cross-dataset/recording-domain robustness. The vowel /a/ does not test lexical speech or isolate language effects; language/source is confounded with microphone, task, recruitment and demographics.
+
+
+## Additional close-overlap prior art
+
+A public repository created 2026-09-12 and updated 2026-09-26 reports acoustic-shortcut/silence controls and cross-corpus PD voice modeling on IPVS and MDVR-KCL, with eGeMAPSv02, CMVN, leave-one-corpus-out nested validation, calibration and subgroup checks: https://github.com/BennedictQuanTon/Parkinson-Voice-Detection. Its reported empirical results have not been independently reproduced here, but the project is a major prior-art overlap and the same corpus pair/audit should not be our headline contribution.
+
+PARK (2026) also evaluates uncertainty and external cohorts in multimodal remote screening: https://pmc.ncbi.nlm.nih.gov/articles/PMC13586151/. This means uncertainty/error relationships are established; only a carefully justified incremental acoustic-distance comparison remains a candidate gap, not a cleared novelty claim.
