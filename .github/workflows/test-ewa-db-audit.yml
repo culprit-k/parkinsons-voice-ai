@@ -1,0 +1,28 @@
+name: Test EWA-DB local audit utility
+
+on:
+  push:
+    paths:
+      - "scripts/audit_ewa_db_local.py"
+      - "tests/test_ewa_audit_utility.py"
+      - ".github/workflows/test-ewa-db-audit.yml"
+  pull_request:
+    paths:
+      - "scripts/audit_ewa_db_local.py"
+      - "tests/test_ewa_audit_utility.py"
+      - ".github/workflows/test-ewa-db-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-privacy-preserving-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run tests with synthetic WAV files only
+        run: python -m unittest discover -s tests -p "test_ewa_audit_utility.py" -v
