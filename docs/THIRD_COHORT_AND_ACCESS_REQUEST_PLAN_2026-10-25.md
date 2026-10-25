@@ -89,3 +89,20 @@ Until then:
 - Do **not** train a confirmatory model or lock the protocol.
 - If only two compatible cohorts clear the gate, call the work a feasibility pilot and make no broad cross-language claim.
 - If IPVS privacy/mapping cannot be resolved lawfully, exclude it rather than attempting name-to-audio linkage without governance approval.
+
+
+## Addendum — post-search verification (25 October 2026)
+
+### EWA-DB status
+
+EWA-DB remains the highest-priority request candidate, not a cleared dataset. The ISLRN/ELRA record states 1,649 speakers overall: 175 PD, 2 mixed AD+PD, 87 AD, 62 MCI and 1,323 healthy controls, across sustained vowel, diadochokinesis, naming and picture-description tasks. WAV audio is published for 1,003 speakers with written consent; the exact PD/control breakdown for that audio-available subset is not specified in the catalogue. Obtain the data-use license, actual audio/manifest, and group-by-task counts before any cohort promotion. ELRA lists 0.00 EUR for its listed license options, but current conditions and eligibility must be confirmed. [ISLRN](https://www.islrn.org/resources/730-022-142-264-9/) · [ELRA](https://catalogue.elra.info/en-us/repository/browse/ELRA-S0489/) · [paper](https://www.nature.com/articles/s41597-024-04171-6).
+
+### mPower and UCI 301 decision
+
+mPower is a secondary route for sustained /a/ because its raw voice requires Synapse account validation/certification, a data-use statement and acceptance of conditions; PD diagnosis is self-reported and recordings repeat within people. It remains unavailable until access is granted and the exact approved release is audited. [mPower study and access](https://pmc.ncbi.nlm.nih.gov/articles/4776701/) · [2024 transfer paper](https://www.nature.com/articles/s41598-024-81824-x).
+
+UCI Dataset 301's UCI release consists of extracted acoustic feature tables rather than raw WAVs; the advertised test file contains recordings/features for 28 PD participants without a corresponding control test arm. It therefore cannot replace the missing third raw-audio PD/control cohort. [Official UCI record](https://archive.ics.uci.edu/dataset/301/parkinson+speech+dataset+with+multiple+types+of+sound+recordings).
+
+### Research implications
+
+The candidate question remains an **unlocked comparative reliability question**: does source-reference acoustic-domain distance add to calibrated confidence when ranking participant-level errors in external cohorts? ParkMAE (2025/2026), Lim et al. (2025), and a June 2026 Spanish-to-Italian uncertainty-aware system demonstrate substantial nearby prior art. Recheck direct overlap with uncertainty/OOD error-monitoring methods before any novelty claim. A sustained vowel cannot establish lexical or spontaneous-language generalization; any claim must be limited to cross-cohort robustness of sustained phonation unless matched connected-speech tasks are separately evaluated. No model has been trained.
