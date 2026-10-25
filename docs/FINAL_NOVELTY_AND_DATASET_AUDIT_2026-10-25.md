@@ -200,3 +200,18 @@ The public Figshare API was used to download the source files individually after
 The workflow ran successfully at GitHub Actions audit run 40170280356: https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40170280356. The earlier first run failed because Figshare's all-files endpoint returned 401; the subsequent API-based individual-file run succeeded. The workflow report deliberately excludes raw audio and participant-level paths.
 
 **Updated decision:** archive integrity is now verified for IPVS and UAMS, but the dataset feasibility gate as a whole remains **NOT PASSED**. The main blocker is no longer download access; it is the IPVS participant/label mapping and direct-identifier risk, plus the absence of a third independent, compatible cohort. No model has been trained and no predictive results have been produced.
+
+
+### MDVR-KCL archive — file integrity passed; task/label linkage remains unverified
+
+The Zenodo API download and inventory succeeded in [GitHub Actions run 40170614840](https://github.com/culprit-k/parkinsons-voice-ai/actions/runs/40170614840).
+
+- One source archive/file of **606,144,431 bytes** was downloaded. Its MD5 matched the checksum in Zenodo metadata.
+- Extracted inventory: **73 WAV files**; all 73 WAV headers readable, all mono at 44.1 kHz. Durations ranged from 73.03902 to 220.63916 seconds.
+- No exact duplicate-audio hash groups were detected.
+- The raw inventory does not by itself establish participant IDs or verified file-to-diagnosis labels. Literature describes 37 participants (16 PD and 21 controls) with read-text and spontaneous-dialogue tasks, but this project has not verified the participant-level manifest from the raw files.
+- MDVR-KCL is **not task-matched** to UAMS sustained /a/ recordings. It could support a connected-speech analysis, but only with a connected-speech cohort from another language and verified participant-level labels.
+
+### Duplicate-file adjudication refinement
+
+The IPVS duplicate-audio pair is in the same parent directory and both files fall under the PD-labelled path category. This suggests an exact duplicate within one folder, but it does not prove whether it is a duplicated file, a repeated session or a valid repeated take. The private manifest must be reviewed locally before deduplication. No file paths or participant names were published.
