@@ -106,3 +106,10 @@ UCI Dataset 301's UCI release consists of extracted acoustic feature tables rath
 ### Research implications
 
 The candidate question remains an **unlocked comparative reliability question**: does source-reference acoustic-domain distance add to calibrated confidence when ranking participant-level errors in external cohorts? ParkMAE (2025/2026), Lim et al. (2025), and a June 2026 Spanish-to-Italian uncertainty-aware system demonstrate substantial nearby prior art. Recheck direct overlap with uncertainty/OOD error-monitoring methods before any novelty claim. A sustained vowel cannot establish lexical or spontaneous-language generalization; any claim must be limited to cross-cohort robustness of sustained phonation unless matched connected-speech tasks are separately evaluated. No model has been trained.
+
+
+## Further access and novelty check (25 October 2026)
+
+- **EWA-DB Zenodo access is confirmed restricted.** A research access form is required; the provider sends a EULA and issues the download link after receiving the signed agreement. The catalogue's listed €0 price is not a grant of access. Exact PD/control numbers among audio-available people must be checked after access. [Zenodo access instructions](https://zenodo.org/records/10952480).
+- **Additional cross-language prior art:** Hassanat et al. (29 April 2026) report an Arabic cohort of 40 people (17 PD, 23 controls) and independent Spanish evaluation on 100 people. This makes any broad "new cross-language PD classifier" claim untenable. [PubMed](https://pubmed.ncbi.nlm.nih.gov/42100562/).
+- **HeyJay! (June 2026)** adds 8,669 English atypical-speech utterances and speech-quality ratings, including PD, but it is restricted-access and is not established as a labelled PD/control screening cohort from the public summary. Consider only for a separate accessibility/robustness question after access and diagnosis stratification are verified. [Dataset article](https://www.nature.com/articles/s41597-026-07497-5) · [ICPSR record](https://www.icpsr.umich.edu/web/ICPSR/studies/39448).
