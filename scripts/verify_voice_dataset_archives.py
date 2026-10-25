@@ -344,12 +344,20 @@ def cohort_path_summary(root: Path) -> dict[str, Any]:
     return output
 
 def audit_spreadsheets(root: Path) -> list[dict[str, Any]]:
-    """Summarize workbook structure and safe aggregate ID/label linkage metrics."""
+    """Summarize workbook structure and safe aggregate ID/label linkage metrics.
+
+    Matching is deliberately exact after conservative filename-stem normalization.
+    This function never writes cell values or sample IDs to the public aggregate report.
+    It only emits aggregate counts into the private manifest; the workflow publishes
+    the sanitized metrics but excludes filenames and private paths.
+    """
     try:
         import openpyxl
     except ImportError:
         return [{"status": "openpyxl_not_installed"}]
 
+    # Restrict matching to exact normalized filename stems. Substring/suffix matching
+    # can falsely claim a mapping when IDs overlap (for example, "12" and "112").
     audio_stems = {
         path.stem.strip().lower()
         for path in root.rglob("*")
@@ -363,16 +371,22 @@ def audit_spreadsheets(root: Path) -> list[dict[str, Any]]:
             "sheets": [],
         }
         try:
-            workbook = openpyxl.load_workbook(workbook_path, read_only=True, data_only=True)
+            workbook = openpyxl.load_workbook(
+                workbook_path, read_only=True, data_only=True
+            )
             for sheet in workbook.worksheets:
                 rows = list(sheet.iter_rows(values_only=True))
-                nonempty_rows = [tuple(row) for row in rows if any(value is not None for value in row)]
+                nonempty_rows = [
+                    tuple(row) for row in rows
+                    if any(value is not None for value in row)
+                ]
                 if not nonempty_rows:
                     workbook_report["sheets"].append({
                         "sheet_name_private": sheet.title,
                         "nonempty_rows": 0,
                     })
                     continue
+
                 header_idx = 0
                 header_score = -1
                 for candidate_idx, candidate_row in enumerate(nonempty_rows[:10]):
@@ -391,6 +405,7 @@ def audit_spreadsheets(root: Path) -> list[dict[str, Any]]:
                     if score > header_score:
                         header_score = score
                         header_idx = candidate_idx
+
                 headers = [
                     str(value).strip() if value is not None else ""
                     for value in nonempty_rows[header_idx]
@@ -399,15 +414,18 @@ def audit_spreadsheets(root: Path) -> list[dict[str, Any]]:
                 id_index = next(
                     (i for i, value in enumerate(normalized)
                      if any(token in value for token in (
-                         "sample id", "sample_id", "participant", "subject", "filename",
-                         "patient id", "recording id", "file id"
-                     )) or value.strip() in {"id", "sample", "subject_id", "subject id"}),
+                         "sample id", "sample_id", "participant", "subject",
+                         "filename", "patient id", "recording id", "file id"
+                     )) or value.strip() in {
+                         "id", "sample", "subject_id", "subject id"
+                     }),
                     None,
                 )
                 label_index = next(
                     (i for i, value in enumerate(normalized)
                      if any(token in value for token in (
-                         "label", "diagnosis", "disease", "condition", "class", "group", "status"
+                         "label", "diagnosis", "disease", "condition", "class",
+                         "group", "status"
                      ))),
                     None,
                 )
@@ -415,42 +433,79 @@ def audit_spreadsheets(root: Path) -> list[dict[str, Any]]:
                 ids = [
                     str(row[id_index]).strip().lower()
                     for row in data_rows
-                    if id_index is not None and id_index < len(row) and row[id_index] is not None
+                    if id_index is not None
+                    and id_index < len(row)
+                    and row[id_index] is not None
+                    and str(row[id_index]).strip()
                 ]
                 labels = Counter(
                     str(row[label_index]).strip()
                     for row in data_rows
-                    if label_index is not None and label_index < len(row) and row[label_index] is not None
+                    if label_index is not None
+                    and label_index < len(row)
+                    and row[label_index] is not None
                 )
-                matched = 0
-                if id_index is not None:
-                    matched = sum(
-                        1 for sample_id in ids
-                        if sample_id in audio_stems
-                        or Path(sample_id).stem in audio_stems
-                        or any(stem.endswith(sample_id) for stem in audio_stems)
-                    )
+
+                # Exact filename-stem matching only; IDs themselves are never emitted.
+                normalized_ids = {
+                    Path(sample_id).stem.strip().lower() for sample_id in ids
+                }
+                matched_ids = (
+                    sum(1 for sample_id in normalized_ids if sample_id in audio_stems)
+                    if id_index is not None else None
+                )
+
+                # Count IDs with conflicting labels without exposing any ID or label.
+                labels_by_id: dict[str, set[str]] = defaultdict(set)
+                if id_index is not None and label_index is not None:
+                    for row in data_rows:
+                        if (id_index < len(row) and label_index < len(row)
+                                and row[id_index] is not None
+                                and row[label_index] is not None):
+                            sample_id = Path(str(row[id_index]).strip()).stem.lower()
+                            labels_by_id[sample_id].add(str(row[label_index]).strip())
+                conflicting_label_ids = sum(
+                    1 for id_labels in labels_by_id.values() if len(id_labels) > 1
+                )
+
                 workbook_report["sheets"].append({
                     "sheet_name_private": sheet.title,
                     "nonempty_rows_including_header": len(nonempty_rows),
                     "data_rows": len(data_rows),
                     "column_headers_private": headers,
-                    "direct_name_fields_present": any(value in {"name", "first name", "surname", "last name"} for value in normalized),
-                    "id_column_detected": headers[id_index] if id_index is not None else None,
-                    "label_column_detected": headers[label_index] if label_index is not None else None,
+                    "direct_name_fields_present": any(
+                        value in {"name", "first name", "surname", "last name"}
+                        for value in normalized
+                    ),
+                    "id_column_detected": (
+                        headers[id_index] if id_index is not None else None
+                    ),
+                    "label_column_detected": (
+                        headers[label_index] if label_index is not None else None
+                    ),
                     "rows_with_id": len(ids),
                     "unique_ids": len(set(ids)),
-                    "rows_missing_id": max(0, len(data_rows) - len(ids)) if id_index is not None else None,
+                    "duplicate_id_rows": max(0, len(ids) - len(set(ids))),
+                    "rows_missing_id": (
+                        max(0, len(data_rows) - len(ids))
+                        if id_index is not None else None
+                    ),
                     "label_value_counts": dict(labels),
-                    "ids_matching_audio_filename": matched if id_index is not None else None,
-                    "ids_not_matching_audio_filename": max(0, len(set(ids)) - matched) if id_index is not None else None,
+                    "ids_matching_audio_filename": matched_ids,
+                    "ids_not_matching_audio_filename": (
+                        max(0, len(normalized_ids) - matched_ids)
+                        if matched_ids is not None else None
+                    ),
+                    "filename_match_method": "exact normalized filename stem only",
+                    "ids_with_conflicting_labels": conflicting_label_ids,
                 })
             workbook.close()
         except Exception as exc:
-            workbook_report["status"] = f"failed: {type(exc).__name__}: {exc}"
+            workbook_report["status"] = (
+                f"failed: {type(exc).__name__}: {exc}"
+            )
         reports.append(workbook_report)
     return reports
-
 
 def audit_figshare_article(name: str, metadata_url: str, output: Path) -> dict[str, Any]:
     """Download public Figshare article files individually through its public API."""
