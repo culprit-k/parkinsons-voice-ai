@@ -90,17 +90,21 @@ Do not use a dataset's paper-reported counts as if they were verified manifest c
 
 ## D. What has and has not been done
 
-Completed in this pass:
+### Initial metadata-only pass (historical; superseded by the raw-archive addenda below)
+
+The list in this subsection records the state at the end of the first metadata-only pass. It must not be read as the current raw-data status. The later addenda document successful archive downloads, checksum checks and audio-header inspection for IPVS, UAMS and MDVR-KCL.
+
+Completed in the initial pass:
 - Targeted web search for cross-language PD speech, OOD/error detection, uncertainty, acoustic shortcuts and dataset access.
 - Inspection of public paper/catalogue metadata for candidate datasets.
 - Identification of direct prior-art overlap with a public cross-corpus acoustic-shortcut repository.
 - Explicit decision to keep the protocol unlocked.
 
-Not completed:
+Not completed at the end of the initial metadata-only pass:
 - Exhaustive systematic database search and citation chaining.
-- Download, SHA-256 verification, unpacking or local audio QC of candidate datasets.
-- Participant-ID/label manifest audit.
-- Model training, results or performance comparisons.
+- Raw archive downloads and file-level QC (these were completed later for IPVS, UAMS and MDVR-KCL; see the addenda below).
+- Participant-ID/label manifest audit (still open for IPVS and MDVR-KCL; UAMS exact filename linkage passed, but diagnosis provenance/participant independence remain open).
+- Model training, results or performance comparisons (still not performed).
 
 These boundaries are deliberate: they prevent a paper from making unsupported claims.
 
