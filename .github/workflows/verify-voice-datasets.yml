@@ -76,11 +76,14 @@ jobs:
                       "wav_duration_min_seconds": item.get("wav_duration_min_seconds"),
                       "wav_duration_max_seconds": item.get("wav_duration_max_seconds"),
                       "duplicate_audio_hash_group_count": len(duplicates),
+                      "duplicate_audio_group_sizes": [len(group.get("paths_private", [])) for group in duplicates],
                       "spreadsheet_audit": [
                           {
                               "status": book.get("status"),
                               "sheets": [
                                   {
+                                      "sheet_name": sheet.get("sheet_name_private"),
+                                      "column_headers": sheet.get("column_headers_private"),
                                       "data_rows": sheet.get("data_rows"),
                                       "unique_ids": sheet.get("unique_ids"),
                                       "rows_missing_id": sheet.get("rows_missing_id"),
