@@ -88,11 +88,15 @@ jobs:
                                       "column_headers": sheet.get("column_headers_private"),
                                       "direct_name_fields_present": sheet.get("direct_name_fields_present"),
                                       "data_rows": sheet.get("data_rows"),
+                                      "rows_with_id": sheet.get("rows_with_id"),
                                       "unique_ids": sheet.get("unique_ids"),
+                                      "duplicate_id_rows": sheet.get("duplicate_id_rows"),
                                       "rows_missing_id": sheet.get("rows_missing_id"),
                                       "label_value_counts": sheet.get("label_value_counts"),
                                       "ids_matching_audio_filename": sheet.get("ids_matching_audio_filename"),
                                       "ids_not_matching_audio_filename": sheet.get("ids_not_matching_audio_filename"),
+                                      "filename_match_method": sheet.get("filename_match_method"),
+                                      "ids_with_conflicting_labels": sheet.get("ids_with_conflicting_labels"),
                                   }
                                   for sheet in book.get("sheets", [])
                               ],
